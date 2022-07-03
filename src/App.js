@@ -1,27 +1,39 @@
-import logo from './logo.svg';
+
 import './App.css';
-import { doc, collection, getDocs} from "firebase/firestore";
-import { db } from './firebaseConfig';
 import { useEffect } from 'react';
+import { LoginPage } from './pages/LoginPage';
+import { RegisterPage } from './pages/RegisterPage';
+import { HomePage } from './pages/HomePage';
+import { Routes,Route } from 'react-router-dom';
+import { CreatePost } from './pages/CreatePost';
+import { UserProfile } from './pages/UserProfile';
+import { BlogDetail } from './pages/BlogDetail';
+import { EditProfile } from './pages/EditProfile';
+
+
+
+
+
+
+
 
 function App() {
- const posts = collection(db,'posts')
 
- useEffect(()=>{
-  getPosts()
- },[])
 
- const getPosts = async ()=>{
-     const snapshot = await getDocs(posts)
-     const allposts = snapshot.docs.map(post=>({id: post.id,...post.data()}))
-     console.log(allposts)
- }
-  
   return (
     <div className="App">
-      
+      <Routes >
+        <Route path="/" element={ <HomePage /> } />
+        <Route path="/:id" element={ <BlogDetail /> } />
+        <Route path="/login"  element={ <LoginPage /> } />
+        <Route path="/register" element={ <RegisterPage /> } />
+        <Route path="/post/:id/edit" element={ <CreatePost /> } />
+        <Route path="/profile" element={ <UserProfile /> } />
+        <Route path="/profile/edit" element={ <EditProfile /> } />
+      </Routes>
     </div>
   );
 }
+
 
 export default App;

@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore,doc,setDoc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 
@@ -22,4 +22,22 @@ export const db = getFirestore(app)
 export const storage = getStorage(app)
 export const auth = getAuth(app)
 
-
+export const  createtUserProfileDocument = async(user,additionData)=>{
+  const userRef = doc(db,'users',user.uid)
+  const { displayName,email,photoURL} = user
+  const createdAt = new Date()
+ 
+  if(!user)return  
+  try{
+    await setDoc(userRef,{
+      displayName,
+      email,
+      photoURL,
+      createdAt,
+      ...additionData,
+    })
+  }
+  catch(error){
+    console.error(error.message)
+  }
+}
