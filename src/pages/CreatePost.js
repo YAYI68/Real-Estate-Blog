@@ -64,7 +64,7 @@ export const CreatePost = () => {
     }
 
     const uploadHandler = ()=>{
-      const storageRef = ref(storage,`post/images/${}/${file.name}`)
+      const storageRef = ref(storage,`/images/blog/${postId}/${file.name}`)
     }
 
 
