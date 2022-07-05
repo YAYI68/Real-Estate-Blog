@@ -68,8 +68,11 @@ export const getPost = (id)=>async (dispatch)=>{
 
 export const createNewPost = ()=>async(dispatch,getState)=>{
      try{
+        dispatch({type:POST_CREATE_REQUEST})
 
-        const {userLogin:{userInfo}} = getState()
+        const {
+            userLogin:{ userInfo },
+        } = getState()
         const userRef = doc(db,"users",`${userInfo.uid}`)
         const snapshot = await getDoc(userRef)
         const user = snapshot.data()
@@ -83,11 +86,13 @@ export const createNewPost = ()=>async(dispatch,getState)=>{
             slug:"",
             author:{...user}
         }
+
         const postRef = collection(db,"posts")  
-        const postSnapshot = await addDoc(postRef,newPost)
-        const post = {id:postSnapshot.id,...postSnapshot}      
+         const postSnapshot =  await addDoc (postRef,newPost)
+        const post = {id:postSnapshot.id} 
+
         dispatch({
-            type:POST_CREATE_REQUEST,
+            type:POST_CREATE_SUCCESS,
             payload:post
         })
      }
@@ -115,6 +120,11 @@ export const updateNewPost = (id,data)=>async(dispatch)=>{
            type:POST_UPDATE_SUCCESS,
            payload:post
        })
+       
+       dispatch({
+        type:POST_DETAIL_SUCCESS,
+        payload:post
+    })
     }
     catch(error){
        dispatch({

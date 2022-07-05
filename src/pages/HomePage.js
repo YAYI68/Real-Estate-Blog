@@ -20,7 +20,9 @@ export const HomePage = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()   
 
-    console.log('user', auth.currentUser)
+    console.log('created',createSuccess)
+    console.log("error",createError)
+    console.log("createdPost",createdPost)
 
   useEffect(() => {
     if(createSuccess){
@@ -35,7 +37,7 @@ export const HomePage = () => {
         setUserInfo("")
       }
     }) 
-  },[dispatch])
+  },[dispatch,createSuccess])
   
   const signUserOut = async ()=>{
     await signOut(auth)
