@@ -22,5 +22,17 @@ export const blogPost = [
         "title": "Title 4"  ,
         "content": "The body of title 4",
         "postImage":"./images/house4.jpg"
+      },
+      {
+        "id": "5",
+        "title": "Title 5"  ,
+        "content": "The body of title 5",
+        "postImage":"./images/house5.jpg"
+      },
+      {
+        "id": "6",
+        "title": "Title 6"  ,
+        "content": "The body of title 6",
+        "postImage":"./images/house6.jpg"
       }
 ]
