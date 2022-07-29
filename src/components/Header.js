@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useRef} from 'react'
 import { FaFacebookF,FaTwitter,FaInstagram,FaLinkedinIn,FaUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom'
 
@@ -6,13 +6,25 @@ import { Link } from 'react-router-dom'
 
 export const Header = () => {
     const [userDisplay,setUserDisplay] = useState(false)
+    const dropRef = useRef()
+
+    
    useEffect(() => {
-     document.addEventListener('mouse')
+    console.log(dropRef.current)
+
+    const closeSlider = (e)=>{
+        console.log(e.target)
+        if(dropRef.current && dropRef.current.contains(e.target)){
+         return;
+        }
+        setUserDisplay(false)
+    }
+     document.addEventListener('mousedown',closeSlider)
    
      return () => {
-    
+        document.removeEventListener("mousedown",closeSlider)
      }
-   }, [third])
+   }, [])
    
   return (
     <header className="header bg-white  flex items-center justify-center fixed w-full z-10 px-3 py-[1.5rem]">
@@ -48,7 +60,7 @@ export const Header = () => {
                     <img src="./images/default.jpg" className='w-full h-full rounded-full' alt="" />
                 </div>
                 {userDisplay && 
-                <div className='absolute w-[15rem] top-[110%]  flex flex-col bg-[#8034eb] text-white right-[5%] rounded-[.5rem]   shadow-md '>
+                <div ref={dropRef}  className='absolute w-[15rem] top-[110%]  flex flex-col bg-[#8034eb] text-white right-[5%] rounded-[.5rem]   shadow-md '>
                     <Link to="" className='text-[1.5rem] py-[.5rem] text-center border-b-2 hover:bg-[#aa76f4] '>Profile</Link>
                     <Link to=""  className='text-[1.5rem] py-[.5rem] text-center border-b-2 hover:bg-[#aa76f4]'>post</Link>
                     <Link to=""  className='text-[1.5rem] py-[.5rem] text-center hover:bg-[#aa76f4]'>Newsletter</Link>
