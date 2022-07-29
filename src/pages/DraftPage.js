@@ -20,10 +20,11 @@ export const DraftPage = () => {
                <Link to='/posts/edit' className='border-2 px-[2rem] py-[1rem] text-[1.5rem] rounded-[.5rem] text-white bg-[#8034eb]'>Write a post</Link>
               </div>
             </div> 
-            <div className='w-full mb-[2rem]'>
+            <div className='w-full mb-[2rem] '>
              <TabSlide current='draft'/>
            </div>
-           <div className='w-full mb-[2rem]'>
+           <div className='w-full mb-[2rem] '>
+             <DraftBlog/>
              <DraftBlog/>
              {/* <div className='w-full mt-[2rem]'>
                 <p className='text-center text-[2rem] '>You haven`t write any article yet.</p>

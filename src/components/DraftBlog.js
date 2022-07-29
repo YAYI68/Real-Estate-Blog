@@ -4,7 +4,7 @@ import { FaTrashAlt,FaPen } from 'react-icons/fa'
 
 export const DraftBlog = () => {
   return (
-    <div className='w-full border-b-[2px] py-[1rem]'>
+    <div className='w-full border-b-[2px] py-[1rem] bg-white'>
       <div className='flex w-[70%] h-[10rem] items-center'> 
         <div className='basis-[20%] mx-[1rem] h-full'>
            <img src="./images/house1.jpg" className='w-full h-full' alt="" />

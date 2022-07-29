@@ -16,8 +16,9 @@ export const BlogDetail = () => {
   return (
     <Main>
       <Section>
-        <article className='px-[20rem] w-full mt-[5rem] flex flex-col '>
-          <div className=' h-[5rem] flex w-full px-[.5rem] justify-between'>
+        <article className='px-[20rem] w-full mt-[5rem]'>
+          <div className='bg-white w-full flex flex-col  rounded px-2 py-10'>
+          <div className=' h-[5rem] flex w-full px-[.5rem] justify-between mt-3'>
             <div className='flex h-full basis-[30%] '>
               <div className='basis-[18%] h-full  rounded-full mr-4'>
                 <img src="./images/default.jpg" className='w-full h-full rounded-full' alt="" />
@@ -41,7 +42,7 @@ export const BlogDetail = () => {
              <img src={blog.postImage} alt="" className='w-full h-full' />
           </div>
           <div id="blogContent" className='w-full mt-[2rem] px-[5rem]'>
-            <p className='text-[1.8rem] leading-[4rem]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, quo cupiditate earum perferendis quibusdam ex vitae autem, veritatis dolorum excepturi asperiores! Ut, officia ipsam? Cumque aliquid ipsum reprehenderit dolores aperiam.
+            <p className='text-[1.8rem] leading-[4rem] text-gray-500'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, quo cupiditate earum perferendis quibusdam ex vitae autem, veritatis dolorum excepturi asperiores! Ut, officia ipsam? Cumque aliquid ipsum reprehenderit dolores aperiam.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, quo cupiditate earum perferendis quibusdam ex vitae autem, veritatis dolorum excepturi asperiores! Ut, officia ipsam? Cumque aliquid ipsum reprehenderit dolores aperiam.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, quo cupiditate earum perferendis quibusdam ex vitae autem, veritatis dolorum excepturi asperiores! Ut, officia ipsam? Cumque aliquid ipsum reprehenderit dolores aperiam.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, quo cupiditate earum perferendis quibusdam ex vitae autem, veritatis dolorum excepturi asperiores! Ut, officia ipsam? Cumque aliquid ipsum reprehenderit dolores aperiam.
@@ -53,6 +54,7 @@ export const BlogDetail = () => {
           <div className='px-[10rem] w-full flex justify-end'>
           <button className='h-[3rem] w-[3rem] '><FaComment className='w-[80%] h-[80%] flex items-center ' /></button>
           <p className='text-[1.5rem] text-[#8034eb] font-bold'>2</p>
+          </div>
           </div>
         </article>
       </Section>
@@ -72,14 +74,14 @@ export const BlogDetail = () => {
 
       <Section>
         <div className='px-[25rem] w-full mt-[2rem]'>
-           <div className='w-[80%] mx-auto my-[2rem]'>
+           <div className='w-[80%] mx-auto my-[2rem] bg-white p-5'>
             <div className='flex items-center'>
                <p className='text-[1.4rem] text-[#8034eb] mr-[2rem] font-bold'>Yayi</p>
                <p className='text-[1rem]' >July 17,2020</p>
             </div>
             <p className='text-[1.5rem] mt-1'>Nice Write up</p>
            </div>
-           <div className='w-[80%] mx-auto my-[2rem]'>
+           <div className='w-[80%] mx-auto my-[2rem] bg-white p-5'>
             <div className='flex items-center'>
                <p className='text-[1.4rem] text-[#8034eb] mr-[2rem] font-bold'>Biodun</p>
                <p className='text-[1rem]' >July 17,2020</p>

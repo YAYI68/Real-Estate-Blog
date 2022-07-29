@@ -1,46 +1,45 @@
 import React from 'react';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-  faBold,
-  faStrikethrough,
-  faItalic,
-  faUnderline,
-  faAlignLeft,
-  faAlignCenter,
-  faAlignRight,
-  faAlignJustify,
-  faRotateLeft,
-  faRotateRight,
-} from '@fortawesome/free-solid-svg-icons';
-import { Editor } from '../components/Editor';
+import { TextArea } from '../components/TextArea';
 import { Main } from '../components/Main';
-import { Section } from "../components/Section"
+import { Section } from "../components/Section";
+import { FaPlus } from 'react-icons/fa';
 
-library.add(
-  faBold,
-  faStrikethrough,
-  faItalic,
-  faUnderline,
-  faAlignLeft,
-  faAlignRight,
-  faAlignCenter,
-  faAlignJustify,
-  faRotateLeft,
-  faRotateRight
-);
 
 export const CreatePost =()=>{
   return (
     <Main>
       <Section>
-        <div>
-          <h1 className="text-gray-800 font-bold text-center mt-2">
-            Lexical Editor
-          </h1>
-          <div className="max-w-[900px] mx-4 mt-8 mb-4">
-            <Editor />
+        <div className=' text-[1.5rem] mt-3 mx-auto px-[20rem] '>
+          <div className='bg-white w-full px-[2rem] py-[2rem]'>
+            <div className='w-full py-[2rem]'>
+           <div className='flex justify-between items-center'>
+            <div className='flex'>
+            <p>Draft in <span>Yayi</span></p> 
+            <p>Saved</p>
+            </div>
+              <button className='text-white bg-[#8034eb] px-[1rem] py-3 rounded-[.5rem]'>publish</button>
+            </div>
+            </div>
+            <form>
+            <input type="text" placeholder='Title' className='text-[2rem] h-[7rem] focus:border-2 focus:border-solid border-none w-full my-5 rounded p-2 focus:border-[#8034eb] outline-none'/>
+          <div class="flex justify-center items-center w-full">
+            <label for="dropzone-file" class="flex flex-col justify-center items-center w-full h-[30rem] bg-gray-50 rounded-lg border-2 border-[#8034eb] border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+            <div class="flex flex-col justify-center items-center pt-5 pb-6">
+              <img src="" alt="" className='hidden' />
+            <svg aria-hidden="true" class="mb-3 w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+           </div>
+           <input id="dropzone-file" type="file" class="hidden" />
+          </label>
+         </div>
+         <div className='w-full h-[30rem] my-[3rem]'>
+           <textarea cols="30" rows="10" className='w-full h-full  border-2 focus:border-solid border-none p-3 rounded focus:border-[#8034eb] outline-none '/> 
+         </div>
+            </form>
           </div>
         </div>
+        
       </Section>
     </Main>
   );

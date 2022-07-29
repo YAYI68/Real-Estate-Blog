@@ -30,10 +30,12 @@ function App() {
       <Header />
      <Routes>
       <Route path='/' element={<HomePage/>}/>
+      <Route path='/profile' element={<UserProfile/>}/>
+      <Route path='/profile/edit' element={<EditProfile/>}/>
       <Route path='/:id' element={<BlogDetail/>}/>
       <Route path='/posts/edit' element={<CreatePost/>}/>
-      <Route  path='/posts/draft' element={<DraftPage/>}/>
-      <Route  path='/posts/public' element={<PublishedPage/>}/>
+      <Route path='/posts/draft' element={<DraftPage/>}/>
+      <Route path='/posts/public' element={<PublishedPage/>}/>
      </Routes>  
     </div>
   );
