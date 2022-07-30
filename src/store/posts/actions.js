@@ -13,6 +13,7 @@ export const POST_DETAIL_FAIL = "POST_DETAIL_REQUEST";
 export const POST_CREATE_REQUEST = "POST_CREATE_REQUEST";
 export const POST_CREATE_SUCCESS = "POST_CREATE_SUCCESS";
 export const POST_CREATE_FAIL = "POST_CREATE_FAIL"
+export const POST_CREATE_RESET = "POST_CREATE_RESET"
 
 export const POST_UPDATE_REQUEST = "POST_UPDATE_REQUEST";
 export const POST_UPDATE_SUCCESS = "POST_UPDATE_SUCCESS";
@@ -73,18 +74,15 @@ export const createNewPost = ()=>async(dispatch,getState)=>{
         const {
             userLogin:{ userInfo },
         } = getState()
-        const userRef = doc(db,"users",`${userInfo.uid}`)
-        const snapshot = await getDoc(userRef)
-        const user = snapshot.data()
         const newPost = {
-            title:"",
-            content:"",
+            title:"Write your blog title",
+            content:" Write a Story",
             createdAt: new Date(),
             blogState:"draft",
             postImage:"",
             publishAt:"",
             slug:"",
-            author:{...user}
+            authorId:userInfo.uid
         }
 
         const postRef = collection(db,"posts")  

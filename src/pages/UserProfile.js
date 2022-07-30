@@ -1,18 +1,29 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { Main } from '../components/Main'
 import { Section } from '../components/Section';
 import { FaFacebookF,FaTwitter,FaInstagram,FaLinkedinIn, FaPhoneAlt,FaTimes} from 'react-icons/fa';
 import {MdEmail,MdLocationOn } from 'react-icons/md';
 import { AiFillCamera } from "react-icons/ai";
-
+import { useSelector,useDispatch } from 'react-redux';
+import { loginUser } from '../store/users/actions';
 
 
 
 export const UserProfile = () => {
   const [editProfile,setEditProfile] = useState(false)
+  
+ 
+ useEffect(() => {
+   
+ 
+   return () => {
+     
+   }
+ }, [])
+ 
   return (
     <>
-        <Main>
+     <Main>
       <Section>
         <div className='flex justify-around w-[90%] mt-[5rem]'>
          <div className='basis-[30%] bg-white shadow-lg rounded p-5'>
@@ -33,7 +44,7 @@ export const UserProfile = () => {
            <button onClick={()=>setEditProfile(true)} className='bg-[#8034eb] mt-2 text-white text-[1.5rem] rounded-lg py-5 px-[1.5rem]'>Edit Profile</button>
           </div>    
          </div>
-          <div className='basis-[65%] h-[20rem] bg-white min-h-[40rem] shadow-lg p-[2rem] rounded-[.5rem] '>
+          <div className='basis-[65%]  bg-white  shadow-lg p-[2rem] rounded-[.5rem] '>
             <div className='w-full mt-[2rem]'>
               <p className='text-gray-600 text-[1.5rem] border-b-2 pb-[.5rem]  w-[10rem] border-[#ff8400]'>About Me</p>
                <div className=''>

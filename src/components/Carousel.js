@@ -4,17 +4,12 @@ import React, { useEffect, useState } from 'react'
 
 export const Carousel = () => {
     const [ curSlide, setCurrentSlide] = useState(0)
-    console.log(curSlide)
-
-    
-    const colors = ["green","yellow","blue"]
      
       // setInterval(() => {
       //   moveRight() 
       // }, 12000);
 
     const images = ["./images/house1.jpg","./images/house2.jpg","./images/house3.jpg"]
-          images.map((img, i)=>console.log(img))
     let maxSlide = images.length
 
     const moveRight = ()=>{
@@ -70,7 +65,7 @@ export const Carousel = () => {
                     <p className='text-[white] text-[1rem] '>July 13, 2022 <span className='mx-[.5rem]'>|</span>Admin</p>
                     <h3 className='text-[3rem] text-[#ff8400] w-[70%]'> London Michelin doing the takeaway London Michelin doing the takeaway</h3>
                     <p className='text-[white] text-[1.5rem]'> The content of my blog and story from london  The content of my blog and story from london The content of my blog and story from london  </p>
-                    <a href="" className='text-[white] text-[1.2rem] px-[2rem] py-[1rem] bg-[#8034eb] w-[15%] text-center my-[1.5rem] rounded' >Read More</a>
+                    <a href="" className='text-[white] text-[1.2rem] px-[2rem] py-[1rem] bg-[#8034eb] w-fit text-center my-[1.5rem] rounded' >Read More</a>
                 </div>
               </div>    
                          

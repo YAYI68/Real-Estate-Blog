@@ -8,8 +8,6 @@ import { UserProfile } from './pages/UserProfile';
 import { BlogDetail } from './pages/BlogDetail';
 import { EditProfile } from './pages/EditProfile';
 import { Header } from './components/Header';
-import { Main } from './components/Main';
-import { Carousel } from './components/Carousel';
 import { Blog } from './components/Blog';
 import { DraftPage } from './pages/DraftPage';
 import { PublishedPage } from './pages/PublishedPage';
@@ -31,9 +29,10 @@ function App() {
      <Routes>
       <Route path='/' element={<HomePage/>}/>
       <Route path='/profile' element={<UserProfile/>}/>
+      <Route path='/login' element={<LoginPage/>}/>
       <Route path='/profile/edit' element={<EditProfile/>}/>
       <Route path='/:id' element={<BlogDetail/>}/>
-      <Route path='/posts/edit' element={<CreatePost/>}/>
+      <Route path='/posts/:id/edit' element={<CreatePost/>}/>
       <Route path='/posts/draft' element={<DraftPage/>}/>
       <Route path='/posts/public' element={<PublishedPage/>}/>
      </Routes>  

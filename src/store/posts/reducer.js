@@ -10,6 +10,7 @@ import {
      POST_CREATE_REQUEST,
      POST_CREATE_SUCCESS,
      POST_CREATE_FAIL,
+     POST_CREATE_RESET,
 
      POST_UPDATE_REQUEST,
      POST_UPDATE_SUCCESS,
@@ -56,6 +57,9 @@ export const postCreateReducer = (state={ post:{}},action)=>{
 
     if(action.type === POST_CREATE_FAIL){
         return {loading:false,success:false, error:action.payload}
+    }
+    if(action.type === POST_CREATE_RESET){
+        return {}
     }
     return state
 }
