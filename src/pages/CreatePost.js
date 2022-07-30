@@ -48,26 +48,26 @@ export const CreatePost =()=>{
           setContent(detailPost.content)
           setPostImage(detailPost.postImage)
           setBlogState(detailPost.blogState)
-        
-      
-      
-      // return () => { reader.removeEventListener("load", () => {
-      //   setPreview("")
-      //   });}
+
         
     },[postId,dispatch])
-    
-    const getFile = (e)=>{
-      setFile(e.target.files[0])
+
+    useEffect (()=>{
       const reader = new FileReader()
       reader.addEventListener("load", () => {
       console.log(reader.result)
       setPreview(reader.result)
-      });    
-      
+      });      
   if(file){
     reader.readAsDataURL(file)
-  }
+    } 
+     return () => { reader.removeEventListener("load", () => {
+        setPreview("")
+        });}
+    },[file])
+    
+    const getFile = (e)=>{
+      setFile(e.target.files[0])
    
     }
     
