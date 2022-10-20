@@ -1,18 +1,26 @@
 
 
 
+import { updateProfile } from 'firebase/auth'
+import { doc, setDoc } from 'firebase/firestore'
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import React, { useRef, useState, useEffect } from 'react'
 import { AiFillCamera } from 'react-icons/ai'
 import { FaTimes } from 'react-icons/fa'
+import { useDispatch } from 'react-redux'
 import { Main } from '../components/Main'
 import { Section } from '../components/Section'
+import { auth, db, storage } from '../firebaseConfig'
+import { updateUserProfile } from '../store/users/actions'
 
 
 
 export const EditProfile = ({setEditProfile}) => {
-   const [ file,setFile ] = useState();
-   const firtNameRef = useRef();
-   const lastNameRef = useRef();
+   const dispatch = useDispatch();
+   const [previewPics, setPreviewPics] = useState("")
+   const [ file,setFile ] = useState("");
+   const displayNameRef = useRef();
+   const emailRef = useRef();
    const headLine = useRef();
    const BioRef = useRef();
    const facebookRef = useRef();
@@ -20,15 +28,76 @@ export const EditProfile = ({setEditProfile}) => {
    const instagramRef = useRef();
    const linkedinRef = useRef();
    const phoneNumberRef = useRef();
+  
+   const getFile = (e)=>{
+    setFile(e.target.files[0])
+  }
 
    useEffect(()=>{
+    const reader = new FileReader()
+    reader.addEventListener("load", () => {
+      setPreviewPics(reader.result)
+    });
+    if(file){
+      reader.readAsDataURL(file)
+      } 
+      return () => {
+        reader.removeEventListener('load', () => {
+          setPreviewPics("")
+        });
+      }
+   },[file])
 
 
-   },[])
 
+   const handleSubmit = async(e)=>{
+    e.preventDefault();
+    const displayName = e.target[0].value;
+    const email = e.target[1].value
+    const password = e.target[2].value
+    const file = e.target[3].files[0]
+   
+    console.log({email, password,file})
+  
+    try {
+ 
+     
+  const storageRef = ref(storage, displayName);
+  
+  const uploadTask = uploadBytesResumable(storageRef, file); 
+   uploadTask.on(
+    (error) => {
+      // setError(true);
+    }, 
+    () => {
+      getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
+        console.log('File available at', downloadURL);
+        await updateProfile(auth.currentUser,{
+          displayName,
+          photoURL: downloadURL,
+        });
+        await setDoc(doc(db,"users",auth.currentUser.uid),{
+          uid:auth.currentUser,
+          displayName,
+          email,
+          photoURL:downloadURL,
+        }) 
+        
+      });
+    }
+  );  
+    } catch (error) {
+      
+    }
+  
+      
+  
+   }
 
    const submitHandler = (e)=>{
          e.preventDefault();
+
+         dispatch(updateUserProfile())
 
     
     
@@ -56,27 +125,31 @@ export const EditProfile = ({setEditProfile}) => {
           <button className="py-3 px-8 rounded-[.5rem] text-[1.5rem]  bg-[#8034eb] text-white ">Save</button>
         </div>
         <div className='bg-white flex-grow overflow-y-scroll pb-[6rem]'>
-        <form className='flex flex-col w-full h-full p-4'>
+        <form className='flex flex-col w-full h-full p-4' onSubmit={submitHandler}>
           <div className='h-[15rem] w-[15rem] mx-auto  mt-[2rem] cursor-pointer hover:scale-[1.2] transition-[transform]'>
           <label for='editProfile' className=' cursor-pointer mb-4'>
           <div className='border-4 h-[13rem] w-[13rem]   border-[#ff8400] rounded-full mx-auto relative mt-[1rem] p-2'>
            <div className='w-full h-full bg-[blue]   rounded-full '>
-            <img src="./images/default.jpg" alt="" className='w-full h-full rounded-full' />
+            <img src={previewPics ? previewPics : "./images/default.jpg"} alt="" className='w-full h-full rounded-full' />
            </div>
            <button className='left-1/2 bottom-0 absolute  h-[3rem] w-[3rem] rounded-full bg-black flex items-center justify-center translate-y-1/2'><AiFillCamera className='h-[2rem] w-[2rem] fill-white'/></button>
           </div>
-          <input type="file" id='editProfile' className='hidden' />
+           <input onChange={getFile} type="file" id='editProfile' className='hidden' />
           </label>
           <p className='text-center text-[1.6rem] font-bold mt-5'>Change Image</p>
           </div>
           <div className='flex justify-between mt-[5rem]'>
             <div className='basis-[47%]'>
-            <label for='firstName' className='text-[1.5rem] text-gray-600 mb-2'>First Name</label>
-            <input id='firstName' type="text"  className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]' placeholder='First Name'/>
+            <label for='firstName' className='text-[1.5rem] text-gray-600 mb-2'>Display Name</label>
+            <input id='firstName' type="text"  
+            className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]'
+             placeholder='Display Name'/>
             </div>
             <div className='basis-[47%]'>
-            <label for='lastName' className='text-[1.5rem] text-gray-600 mb-2'>Last Name</label>
-            <input id='lastName' type="text"  className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 rounded border-2 focus:border-[#8034eb]' placeholder='Last Name'/>
+            <label for='lastName' className='text-[1.5rem] text-gray-600 mb-2'>Email</label>
+            <input id='lastName' type="email"  
+            className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 rounded border-2 focus:border-[#8034eb]' 
+            placeholder='Email'/>
             </div>
           </div>
           <div className='mt-[2rem]'>

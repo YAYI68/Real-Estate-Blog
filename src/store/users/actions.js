@@ -1,6 +1,6 @@
 
 import {signOut,createUserWithEmailAndPassword, updateProfile, onAuthStateChanged} from 'firebase/auth';
-import { doc, getDocs, getDoc,collection, updateDoc } from 'firebase/firestore';
+import { doc, getDocs, getDoc,collection, updateDoc, setDoc } from 'firebase/firestore';
 import { auth, createtUserProfileDocument, db } from "../../firebaseConfig";
 
 
@@ -108,7 +108,7 @@ export const getUserProfile = (id)=>async(dispatch)=>{
 
 }
 
-export const updateUserProfile = (data,id)=>async(dispatch)=>{
+export const updateUserProfile = (id,data)=>async(dispatch)=>{
 
     try{
         dispatch({type:USER_UPDATE_REQUEST})
@@ -119,7 +119,7 @@ export const updateUserProfile = (data,id)=>async(dispatch)=>{
             email,
             photoURL,
         })
-        const updatedUser =  await updateDoc(userRef,data)
+        const updatedUser =  await setDoc(userRef,data)
       dispatch({
         type:USER_UPDATE_SUCCESS,
         payload:updatedUser
