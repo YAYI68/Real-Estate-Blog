@@ -4,10 +4,22 @@ import React, { useEffect, useState } from 'react'
 
 export const Carousel = () => {
     const [ curSlide, setCurrentSlide] = useState(0)
-     
+    
+
       // setInterval(() => {
       //   moveRight() 
       // }, 12000);
+
+    useEffect(() => {
+      const timer = setInterval(() =>{
+        moveRight()
+      },5000)
+    
+      return () => {
+        clearInterval(timer)
+      }
+    }, [curSlide])
+      
 
     const images = ["./images/house1.jpg","./images/house2.jpg","./images/house3.jpg"]
     let maxSlide = images.length
@@ -60,7 +72,7 @@ export const Carousel = () => {
         </button>
             {imageShow.map((show,i)=>(
                 <div  className={`absolute top-[0] w-full  h-full   bg-no-repeat bg-cover  translate-x-[${100 * (i-curSlide) }%]  transition-transform `}> 
-                <img src={show.image} alt="" className=" h-full w-full brightness-[.3] object-top" />
+                <img src={show.image} alt="" className=" h-full w-full brightness-[.5] object-top" />
                 <div className='flex flex-col h-[70%] absolute top-[25%] left-[15%] w-[50%]'>
                     <p className='text-[white] text-[1rem] '>July 13, 2022 <span className='mx-[.5rem]'>|</span>Admin</p>
                     <h3 className='text-[3rem] text-[#ff8400] w-[70%]'> London Michelin doing the takeaway London Michelin doing the takeaway</h3>
@@ -74,20 +86,7 @@ export const Carousel = () => {
               {images.map((image,i)=>(
                 <button onClick={()=>SlideBtn(i)} className='h-4 w-4 rounded-full  bg-white m-2'></button>
               ))}
-            </div>
-            
-            
-    
-            
-             {/* <div  className={`absolute top-[0] w-full h-full bg-[green] translate-x-[0%]  transition-transform z-[${3-curSlide}]`}> 
-                
-            </div>
-            <div className={`absolute top-[0] w-full h-full bg-[yellow]  translate-x-[100%] transition-transform z-[${2-curSlide}]`}>
-                
-            </div>
-            <div className={`absolute top-[0] w-full h-full bg-[blue]  translate-x-[200%] transition-transform z-[${1-curSlide}]`}>
-               
-            </div>  */}       
+            </div>     
           
         </div>
     </div>
