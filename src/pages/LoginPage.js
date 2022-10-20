@@ -22,18 +22,13 @@ export const LoginPage = () => {
              if(user){ 
                navigate("/profile") 
              }
-         })
-        //  if(userInfo){
-        //   navigate("/profile") 
-        //  }
-         
+         })        
          },[navigate,userInfo])
 
   
     const submitHandler = async(e) => {
-        e.preventDefault();
+      e.preventDefault();
       const {user} = await signInWithEmailAndPassword(auth,email,password) 
-      localStorage.setItem('userInfo',JSON.stringify(user))     
         setEmail("")
         setPassword("")
     }

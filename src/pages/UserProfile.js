@@ -5,7 +5,8 @@ import { FaFacebookF,FaTwitter,FaInstagram,FaLinkedinIn, FaPhoneAlt,FaTimes} fro
 import {MdEmail,MdLocationOn } from 'react-icons/md';
 import { AiFillCamera } from "react-icons/ai";
 import { useSelector,useDispatch } from 'react-redux';
-import { loginUser } from '../store/users/actions';
+
+import { EditProfile } from '../components/EditProfile';
 
 
 
@@ -14,8 +15,7 @@ export const UserProfile = () => {
   
  
  useEffect(() => {
-   
- 
+
    return () => {
      
    }
@@ -77,89 +77,10 @@ export const UserProfile = () => {
           </div>
         </div>
       </Section>
-    </Main>
     {editProfile &&   
-    <div  onClick={()=>setEditProfile(false)} className='fixed z-[20]  w-[100vw]  h-[100vh] bg-[rgb(0,0,0,0.69)]  left-0 top-0  flex items-center justify-center'>
-      <div className='w-[50%] h-[85%] m-auto bg-[white]  rounded flex flex-col fixed '>
-        <div className='flex p-[1rem] justify-between  border-b-2'>
-         <div className='flex items-center basis-[30%]'>
-           <button onClick={()=>setEditProfile(false)} className='mr-4'><FaTimes className='text-[2.5rem] fill-[#8034eb] '/></button>
-           <p className='text-[2rem] font-bold'>EditProfile</p>
-         </div>
-          <button className="py-3 px-8 rounded-[.5rem] text-[1.5rem]  bg-[#8034eb] text-white ">Save</button>
-        </div>
-        <div className='bg-white flex-grow overflow-y-scroll pb-[6rem]'>
-        <form className='flex flex-col w-full h-full p-4'>
-          <div className='h-[15rem] w-[15rem] mx-auto  mt-[2rem] cursor-pointer hover:scale-[1.2] transition-[transform]'>
-          <label for='editProfile' className=' cursor-pointer mb-4'>
-          <div className='border-4 h-[13rem] w-[13rem]   border-[#ff8400] rounded-full mx-auto relative mt-[1rem] p-2'>
-           <div className='w-full h-full bg-[blue]   rounded-full '>
-            <img src="./images/default.jpg" alt="" className='w-full h-full rounded-full' />
-           </div>
-           <button className='left-1/2 bottom-0 absolute  h-[3rem] w-[3rem] rounded-full bg-black flex items-center justify-center translate-y-1/2'><AiFillCamera className='h-[2rem] w-[2rem] fill-white'/></button>
-          </div>
-          <input type="file" id='editProfile' className='hidden' />
-          </label>
-          <p className='text-center text-[1.6rem] font-bold mt-5'>Change Image</p>
-          </div>
-          <div className='flex justify-between mt-[5rem]'>
-            <div className='basis-[47%]'>
-            <label for='firstName' className='text-[1.5rem] text-gray-600 mb-2'>First Name</label>
-            <input id='firstName' type="text"  className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]' placeholder='First Name'/>
-            </div>
-            <div className='basis-[47%]'>
-            <label for='lastName' className='text-[1.5rem] text-gray-600 mb-2'>Last Name</label>
-            <input id='lastName' type="text"  className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 rounded border-2 focus:border-[#8034eb]' placeholder='Last Name'/>
-            </div>
-          </div>
-          <div className='mt-[2rem]'>
-            <label className='text-[1.5rem] text-gray-600 mb-2'>Headline</label>
-            <input type="text" className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]'/>
-          </div>
-
-          <div className='mt-[2rem]'>
-            <label className='text-[1.5rem] text-gray-600 mb-2'>Bio</label>
-            <textarea cols="30" rows="5" className='w-full text-[1.5rem]  outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]' placeholder='A bit about yourself' />
-          </div>
-
-          <div className='mt-[2rem]'>
-            <label className='text-[1.5rem] text-gray-600 mb-2'>Facebook</label>
-            <input type="text" className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]' placeholder='Your facebook url link'/>
-          </div>
-
-          <div className='mt-[2rem]'>
-            <label className='text-[1.5rem] text-gray-600 mb-2'>Instagram</label>
-            <input type="text" className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]' placeholder='Your instagram url link'/>
-          </div>
-
-          <div className='mt-[2rem]'>
-            <label className='text-[1.5rem] text-gray-600 mb-2'>LinkedIn</label>
-            <input type="text" className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 rounded border-2 focus:border-[#8034eb]' placeholder='Your LinkedIn url link'/>
-          </div>
-
-          <div className='mt-[2rem]'>
-            <label className='text-[1.5rem] text-gray-600 mb-2'>Twitter</label>
-            <input type="text" className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 rounded p-2 border-2 focus:border-[#8034eb]' placeholder='Your Twitter url link'/>
-          </div>
-
-          
-          <div className='mt-[2rem]'>
-            <label className='text-[1.5rem] text-gray-600 mb-2'>Phone Number</label>
-            <input type="text" className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 rounded p-2 border-2 focus:border-[#8034eb]' placeholder='Your Phone Number'/>
-          </div>
-          
-          <div className='mt-[2rem] mb-[2rem]'>
-            <label className='text-[1.5rem] text-gray-600 mb-2'>Address</label>
-            <input type="text" className='w-full text-[1.5rem] h-[4rem] outline-none rounded bg-gray-200 p-2 border-2 focus:border-[#8034eb]' placeholder='Your Location '/>
-          </div>
-          <div className='mt-[2rem] mb-[2rem]'>
-            
-          </div>
-        </form>      
-        </div>
-      </div>          
-    </div>
+    <EditProfile setEditProfile={setEditProfile}/>
     }
+    </Main>
     </>
   )
 }

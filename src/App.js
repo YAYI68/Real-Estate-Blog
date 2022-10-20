@@ -6,20 +6,9 @@ import { Routes,Route } from 'react-router-dom';
 import { CreatePost } from './pages/CreatePost';
 import { UserProfile } from './pages/UserProfile';
 import { BlogDetail } from './pages/BlogDetail';
-import { EditProfile } from './pages/EditProfile';
 import { Header } from './components/Header';
-import { Blog } from './components/Blog';
 import { DraftPage } from './pages/DraftPage';
 import { PublishedPage } from './pages/PublishedPage';
-
-
-
-
-
-// blue #8034eb
-// orange #e6c20e
-
-
 
 
 function App() {
@@ -30,7 +19,6 @@ function App() {
       <Route path='/' element={<HomePage/>}/>
       <Route path='/profile' element={<UserProfile/>}/>
       <Route path='/login' element={<LoginPage/>}/>
-      <Route path='/profile/edit' element={<EditProfile/>}/>
       <Route path='/:id' element={<BlogDetail/>}/>
       <Route path='/posts/:id/edit' element={<CreatePost/>}/>
       <Route path='/posts/draft' element={<DraftPage/>}/>

@@ -5,33 +5,18 @@ import { useSelector,useDispatch } from 'react-redux';
 import {  logOutUser } from '../store/users/actions';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
-
-
+import { useStateContext } from '../context/ContextProvider';
 
 
 export const Header = () => {
     const [userDisplay,setUserDisplay] = useState(false)
     const dropRef = useRef()
-    const [userData,setUserData] = useState('')
-    const userLogin = useSelector(state=>state.userLogin)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const {userInfo} = userLogin
+    const { userInfo } = useStateContext();
 
     
    useEffect(() => {
-     
-    onAuthStateChanged(auth,(user)=>{
-        if(user){
-            setUserData(user)      
-        }
-        else{
-            setUserData("")
-        }
-    })
-
-
-
     const closeSlider = (e)=>{
         if(dropRef.current && dropRef.current.contains(e.target)){
          return;
@@ -43,11 +28,8 @@ export const Header = () => {
      return () => {
         document.removeEventListener("mousedown",closeSlider)
      }
+   },[])
    
-
-   }, [])
-   
-  
    const signUserOut = async()=>{
        await signOut(auth)
         dispatch(logOutUser()) 
@@ -82,7 +64,7 @@ export const Header = () => {
                 <svg class="w-8 h-8 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                </button>
             </div>
-         
+          {userInfo &&   
             <div className='h-[50%] w-[7%] relative'>
                 <div className='h-[40%] w-[40%] rounded-full cursor-pointer' onClick={()=>setUserDisplay(!userDisplay)}>
                     <img src="./images/default.jpg" className='w-full h-full rounded-full' alt="" />
@@ -92,17 +74,16 @@ export const Header = () => {
                     <Link to="/profile" className='text-[1.5rem] py-[.5rem] text-center border-b-2 hover:bg-[#8034eb] hover:text-white'>Profile</Link>
                     <Link to="/posts/draft"  className='text-[1.5rem] py-[.5rem] text-center border-b-2 hover:bg-[#8034eb] hover:text-white'>post</Link>
                     <Link to="/newsletter"  className='text-[1.5rem] py-[.5rem] text-center hover:bg-[#8034eb] hover:text-white'>Newsletter</Link>
+                    <Link to="" onClick={signUserOut} className='text-[1.5rem] py-[.5rem] text-center hover:bg-[#8034eb] hover:text-white'>logout</Link>
                 </div>
                 }
             </div>
-            {!userData ? 
+          }
+            {!userInfo &&
             <ul className='w-[5%] flex items-center justify-between list-none mr-[1.5rem]'>
             <li className='w-fit border-[1px] border-[#8034eb] hover:bg-[#8034eb] flex justify-center items-center px-3 py-2 rounded text-[#8034eb] hover:text-white'><Link to="/login" className="text-[1.5rem]  font-[400] hover:text-[white]">Login</Link></li> 
             </ul>
-            :
-            <button onClick={signUserOut} className="text-[1.5rem] w-fit border-[1px] border-[#8034eb] hover:bg-[#8034eb] flex justify-center items-center px-3 py-2 rounded text-[#8034eb] hover:text-white">LogOut</button>
-        }
-            
+           }  
         </nav>
     </header>
   )

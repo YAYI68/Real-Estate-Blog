@@ -37,8 +37,6 @@ export const loginUser = (user)=>(dispatch)=>{
         type:USER_LOGIN_SUCCESS,
         payload:user,
      })
-
-  
     }
 
     catch(error){
@@ -56,8 +54,7 @@ export const logOutUser = ()=>(dispatch)=>{
     try{
       dispatch({type:USER_LOGOUT}) 
     }
-    catch(error){
-      
+    catch(error){  
     }
 
 }
@@ -67,7 +64,7 @@ export const registerUser = (data)=>async(dispatch)=>{
      dispatch({type:REGISTER_USER_REQUEST}) 
      const {displayName,email,password} = data
      
-     const {user } = await createUserWithEmailAndPassword(auth,email,password)
+     const {user} = await createUserWithEmailAndPassword(auth,email,password)
                   await createtUserProfileDocument(user,{displayName})
                   await updateProfile(user,{displayName})
      dispatch({
