@@ -4,12 +4,6 @@ import React, { useEffect, useState } from 'react'
 
 export const Carousel = () => {
     const [ curSlide, setCurrentSlide] = useState(0)
-    
-
-      // setInterval(() => {
-      //   moveRight() 
-      // }, 12000);
-
     useEffect(() => {
       const timer = setInterval(() =>{
         moveRight()

@@ -1,5 +1,4 @@
 import React, { useState,useEffect } from 'react';
-import { TextArea } from '../components/TextArea';
 import { Main } from '../components/Main';
 import { Section } from "../components/Section";
 import { FaPlus } from 'react-icons/fa';
@@ -7,13 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { auth, storage } from '../firebaseConfig';
 import { getUserProfile } from '../store/users/actions';
 import { ref, uploadBytesResumable,getDownloadURL,uploadBytes  } from "firebase/storage";
-import {useParams,useNavigate} from "react-router-dom"
+import { useParams,useNavigate} from "react-router-dom"
 import { getPost, updateNewPost } from '../store/posts/actions';
 
 
 
 export const CreatePost =()=>{
-      const [ title, setTitle ] = useState(" ")
+    const [ title, setTitle ] = useState(" ")
     const [ content, setContent] = useState(" ")
     const [file,setFile]= useState("")
     const [ postImage, setPostImage ] =useState(" ")

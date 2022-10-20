@@ -1,7 +1,7 @@
 import React from 'react'
 import { Section } from './Section';
 import {Link } from 'react-router-dom';
-import { blogPost } from '../blog';
+import { blogPost } from '../data/dummy';
 
 
 

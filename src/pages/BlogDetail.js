@@ -3,8 +3,7 @@ import { Main } from '../components/Main';
 import { Section } from '../components/Section';
 import { FaFacebookF,FaTwitter,FaInstagram,FaLinkedinIn, FaComment} from 'react-icons/fa';
 import { Link,useParams } from "react-router-dom";
-import { blogPost } from '../blog';
-
+import { blogPost } from '../data/dummy';
 
 
 export const BlogDetail = () => {
