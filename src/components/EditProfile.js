@@ -18,19 +18,20 @@ import { updateUserProfile } from '../store/users/actions'
 export const EditProfile = ({setEditProfile}) => {
    const dispatch = useDispatch();
    const [previewPics, setPreviewPics] = useState("")
-   const [ file,setFile ] = useState("");
+   const [ imgFile,setImgFile ] = useState("");
    const displayNameRef = useRef();
    const emailRef = useRef();
-   const headLine = useRef();
-   const BioRef = useRef();
+   const headLineRef = useRef();
+   const bioRef = useRef();
    const facebookRef = useRef();
    const twitterRef = useRef();
    const instagramRef = useRef();
-   const linkedinRef = useRef();
+   const linkedInRef = useRef();
    const phoneNumberRef = useRef();
+   
   
    const getFile = (e)=>{
-    setFile(e.target.files[0])
+    setImgFile(e.target.files[0])
   }
 
    useEffect(()=>{
@@ -38,30 +39,34 @@ export const EditProfile = ({setEditProfile}) => {
     reader.addEventListener("load", () => {
       setPreviewPics(reader.result)
     });
-    if(file){
-      reader.readAsDataURL(file)
+    if(imgFile){
+      reader.readAsDataURL(imgFile)
       } 
       return () => {
         reader.removeEventListener('load', () => {
           setPreviewPics("")
         });
       }
-   },[file])
+   },[imgFile])
 
 
 
    const handleSubmit = async(e)=>{
     e.preventDefault();
-    const displayName = e.target[0].value;
-    const email = e.target[1].value
-    const password = e.target[2].value
-    const file = e.target[3].files[0]
+    const displayName = displayNameRef.current.value;
+    const email = emailRef.current.value
+    const headLine = headLineRef.current.value
+    const bio = bioRef.current.value
+    const phoneNumber = phoneNumberRef.current.value
+    const twitter =  twitterRef.current.value
+    const facebook = facebookRef.current.value
+    const instagram = instagramRef.current.value
+    const linkedIn = linkedInRef.current.value
+    const file = imgFile
    
-    console.log({email, password,file})
+
   
-    try {
- 
-     
+  try { 
   const storageRef = ref(storage, displayName);
   
   const uploadTask = uploadBytesResumable(storageRef, file); 
@@ -77,33 +82,28 @@ export const EditProfile = ({setEditProfile}) => {
           photoURL: downloadURL,
         });
         await setDoc(doc(db,"users",auth.currentUser.uid),{
-          uid:auth.currentUser,
+          uid:auth.currentUser.uid,
           displayName,
           email,
+          headLine,
           photoURL:downloadURL,
+          bio,
+          phoneNumber,
+          twitter,
+          facebook,
+          instagram, 
+          linkedIn
         }) 
-        
+
       });
     }
   );  
     } catch (error) {
       
     }
-  
-      
-  
-   }
-
-   const submitHandler = (e)=>{
-         e.preventDefault();
-
-         dispatch(updateUserProfile())
-
-    
-    
-     
 
    }
+
      
     
 
@@ -125,7 +125,7 @@ export const EditProfile = ({setEditProfile}) => {
           <button className="py-3 px-8 rounded-[.5rem] text-[1.5rem]  bg-[#8034eb] text-white ">Save</button>
         </div>
         <div className='bg-white flex-grow overflow-y-scroll pb-[6rem]'>
-        <form className='flex flex-col w-full h-full p-4' onSubmit={submitHandler}>
+        <form className='flex flex-col w-full h-full p-4' onSubmit={handleSubmit}>
           <div className='h-[15rem] w-[15rem] mx-auto  mt-[2rem] cursor-pointer hover:scale-[1.2] transition-[transform]'>
           <label for='editProfile' className=' cursor-pointer mb-4'>
           <div className='border-4 h-[13rem] w-[13rem]   border-[#ff8400] rounded-full mx-auto relative mt-[1rem] p-2'>
@@ -141,54 +141,75 @@ export const EditProfile = ({setEditProfile}) => {
           <div className='flex justify-between mt-[5rem]'>
             <div className='basis-[47%]'>
             <label for='firstName' className='text-[1.5rem] text-gray-600 mb-2'>Display Name</label>
-            <input id='firstName' type="text"  
+            <input id='firstName' type="text" 
+             ref={displayNameRef} 
             className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]'
              placeholder='Display Name'/>
             </div>
             <div className='basis-[47%]'>
             <label for='lastName' className='text-[1.5rem] text-gray-600 mb-2'>Email</label>
             <input id='lastName' type="email"  
+            ref={emailRef}
             className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 rounded border-2 focus:border-[#8034eb]' 
             placeholder='Email'/>
             </div>
           </div>
           <div className='mt-[2rem]'>
             <label className='text-[1.5rem] text-gray-600 mb-2'>Headline</label>
-            <input type="text" className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]'/>
+            <input type="text"
+             ref={headLineRef}
+             className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]'/>
           </div>
 
           <div className='mt-[2rem]'>
             <label className='text-[1.5rem] text-gray-600 mb-2'>Bio</label>
-            <textarea cols="30" rows="5" className='w-full text-[1.5rem]  outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]' placeholder='A bit about yourself' />
+            <textarea cols="30" rows="5" 
+             ref={bioRef}
+             className='w-full text-[1.5rem]  outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]'
+             placeholder='A bit about yourself' />
           </div>
 
           <div className='mt-[2rem]'>
             <label className='text-[1.5rem] text-gray-600 mb-2'>Facebook</label>
-            <input type="text" className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]' placeholder='Your facebook url link'/>
+            <input type="text" 
+             ref={facebookRef}
+            className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]' 
+            placeholder='Your facebook url link'/>
           </div>
 
           <div className='mt-[2rem]'>
             <label className='text-[1.5rem] text-gray-600 mb-2'>Instagram</label>
-            <input type="text" className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]' placeholder='Your instagram url link'/>
+            <input type="text" 
+              ref={instagramRef}
+            className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]' 
+            placeholder='Your instagram url link'/>
           </div>
 
           <div className='mt-[2rem]'>
             <label className='text-[1.5rem] text-gray-600 mb-2'>LinkedIn</label>
-            <input type="text" className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 rounded border-2 focus:border-[#8034eb]' placeholder='Your LinkedIn url link'/>
+            <input type="text"
+            ref={linkedInRef} 
+            className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 rounded border-2 focus:border-[#8034eb]' 
+            placeholder='Your LinkedIn url link'/>
           </div>
 
           <div className='mt-[2rem]'>
             <label className='text-[1.5rem] text-gray-600 mb-2'>Twitter</label>
-            <input type="text" className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 rounded p-2 border-2 focus:border-[#8034eb]' placeholder='Your Twitter url link'/>
+            <input type="text" 
+            ref={twitterRef}
+            className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 rounded p-2 border-2 focus:border-[#8034eb]' 
+            placeholder='Your Twitter url link'/>
           </div>
 
-          
           <div className='mt-[2rem]'>
             <label className='text-[1.5rem] text-gray-600 mb-2'>Phone Number</label>
-            <input type="text" className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 rounded p-2 border-2 focus:border-[#8034eb]' placeholder='Your Phone Number'/>
+            <input type="text"
+            ref={phoneNumberRef} 
+            className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 rounded p-2 border-2 focus:border-[#8034eb]' 
+            placeholder='Your Phone Number'/>
           </div>
           <div className='mt-[2rem] mb-[2rem]'>
-            
+           <button className="py-3 px-8 rounded-[.5rem] text-[1.5rem]  bg-[#8034eb] text-white ">Save</button>
           </div>
         </form>      
         </div>
@@ -202,140 +223,3 @@ export const EditProfile = ({setEditProfile}) => {
 
 
 
-
-
-
-
-
-// import React,{useState,useEffect} from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { auth, db } from '../firebaseConfig';
-// import { useNavigate } from "react-router-dom";
-// import { getUserProfile, updateUserProfile } from '../store/users/actions';
-// import { updateProfile } from 'firebase/auth';
-// import { doc, updateDoc } from 'firebase/firestore';
-// import { ref, uploadBytesResumable,getDownloadURL  } from "firebase/storage";
-// import { storage } from '../firebaseConfig';
-
-
-
-
-
-
-// export const EditProfile = () => {
-//     const [displayName,setDisplayName] = useState("")
-//     const [email,setEmail] = useState("")
-//     const [file,setFile] =useState("")
-//     const [photoURL,setPhotoURL] = useState("")
-//     const [twitter, setTwitter] = useState("")
-//     const [instagram,setInstagram] = useState("")
-//     const [linkedIn,setLinkedin] = useState("")
-//     const [description,setDescription] = useState("")
-//     const dispatch = useDispatch()
-//     const navigate = useNavigate()
-//     const userLogin = useSelector(state => state.userLogin)
-//     const userProfile = useSelector(state=>state.userProfile)
-//     const updatedProfile = useSelector(state=>state.updatedProfile)
-//     const {loading:loadingUpdate,success:successUpdate,profileUpdate,error:errorUpdate}=updatedProfile
-//     const {loading,success,error,profile} = userProfile
-//     const { userInfo } = userLogin
-//     console.log("from profile", userInfo.uid)
-//     console.log("from profile",profile)
-//     const userId = userInfo.uid
-   
-//     // const uploadImage = async()=>{
-//     //     const url = await getDownloadURL(storageRef)
-//     //     setPhotoURL(url)
-//     // }
-//     console.log(successUpdate)
-
-//     useEffect(()=>{
-//         if(successUpdate){
-//             navigate("/profile")
-//         }
-//         if(!userInfo){
-//             navigate("/")
-//         }
-//         if(profile && profile.id === userId){
-//                 setDisplayName(profile.displayName)
-//                 setEmail(profile.email)
-//                 setPhotoURL(profile.photoURL)
-//                 setTwitter(profile.twitter)
-//                 setInstagram(profile.instagram)
-//                 setLinkedin(profile.linkedIn)
-//                 setDescription(profile.description)
-//             } 
-//         else{
-//             dispatch(getUserProfile(userId))        
-//         }
-//     },[userInfo,profile,dispatch,navigate,userId,successUpdate])
-  
-//    const  uploadHandler = ()=>{
-//     const storageRef = ref(storage,`image/${userInfo.uid}/${file.name}`);
-//     const uploadTask = uploadBytesResumable(storageRef, file);
-//      uploadTask.on('state_changed', (snapshot) => {
-//     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-//     console.log('Upload is ' + progress + '% done');
-//   }, 
-//   (error) => {
-//     // Handle unsuccessful uploads
-//   }, 
-//   () => {
-//     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-//       console.log('File available at', downloadURL);
-//       setPhotoURL(downloadURL)
-//     });
-//   }
-// );
-//    }
-
-//    const data = {
-//     displayName,
-//     email,
-//     photoURL,
-//     twitter,
-//     instagram,
-//     linkedIn,
-//     description
-// }
-//     const submitHandler = async (e)=>{
-//         e.preventDefault();
-//         dispatch (updateUserProfile(data,userId)) 
-//         console.log("Profile Updated")
-//     }
-
-//   return (
-//     <div style={{marginTop:"5rem"}}>
-//        {success &&
-//        <div>
-//            <form onSubmit={submitHandler}>
-//                <div>
-//                <input type="text" value={displayName} onChange={(e)=>setDisplayName(e.target.value)} />
-//                </div>
-//                <div>
-//                <input type="email"  placeholder="Email"  value={email} onChange={(e)=>setEmail(e.target.value)}/>
-//                </div>
-//                <div>
-//                <input type="file" placeholder="" onChange={(e)=>setFile(e.target.files[0])} />
-//                </div>
-//                <div>
-//                <input type="text"  placeholder="twitter"  value={twitter} onChange={(e)=>setTwitter(e.target.value)}/>
-//                </div>
-//                <div>
-//                <input type="text" placeholder="instagram" value={instagram}  onChange={(e)=>setInstagram(e.target.value)} />
-//                </div>
-//                <div>
-//                <input type="text" placeholder="linkedIn" value={linkedIn}  onChange={(e)=>setLinkedin(e.target.value)}/>
-//                </div>
-//                <div> 
-//                <textarea cols="30" rows="10" placeholder="Bio"   value={description} onChange={(e)=>setDescription(e.target.value)}></textarea>
-//                </div>
-//                <button>Save</button>
-//            </form>
-//            <img src={photoURL} alt="" />
-//            <button onClick={uploadHandler}>Upload</button>
-//        </div>       
-//        }
-//     </div>
-//   )
-// }
