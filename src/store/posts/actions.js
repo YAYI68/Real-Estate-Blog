@@ -1,5 +1,7 @@
-import { db } from "../../firebaseConfig";
-import { collection,getDocs,getDoc, doc, addDoc, updateDoc } from "firebase/firestore";
+import { auth, db } from "../../firebaseConfig";
+import { collection,getDocs,getDoc, doc, addDoc, updateDoc, setDoc } from "firebase/firestore";
+
+
 
 
 export const POST_LIST_REQUEST = "POST_LIST_REQUEST";
@@ -71,22 +73,23 @@ export const createNewPost = ()=>async(dispatch,getState)=>{
      try{
         dispatch({type:POST_CREATE_REQUEST})
 
-        const {
-            userLogin:{ userInfo },
-        } = getState()
+        // const {
+        //     userLogin:{ userInfo },
+        // } = getState()
         const newPost = {
             title:"Write your blog title",
             content:" Write a Story",
             createdAt: new Date(),
             blogState:"draft",
-            postImage:"",
+            postImageURL:"",
             publishAt:"",
             slug:"",
-            authorId:userInfo.uid
+            authorId:auth.currentUser.uid
         }
 
-        const postRef = collection(db,"posts")  
-         const postSnapshot =  await addDoc (postRef,newPost)
+        const postRef = collection(db, "posts")
+       
+         const postSnapshot =  await addDoc(postRef,newPost)
         const post = {id:postSnapshot.id} 
 
         dispatch({

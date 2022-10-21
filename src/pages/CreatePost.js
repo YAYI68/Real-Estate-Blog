@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, useRef } from 'react';
 import { Main } from '../components/Main';
 import { Section } from "../components/Section";
 import { FaPlus } from 'react-icons/fa';
@@ -12,37 +12,25 @@ import { getPost, updateNewPost } from '../store/posts/actions';
 
 
 export const CreatePost =()=>{
-    const [ title, setTitle ] = useState(" ")
-    const [ content, setContent] = useState(" ")
-    const [file,setFile]= useState("")
-    const [ postImage, setPostImage ] =useState(" ")
-    const [ blogState,setBlogState ] = useState(" ")
-    const [savedImg,setSavedImg] = useState(false)
+    const  titleRef = useRef();
+    const  contentRef = useRef();
+    const [file,setFile]= useState();
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const params = useParams()
     const postId = params.id
     
-  const [preview,setPreview] = useState()
+  const [preview,setPreview] = useState("")
     
   const postDetail = useSelector(state => state.postDetail)
-  const { loading:detailLoading,success:detailSuccess,error:detailError,post:detailPost } = postDetail
+  const { loading:detailLoading,success:detailSuccess,error:detailError,post } = postDetail
 
-    const slug = title?title.replaceAll(" ","-"):""
-    const publishAt = blogState === "publish"? new Date() : ""
+  useEffect(()=>{
+        dispatch(getPost(postId))
+      
+  },[postId,dispatch])
+
    
-    useEffect(()=>{
-      if(!detailPost.title || detailPost.id !== postId){
-          dispatch(getPost(postId)) 
-        }
-          setTitle(detailPost.title) 
-          setContent(detailPost.content)
-          setPostImage(detailPost.postImage)
-          setBlogState(detailPost.blogState)
-
-        
-    },[postId,dispatch])
-
     useEffect (()=>{
       const reader = new FileReader()
       reader.addEventListener("load", () => {
@@ -59,72 +47,34 @@ export const CreatePost =()=>{
     
     const getFile = (e)=>{
       setFile(e.target.files[0])
-   
     }
     
-    const newPost = {
-        title,
-        content,
-        blogState,
-        postImage,
-        publishAt,
-        slug,                
-    }
+    // const newPost = {
+    //     title,
+    //     content,
+    //     blogState,
+    //     postImage,
+    //     publishAt,
+    //     slug,                
+    // }
     
-      const uploadHandler = async()=>{
-      const storageRef = ref(storage,`/images/blog/${postId}/${file.name}`)
-      const uploadTask = await uploadBytes(storageRef,file)
-      const url = await getDownloadURL(uploadTask.snapshot.ref)
-      setPostImage(url)
-      return url
-      // uploadTask.on("state_changed",(snapshot)=>{
-      //   const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      //   console.log('Upload is ' + progress + '% done');
-      // },
-      // (error)=>{      
-      // },
-      // ()=>{
-      //   getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-      //     console.log('File available at', downloadURL);
-      //     setPostImage(downloadURL)
-      //     setSavedImg(true)
-      //   });
-      // } 
-      // )
-    }
+     
 
     const submitHandler = (e)=>{
-      e.preventDefault();
-      if(file){
-        uploadHandler()
-        if(savedImg){
-          dispatch(updateNewPost(postId,newPost))
-        }
-      }
-      else{
-        dispatch(updateNewPost(postId,newPost))
-      }
-      console.log("blog has been publish")
+          e.preventDefault();
+           const title = titleRef.current.value;
+           const content = contentRef.current.value;
+           
     }
     
 const publishHandler = ()=>{
-  setBlogState("publish")
-  if(file){
-    uploadHandler()
-    if(savedImg){
-      dispatch(updateNewPost(postId,newPost))
-    }
-  }
-  else{
-    dispatch(updateNewPost(postId,newPost))
-  }
-  console.log("blog has been publish")
+
 }
 
   return (
     <Main>
+      {detailSuccess &&    
       <Section>
-      {detailSuccess &&
         <div className=' text-[1.5rem] mt-3 mx-auto px-[20rem] '>
           <div className='bg-white w-full px-[2rem] py-[2rem] overflow-y-scroll'>
           <div className='w-full py-[2rem]'>
@@ -140,7 +90,7 @@ const publishHandler = ()=>{
             </div>
             </div>
             <form>
-            <input  value={title}  onChange={(e)=>setTitle(e.target.value)} type="text" placeholder='Title' className='text-[2rem]  focus:border-2 focus:border-solid border-none w-full my-5 rounded p-2 focus:border-[#8034eb] outline-none'/>
+            <input  ref={titleRef} defaultValue={post.title}  type="text" placeholder='Title' className='text-[2rem]  focus:border-2 focus:border-solid border-none w-full my-5 rounded p-2 focus:border-[#8034eb] outline-none'/>
           <div class="flex justify-center items-center w-full">
             <label for="dropzone-file" class="flex flex-col justify-center items-center w-full h-[30rem] bg-gray-50 rounded-lg border-2 border-[#8034eb] border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
             <div class="flex flex-col justify-center items-center pt-5 pb-6">
@@ -151,17 +101,17 @@ const publishHandler = ()=>{
             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
             <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p> */}
            </div>
-           <input id="dropzone-file" type="file" onChange={getFile} className="hidden" />
+           <input   id="dropzone-file" type="file" onChange={getFile} className="hidden" />
           </label>
          </div>
          <div className='w-full h-[30rem] my-[3rem]'>
-           <textarea  value={content}  onChange={(e)=>setContent(e.target.value)} cols="30" rows="10" placeholder='Write a story' className='w-full h-full  border-2 focus:border-solid border-none p-3 rounded focus:border-[#8034eb] outline-none '/> 
+           <textarea ref={contentRef} defaultValue={post.content} cols="30" rows="10" placeholder='Write a story' className='w-full h-full  border-2 focus:border-solid border-none p-3 rounded focus:border-[#8034eb] outline-none '/> 
          </div>
-            </form>
+        </form>
           </div>
         </div>
-       }
       </Section>
+      }
     </Main>
   );
 }

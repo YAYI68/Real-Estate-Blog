@@ -15,7 +15,7 @@ import { updateUserProfile } from '../store/users/actions'
 
 
 
-export const EditProfile = ({setEditProfile}) => {
+export const EditProfile = ({setEditProfile,user}) => {
    const dispatch = useDispatch();
    const [previewPics, setPreviewPics] = useState("")
    const [ imgFile,setImgFile ] = useState("");
@@ -64,43 +64,59 @@ export const EditProfile = ({setEditProfile}) => {
     const linkedIn = linkedInRef.current.value
     const file = imgFile
    
+    console.log("Save was clicked")
 
+    const data = {
+      uid:auth.currentUser.uid,
+      displayName,
+      email,
+      headLine,
+      bio,
+      phoneNumber,
+      twitter,
+      facebook,
+      instagram, 
+      linkedIn
+    }
+
+  if(imgFile){
+    try { 
+    const storageRef = ref(storage, `user/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file); 
+     uploadTask.on(
+      (error) => {
+        // setError(true);
+      }, 
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
+          console.log('File available at', downloadURL);
+          await updateProfile(auth.currentUser,{
+            displayName,
+            photoURL: downloadURL,
+          });
+          await setDoc(doc(db,"users",auth.currentUser.uid),{
+            uid:auth.currentUser.uid,
+            ...data,
+            photoURL:downloadURL,
+          }) 
   
-  try { 
-  const storageRef = ref(storage, displayName);
-  
-  const uploadTask = uploadBytesResumable(storageRef, file); 
-   uploadTask.on(
-    (error) => {
-      // setError(true);
-    }, 
-    () => {
-      getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
-        console.log('File available at', downloadURL);
-        await updateProfile(auth.currentUser,{
-          displayName,
-          photoURL: downloadURL,
         });
-        await setDoc(doc(db,"users",auth.currentUser.uid),{
-          uid:auth.currentUser.uid,
-          displayName,
-          email,
-          headLine,
-          photoURL:downloadURL,
-          bio,
-          phoneNumber,
-          twitter,
-          facebook,
-          instagram, 
-          linkedIn
-        }) 
-
-      });
-    }
-  );  
-    } catch (error) {
-      
-    }
+      }
+    );  
+      } catch (error) {
+        
+      }
+  }else{
+    await updateProfile(auth.currentUser,{
+      displayName,
+      photoURL: user.photoURL,
+    });
+    await setDoc(doc(db,"users",auth.currentUser.uid),{
+      uid:auth.currentUser.uid,
+      photoURL:user.photoURL,
+      ...data,
+    }) 
+  }
 
    }
 
@@ -122,7 +138,7 @@ export const EditProfile = ({setEditProfile}) => {
            <button onClick={()=>setEditProfile(false)} className='mr-4'><FaTimes className='text-[2.5rem] fill-[#8034eb] '/></button>
            <p className='text-[2rem] font-bold'>EditProfile</p>
          </div>
-          <button className="py-3 px-8 rounded-[.5rem] text-[1.5rem]  bg-[#8034eb] text-white ">Save</button>
+          <button onClick={handleSubmit} className="py-3 px-8 rounded-[.5rem] text-[1.5rem]  bg-[#8034eb] text-white ">Save</button>
         </div>
         <div className='bg-white flex-grow overflow-y-scroll pb-[6rem]'>
         <form className='flex flex-col w-full h-full p-4' onSubmit={handleSubmit}>
@@ -130,7 +146,7 @@ export const EditProfile = ({setEditProfile}) => {
           <label for='editProfile' className=' cursor-pointer mb-4'>
           <div className='border-4 h-[13rem] w-[13rem]   border-[#ff8400] rounded-full mx-auto relative mt-[1rem] p-2'>
            <div className='w-full h-full bg-[blue]   rounded-full '>
-            <img src={previewPics ? previewPics : "./images/default.jpg"} alt="" className='w-full h-full rounded-full' />
+            <img src={previewPics ? previewPics : user.photoURL} alt="" className='w-full h-full rounded-full' />
            </div>
            <button className='left-1/2 bottom-0 absolute  h-[3rem] w-[3rem] rounded-full bg-black flex items-center justify-center translate-y-1/2'><AiFillCamera className='h-[2rem] w-[2rem] fill-white'/></button>
           </div>
@@ -142,6 +158,7 @@ export const EditProfile = ({setEditProfile}) => {
             <div className='basis-[47%]'>
             <label for='firstName' className='text-[1.5rem] text-gray-600 mb-2'>Display Name</label>
             <input id='firstName' type="text" 
+             defaultValue={user.displayName}
              ref={displayNameRef} 
             className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]'
              placeholder='Display Name'/>
@@ -149,6 +166,7 @@ export const EditProfile = ({setEditProfile}) => {
             <div className='basis-[47%]'>
             <label for='lastName' className='text-[1.5rem] text-gray-600 mb-2'>Email</label>
             <input id='lastName' type="email"  
+            defaultValue={user.email}
             ref={emailRef}
             className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 rounded border-2 focus:border-[#8034eb]' 
             placeholder='Email'/>
@@ -157,6 +175,7 @@ export const EditProfile = ({setEditProfile}) => {
           <div className='mt-[2rem]'>
             <label className='text-[1.5rem] text-gray-600 mb-2'>Headline</label>
             <input type="text"
+            defaultValue={user.headLine}
              ref={headLineRef}
              className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]'/>
           </div>
@@ -164,6 +183,7 @@ export const EditProfile = ({setEditProfile}) => {
           <div className='mt-[2rem]'>
             <label className='text-[1.5rem] text-gray-600 mb-2'>Bio</label>
             <textarea cols="30" rows="5" 
+            defaultValue={user.bio}
              ref={bioRef}
              className='w-full text-[1.5rem]  outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]'
              placeholder='A bit about yourself' />
@@ -172,6 +192,7 @@ export const EditProfile = ({setEditProfile}) => {
           <div className='mt-[2rem]'>
             <label className='text-[1.5rem] text-gray-600 mb-2'>Facebook</label>
             <input type="text" 
+            defaultValue={user.facebook}
              ref={facebookRef}
             className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]' 
             placeholder='Your facebook url link'/>
@@ -180,7 +201,8 @@ export const EditProfile = ({setEditProfile}) => {
           <div className='mt-[2rem]'>
             <label className='text-[1.5rem] text-gray-600 mb-2'>Instagram</label>
             <input type="text" 
-              ref={instagramRef}
+            defaultValue={user.instagram}
+            ref={instagramRef}
             className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]' 
             placeholder='Your instagram url link'/>
           </div>
@@ -188,6 +210,7 @@ export const EditProfile = ({setEditProfile}) => {
           <div className='mt-[2rem]'>
             <label className='text-[1.5rem] text-gray-600 mb-2'>LinkedIn</label>
             <input type="text"
+            defaultValue={user.linkedIn}
             ref={linkedInRef} 
             className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 rounded border-2 focus:border-[#8034eb]' 
             placeholder='Your LinkedIn url link'/>
@@ -196,6 +219,7 @@ export const EditProfile = ({setEditProfile}) => {
           <div className='mt-[2rem]'>
             <label className='text-[1.5rem] text-gray-600 mb-2'>Twitter</label>
             <input type="text" 
+            defaultValue={user.twitter}
             ref={twitterRef}
             className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 rounded p-2 border-2 focus:border-[#8034eb]' 
             placeholder='Your Twitter url link'/>
@@ -204,6 +228,7 @@ export const EditProfile = ({setEditProfile}) => {
           <div className='mt-[2rem]'>
             <label className='text-[1.5rem] text-gray-600 mb-2'>Phone Number</label>
             <input type="text"
+            defaultValue={user.phoneNumber}
             ref={phoneNumberRef} 
             className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 rounded p-2 border-2 focus:border-[#8034eb]' 
             placeholder='Your Phone Number'/>

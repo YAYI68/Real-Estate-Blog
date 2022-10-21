@@ -16,7 +16,7 @@ export const DraftPage = () => {
    const navigate = useNavigate()
    const dispatch = useDispatch()
    const postCreate = useSelector(state =>state.postCreate)
-   const {loading:createLoading,success:createSuccess,error:createError,post:createdPost }= postCreate
+   const {loading:createLoading,success:createSuccess,error:createError,post:createdPost } = postCreate
 
   useEffect(()=>{
     if(createSuccess){
@@ -25,7 +25,12 @@ export const DraftPage = () => {
      dispatch({type:POST_CREATE_RESET})
        
   },[createSuccess,navigate,createdPost,dispatch]);
-
+  
+    useEffect(() => {
+      
+    },[createdPost])
+ 
+    
 
   const writePost = ()=>{
      dispatch(createNewPost())
