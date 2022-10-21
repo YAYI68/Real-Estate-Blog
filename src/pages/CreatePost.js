@@ -92,7 +92,7 @@ export const CreatePost =()=>{
     const publishHandler = async(e)=>{
       e.preventDefault();
       await submit("draft")
-      console.log("Publishe was clicked")
+      console.log("Published was clicked")
   
      
    
@@ -101,6 +101,7 @@ export const CreatePost =()=>{
     const submitHandler = async(e)=>{
           e.preventDefault();
           await submit("draft")
+          console.log("Draft was clicked")
     }
     
 // const publishHandler = ()=>{
