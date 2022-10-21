@@ -93,9 +93,6 @@ export const CreatePost =()=>{
       e.preventDefault();
       await submit("draft")
       console.log("Published was clicked")
-  
-     
-   
      }
 
     const submitHandler = async(e)=>{
