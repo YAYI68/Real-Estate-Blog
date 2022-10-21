@@ -115,7 +115,7 @@ export const updateNewPost = (id,data)=>async(dispatch)=>{
        const postRef = doc(db,"posts",`${id}`)  
                  await updateDoc(postRef,data)
         const postSnapshot = await getDoc(postRef)
-       const post = {id:postSnapshot.id,...postSnapshot.data()}   
+       const post = {id:postSnapshot.id}   
 
        dispatch({
            type:POST_UPDATE_SUCCESS,

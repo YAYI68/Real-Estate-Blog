@@ -1,26 +1,27 @@
-import React, { useState,useEffect, useRef } from 'react';
+import React, { useState,useEffect, useRef, Fragment } from 'react';
 import { Main } from '../components/Main';
 import { Section } from "../components/Section";
 import { FaPlus } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { auth, storage } from '../firebaseConfig';
+import { auth, db, storage } from '../firebaseConfig';
 import { getUserProfile } from '../store/users/actions';
 import { ref, uploadBytesResumable,getDownloadURL,uploadBytes  } from "firebase/storage";
 import { useParams,useNavigate} from "react-router-dom"
 import { getPost, updateNewPost } from '../store/posts/actions';
+import { doc, updateDoc } from 'firebase/firestore';
 
 
 
 export const CreatePost =()=>{
     const  titleRef = useRef();
     const  contentRef = useRef();
-    const [file,setFile]= useState();
+    const [imgFile,setImgFile]= useState("");
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const params = useParams()
     const postId = params.id
+    const [preview,setPreview] = useState("")
     
-  const [preview,setPreview] = useState("")
     
   const postDetail = useSelector(state => state.postDetail)
   const { loading:detailLoading,success:detailSuccess,error:detailError,post } = postDetail
@@ -29,47 +30,82 @@ export const CreatePost =()=>{
         dispatch(getPost(postId))
       
   },[postId,dispatch])
-
-   
     useEffect (()=>{
       const reader = new FileReader()
       reader.addEventListener("load", () => {
-      console.log(reader.result)
       setPreview(reader.result)
       });      
-  if(file){
-    reader.readAsDataURL(file)
+  if(imgFile){
+    reader.readAsDataURL(imgFile)
     } 
      return () => { reader.removeEventListener("load", () => {
         setPreview("")
         });}
-    },[file])
+    },[imgFile])
     
     const getFile = (e)=>{
-      setFile(e.target.files[0])
+      setImgFile(e.target.files[0])
     }
-    
-    // const newPost = {
-    //     title,
-    //     content,
-    //     blogState,
-    //     postImage,
-    //     publishAt,
-    //     slug,                
-    // }
-    
      
+    const submit = async(blogState)=>{
+      const title = titleRef.current.value;
+      const content = contentRef.current.value;
+      const file = imgFile
+      const slug = title.replaceAll(" ","_")
+      const postRef = doc(db,"posts",`${postId}`) 
 
-    const submitHandler = (e)=>{
+      const data = {
+        title,
+        content,
+        blogState:blogState,
+        publishAt:new Date(),
+        slug,      
+      }
+
+      if(imgFile){
+        const storageRef = ref(storage, `blog/${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, file); 
+         uploadTask.on(
+          (error) => {
+            // setError(true);
+          }, 
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
+              await updateDoc(postRef,{
+                ...data,
+                postImageURL:downloadURL,
+              })
+              navigate('/posts/draft')
+            });
+          }
+        );  
+      }else{
+        await updateDoc(postRef,{
+          ...data,
+          postImageURL:post.postImageURL,
+        })
+        navigate('/posts/draft')
+      }
+
+    }
+
+    const publishHandler = async(e)=>{
+      e.preventDefault();
+      await submit("draft")
+      console.log("Publishe was clicked")
+  
+     
+   
+     }
+
+    const submitHandler = async(e)=>{
           e.preventDefault();
-           const title = titleRef.current.value;
-           const content = contentRef.current.value;
-           
+          await submit("draft")
     }
     
-const publishHandler = ()=>{
+// const publishHandler = ()=>{
 
-}
+// }
 
   return (
     <Main>
@@ -94,12 +130,15 @@ const publishHandler = ()=>{
           <div class="flex justify-center items-center w-full">
             <label for="dropzone-file" class="flex flex-col justify-center items-center w-full h-[30rem] bg-gray-50 rounded-lg border-2 border-[#8034eb] border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
             <div class="flex flex-col justify-center items-center pt-5 pb-6">
-              {preview &&   
+              {preview ?   
               <img src={preview} alt="" className=' h-full w-full' />
+              :
+              <Fragment>
+              <svg aria-hidden="true" className=" hidden mb-3 w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+               <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+               <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p> 
+              </Fragment>
               }
-            {/* <svg aria-hidden="true" className=" hidden mb-3 w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p> */}
            </div>
            <input   id="dropzone-file" type="file" onChange={getFile} className="hidden" />
           </label>
@@ -130,112 +169,4 @@ const publishHandler = ()=>{
 
 
 
-// import { useNavigate } from "react-router-dom";
 
-
-
-// export const CreatePost = () => {
-//   const dispatch = useDispatch()
-//   const [authorProfile,setAuthorProfile] = useState({})
-//     const [ title, setTitle ] = useState("")
-//     const [ content, setContent] = useState("")
-//     const [file,setFile]= useState("")
-//     const [ postImage, setPostImage ] =useState("")
-//     const [ blogState,setBlogState ] = useState("")
-//     const navigate = useNavigate()
-//     const userProfile = useSelector(state =>state.userProfile)
-
-//     const {profile,success:successProfile} = userProfile
-//     const userLogin = useSelector(state=>state.userLogin)
-//     const { userInfo } = userLogin
-//     const userId = userInfo.uid
-
-    
-//     // console.log("detailPost",detailPost.id) 
-//     // console.log("postId",postId) 
-
-//     useEffect(() => {
-//       if(!userInfo){
-//         navigate("/")
-//       }
-//       if(!detailPost.title || detailPost.id !== postId){
-//         dispatch(getPost(postId))
-//       }         
-//       else{
-//           setTitle(detailPost.title) 
-//           setContent(detailPost.content)
-//           setPostImage(detailPost.postImage)
-//           setBlogState(detailPost.blogState)
-//           const {displayName,email,photoURL,twitter,instagram,linkedin } = profile
-//           setAuthorProfile({
-//             displayName,
-//             email,
-//             photoURL,
-//             twitter,
-//             instagram,
-//             linkedin
-//           })
-//          }
-//          dispatch(getUserProfile(userId))
-//     },[detailSuccess])
-//     const publishAt = blogState === "publish"? new Date() : ""
-
-    
-
-//     const newPost = {
-//         title,
-//         content,
-//         blogState,
-//         postImage,
-//         publishAt,
-//         slug,
-//         author:{
-//           ...authorProfile, 
-//         }
-//     }
-
-//     const uploadHandler = ()=>{
-//       const storageRef = ref(storage,`/images/blog/${postId}/${file.name}`)
-//       const uploadTask = uploadBytesResumable(storageRef,file)
-//       uploadTask.on("state_changed",(snapshot)=>{
-//         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-//         console.log('Upload is ' + progress + '% done');
-//       },
-//       (error)=>{      
-//       },
-//       ()=>{
-//         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-//           console.log('File available at', downloadURL);
-//           setPostImage(downloadURL)
-//         });
-//       } 
-//       )
-
-//     }
-
-
-
-
-
-//   return (
-//     <div style={{marginTop:"4rem"}}>
-//       {detailSuccess && successProfile &&         
-//       <div>
-//          <img src={postImage} alt=""  />
-//          <button onClick={uploadHandler}>Upload</button>
-//          <form onSubmit={submitHandler} style={{marginTop:"4rem"}}>
-//             <div>
-//               <input type="text" placeholder="Title"  value={title}  onChange={(e)=>setTitle(e.target.value)} />
-//             </div>
-//             <div>
-//               <textarea cols="30" rows="10"  placeholder="content" value={content}  onChange={(e)=>setContent(e.target.value)}/>
-//             </div>
-//             <input type="file"  onChange={(e)=>setFile(e.target.files[0])}/>
-//             <button>Draft</button>
-//           </form>
-//       </div>
-//       }
-//         <button onClick={publishHandler}>publish</button>
-//     </div>
-//   )
-// }
