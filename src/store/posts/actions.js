@@ -1,5 +1,6 @@
 import { auth, db } from "../../firebaseConfig";
 import { collection,getDocs,getDoc, doc, addDoc, updateDoc, setDoc } from "firebase/firestore";
+import { currentDate } from "../../utils/blog_util";
 
 
 
@@ -22,7 +23,7 @@ export const POST_UPDATE_SUCCESS = "POST_UPDATE_SUCCESS";
 export const POST_UPDATE_FAIL = "POST_UPDATE_FAIL"
 
 
-export const  allPosts =()=>async(dispatch)=>{      
+export const  getAllPosts =()=>async(dispatch)=>{      
     try{
        dispatch({type:POST_LIST_REQUEST})
        const snapshots = await getDocs(collection(db,"posts"))
@@ -79,9 +80,9 @@ export const createNewPost = ()=>async(dispatch,getState)=>{
         const newPost = {
             title:"Write your blog title",
             content:" Write a Story",
-            createdAt: new Date(),
+            createdAt:currentDate,
             blogState:"draft",
-            postImageURL:"",
+            imageURL:"",
             publishAt:"",
             slug:"",
             authorId:auth.currentUser.uid

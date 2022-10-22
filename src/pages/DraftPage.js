@@ -5,9 +5,7 @@ import { Main } from '../components/Main'
 import { Section } from '../components/Section';
 import { TabSlide } from '../components/TabSlide';
 import { useSelector , useDispatch } from 'react-redux';
-import {createNewPost,POST_CREATE_RESET } from '../store/posts/actions';
-
-
+import {getAllPosts, createNewPost,POST_CREATE_RESET } from '../store/posts/actions';
 
 
 
@@ -17,20 +15,23 @@ export const DraftPage = () => {
    const dispatch = useDispatch()
    const postCreate = useSelector(state =>state.postCreate)
    const {loading:createLoading,success:createSuccess,error:createError,post:createdPost } = postCreate
+   const postList = useSelector(state => state.postList)
+   const { loading:allPostsLoading, success:allPostsSuccess, error:allPostsError, posts:allPosts } = postList
 
   useEffect(()=>{
     if(createSuccess){
            navigate(`/posts/${createdPost.id}/edit`)
      }
      dispatch({type:POST_CREATE_RESET})
+    dispatch(getAllPosts());
        
   },[createSuccess,navigate,createdPost,dispatch]);
   
-    useEffect(() => {
-      
-    },[createdPost])
- 
+    // useEffect(() => {
     
+    // },[dispatch]);
+ 
+    console.log({allPosts})
 
   const writePost = ()=>{
      dispatch(createNewPost())
@@ -49,15 +50,20 @@ export const DraftPage = () => {
             <div className='w-full mb-[2rem] '>
              <TabSlide current='draft'/>
            </div>
+           {allPostsSuccess && allPosts.length >0 &&
            <div className='w-full mb-[2rem] '>
-             <DraftBlog/>
-             <DraftBlog/>
+            {allPosts.map((post,index)=>(
+             <DraftBlog key={post.id} blog={post} />
+            ))}
+             {/* <DraftBlog/> */}
              {/* <div className='w-full mt-[2rem]'>
                 <p className='text-center text-[2rem] '>You haven`t write any article yet.</p>
              </div> */}
            </div>
+         }
         </div>
        </Section>
+      
     </Main>
   )
 }

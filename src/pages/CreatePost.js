@@ -9,6 +9,8 @@ import { ref, uploadBytesResumable,getDownloadURL,uploadBytes  } from "firebase/
 import { useParams,useNavigate} from "react-router-dom"
 import { getPost, updateNewPost } from '../store/posts/actions';
 import { doc, updateDoc } from 'firebase/firestore';
+import { currentDate } from '../utils/blog_util';
+
 
 
 
@@ -30,6 +32,7 @@ export const CreatePost =()=>{
         dispatch(getPost(postId))
       
   },[postId,dispatch])
+
     useEffect (()=>{
       const reader = new FileReader()
       reader.addEventListener("load", () => {
@@ -47,23 +50,26 @@ export const CreatePost =()=>{
       setImgFile(e.target.files[0])
     }
      
-    const submit = async(blogState)=>{
+    const submit = async(state,date)=>{
       const title = titleRef.current.value;
       const content = contentRef.current.value;
       const file = imgFile
       const slug = title.replaceAll(" ","_")
       const postRef = doc(db,"posts",`${postId}`) 
+      
+     
+      
 
       const data = {
         title,
         content,
-        blogState:blogState,
-        publishAt:new Date(),
+        blogState:state,
+        publishAt:date,
         slug,      
       }
 
       if(imgFile){
-        const storageRef = ref(storage, `blog/${file.name}`);
+        const storageRef =  ref(storage, `blog/${file.name}`);
         const uploadTask = uploadBytesResumable(storageRef, file); 
          uploadTask.on(
           (error) => {
@@ -73,7 +79,7 @@ export const CreatePost =()=>{
             getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
               await updateDoc(postRef,{
                 ...data,
-                postImageURL:downloadURL,
+                imageURL:downloadURL,
               })
               navigate('/posts/draft')
             });
@@ -82,7 +88,7 @@ export const CreatePost =()=>{
       }else{
         await updateDoc(postRef,{
           ...data,
-          postImageURL:post.postImageURL,
+          imageURL:post.imageURL,
         })
         navigate('/posts/draft')
       }
@@ -91,19 +97,17 @@ export const CreatePost =()=>{
 
     const publishHandler = async(e)=>{
       e.preventDefault();
-      await submit("draft")
+      await submit("publish",currentDate)
       console.log("Published was clicked")
      }
 
     const submitHandler = async(e)=>{
           e.preventDefault();
-          await submit("draft")
+          await submit("draft","")
           console.log("Draft was clicked")
     }
     
-// const publishHandler = ()=>{
 
-// }
 
   return (
     <Main>
