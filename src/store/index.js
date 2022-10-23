@@ -3,6 +3,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {
    allPostReducer, 
+   allPublishPostReducer, 
    postCreateReducer, 
    postDetailReducer,
    postUpdateReducer, 
@@ -27,6 +28,7 @@ const reducer = {
      userLogin:userLoginReducer,
      userRegister:userRegisterReducer,
      postList:allPostReducer,
+     postPublish:allPublishPostReducer,
      userProfile:userProfileReducer,
      updatedProfile:updateProfileReducer,
      postDetail:postDetailReducer,

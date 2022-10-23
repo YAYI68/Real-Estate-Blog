@@ -19,10 +19,10 @@ function App() {
       <Route path='/' element={<HomePage/>}/>
       <Route path='/profile' element={<UserProfile/>}/>
       <Route path='/login' element={<LoginPage/>}/>
-      <Route path='/:id' element={<BlogDetail/>}/>
-      <Route path='/posts/:id/edit' element={<CreatePost/>}/>
-      <Route path='/posts/draft' element={<DraftPage/>}/>
-      <Route path='/posts/public' element={<PublishedPage/>}/>
+      <Route path='/:slug' element={<BlogDetail/>}/>
+      <Route path='/blogs/:id/edit' element={<CreatePost/>}/>
+      <Route path='/blogs/draft' element={<DraftPage/>}/>
+      <Route path='/blogs/public' element={<PublishedPage/>}/>
      </Routes>  
     </div>
   );

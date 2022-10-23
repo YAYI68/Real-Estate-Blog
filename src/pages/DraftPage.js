@@ -14,24 +14,26 @@ export const DraftPage = () => {
    const navigate = useNavigate()
    const dispatch = useDispatch()
    const postCreate = useSelector(state =>state.postCreate)
-   const {loading:createLoading,success:createSuccess,error:createError,post:createdPost } = postCreate
+   const {loading:createLoading,success:createSuccess,error:createError,blog:createdBlog } = postCreate
    const postList = useSelector(state => state.postList)
-   const { loading:allPostsLoading, success:allPostsSuccess, error:allPostsError, posts:allPosts } = postList
+   const { loading:allPostsLoading, success:allPostsSuccess, error:allPostsError, blogs:allBlogs } = postList
+
+   console.log({allBlogs})
 
   useEffect(()=>{
     if(createSuccess){
-           navigate(`/posts/${createdPost.id}/edit`)
+           navigate(`/blogs/${createdBlog.id}/edit`)
      }
      dispatch({type:POST_CREATE_RESET})
     dispatch(getAllPosts());
        
-  },[createSuccess,navigate,createdPost,dispatch]);
+  },[createSuccess,navigate,createdBlog,dispatch]);
   
     // useEffect(() => {
     
     // },[dispatch]);
  
-    console.log({allPosts})
+    console.log({allBlogs})
 
   const writePost = ()=>{
      dispatch(createNewPost())
@@ -50,10 +52,10 @@ export const DraftPage = () => {
             <div className='w-full mb-[2rem] '>
              <TabSlide current='draft'/>
            </div>
-           {allPostsSuccess && allPosts.length >0 &&
+           {allPostsSuccess && allBlogs.length >0 &&
            <div className='w-full mb-[2rem] '>
-            {allPosts.map((post,index)=>(
-             <DraftBlog key={post.id} blog={post} />
+            {allBlogs.map((blog,index)=>(
+             <DraftBlog key={blog.id} blog={blog} />
             ))}
              {/* <DraftBlog/> */}
              {/* <div className='w-full mt-[2rem]'>

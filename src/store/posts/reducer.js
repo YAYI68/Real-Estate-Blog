@@ -3,6 +3,10 @@ import {
      POST_LIST_SUCCESS,
      POST_LIST_FAIL ,
 
+     POST_LIST_PUBLISH_REQUEST,
+     POST_LIST_PUBLISH_SUCCESS,
+     POST_LIST_PUBLISH_FAIL,
+
      POST_DETAIL_REQUEST,
      POST_DETAIL_SUCCESS,
      POST_DETAIL_FAIL,
@@ -19,12 +23,12 @@ import {
 
     } from "./actions";
 
-export const  allPostReducer = (state={ posts:[]},action)=>{
+export const  allPostReducer = (state={ blogs:[]},action)=>{
     if(action.type === POST_LIST_REQUEST){
         return{loading:true}
     }
     if(action.type === POST_LIST_SUCCESS ){
-        return{ loading:false, posts:action.payload,success:true}
+        return{ loading:false, blogs:action.payload,success:true}
     }
     if(action.type === POST_LIST_FAIL){
         return {loading:false, error:action.payload, success:true}
@@ -33,12 +37,26 @@ export const  allPostReducer = (state={ posts:[]},action)=>{
   return state;
 }
 
-export const postDetailReducer = (state={ post:{}},action)=>{
+export const  allPublishPostReducer = (state={ blogs:[]},action)=>{
+    if(action.type === POST_LIST_PUBLISH_REQUEST){
+        return{loading:true}
+    }
+    if(action.type === POST_LIST_PUBLISH_SUCCESS ){
+        return{ loading:false, blogs:action.payload,success:true}
+    }
+    if(action.type === POST_LIST_PUBLISH_FAIL){
+        return {loading:false, error:action.payload, success:true}
+    }
+
+  return state;
+}
+
+export const postDetailReducer = (state={blog:{}},action)=>{
     if(action.type === POST_DETAIL_REQUEST){
      return {loading:true}
     }
     if( action.type === POST_DETAIL_SUCCESS){
-      return {loading:false,success:true, post:action.payload}
+      return {loading:false,success:true, blog:action.payload}
     }
 
     if(action.type === POST_DETAIL_FAIL){
@@ -47,12 +65,12 @@ export const postDetailReducer = (state={ post:{}},action)=>{
     return state
 }
 
-export const postCreateReducer = (state={ post:{}},action)=>{
+export const postCreateReducer = (state={ blog:{}},action)=>{
     if(action.type === POST_CREATE_REQUEST){
      return {loading:true}
     }
     if( action.type === POST_CREATE_SUCCESS){
-      return {loading:false,success:true, post:action.payload}
+      return {loading:false,success:true, blog:action.payload}
     }
 
     if(action.type === POST_CREATE_FAIL){
@@ -64,12 +82,12 @@ export const postCreateReducer = (state={ post:{}},action)=>{
     return state
 }
 
-export const postUpdateReducer = (state={ post:{}},action)=>{
+export const postUpdateReducer = (state={ blog:{}},action)=>{
     if(action.type === POST_UPDATE_REQUEST){
      return {loading:true}
     }
     if( action.type === POST_UPDATE_SUCCESS){
-      return {loading:false,success:true, post:action.payload}
+      return {loading:false,success:true, blog:action.payload}
     }
 
     if(action.type === POST_UPDATE_FAIL){

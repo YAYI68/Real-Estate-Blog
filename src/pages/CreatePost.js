@@ -26,11 +26,10 @@ export const CreatePost =()=>{
     
     
   const postDetail = useSelector(state => state.postDetail)
-  const { loading:detailLoading,success:detailSuccess,error:detailError,post } = postDetail
+  const { loading:detailLoading,success:detailSuccess,error:detailError,blog } = postDetail
 
   useEffect(()=>{
-        dispatch(getPost(postId))
-      
+        dispatch(getPost(postId))  
   },[postId,dispatch])
 
     useEffect (()=>{
@@ -54,7 +53,7 @@ export const CreatePost =()=>{
       const title = titleRef.current.value;
       const content = contentRef.current.value;
       const file = imgFile
-      const slug = title.replaceAll(" ","_")
+      const slug = title.toLowerCase().replaceAll(" ","_")
       const postRef = doc(db,"posts",`${postId}`) 
       
      
@@ -81,16 +80,16 @@ export const CreatePost =()=>{
                 ...data,
                 imageURL:downloadURL,
               })
-              navigate('/posts/draft')
+              navigate('/blogs/draft')
             });
           }
         );  
       }else{
         await updateDoc(postRef,{
           ...data,
-          imageURL:post.imageURL,
+          imageURL:blog.imageURL,
         })
-        navigate('/posts/draft')
+        navigate('/blogs/draft')
       }
 
     }
@@ -128,12 +127,12 @@ export const CreatePost =()=>{
             </div>
             </div>
             <form>
-            <input  ref={titleRef} defaultValue={post.title}  type="text" placeholder='Title' className='text-[2rem]  focus:border-2 focus:border-solid border-none w-full my-5 rounded p-2 focus:border-[#8034eb] outline-none'/>
+            <input  ref={titleRef} defaultValue={blog.title}  type="text" placeholder='Title' className='text-[2rem]  focus:border-2 focus:border-solid border-none w-full my-5 rounded p-2 focus:border-[#8034eb] outline-none'/>
           <div class="flex justify-center items-center w-full">
             <label for="dropzone-file" class="flex flex-col justify-center items-center w-full h-[30rem] bg-gray-50 rounded-lg border-2 border-[#8034eb] border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
             <div class="flex flex-col justify-center items-center pt-5 pb-6">
-              {preview ?   
-              <img src={preview} alt="" className=' h-full w-full' />
+              {preview || blog.imageURL ?   
+              <img src={preview?preview:blog.imageURL} alt="" className=' h-full w-full' />
               :
               <Fragment>
               <svg aria-hidden="true" className=" hidden mb-3 w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
@@ -146,7 +145,7 @@ export const CreatePost =()=>{
           </label>
          </div>
          <div className='w-full h-[30rem] my-[3rem]'>
-           <textarea ref={contentRef} defaultValue={post.content} cols="30" rows="10" placeholder='Write a story' className='w-full h-full  border-2 focus:border-solid border-none p-3 rounded focus:border-[#8034eb] outline-none '/> 
+           <textarea ref={contentRef} defaultValue={blog.content} cols="30" rows="10" placeholder='Write a story' className='w-full h-full  border-2 focus:border-solid border-none p-3 rounded focus:border-[#8034eb] outline-none '/> 
          </div>
         </form>
           </div>

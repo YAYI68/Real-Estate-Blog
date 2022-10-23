@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaTrashAlt,FaPen } from 'react-icons/fa'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 
@@ -15,7 +15,7 @@ export const DraftBlog = ({blog}) => {
   }
 
   const editBlog = ()=>{
-    navigate(`/posts/${blog.id}/edit`)
+    navigate(`/blogs/${blog.id}/edit`)
   }
 
   return (
@@ -31,7 +31,7 @@ export const DraftBlog = ({blog}) => {
                 <p>{blog.createdAt}</p>
                 <div className='flex justify-between w-[12%]'>
                    <button ><FaTrashAlt className='fill-[red]'/></button>
-                   <button onclick={editBlog} ><FaPen className='fill-[green]'/></button>
+                   <Link to={`/blogs/${blog.id}/edit`}  ><FaPen className='fill-[green]'/></Link>
                 </div>
             </div>
         </div>

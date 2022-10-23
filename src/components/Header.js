@@ -72,7 +72,7 @@ export const Header = () => {
                 {userDisplay && 
                 <div ref={dropRef}  onClick={()=>setUserDisplay(false)} className='absolute w-[15rem] top-[110%]  flex flex-col bg-white text-[#8034eb] right-[5%] rounded-[.5rem]   shadow-md '>
                     <Link to="/profile" className='text-[1.5rem] py-[.5rem] text-center border-b-2 hover:bg-[#8034eb] hover:text-white'>Profile</Link>
-                    <Link to="/posts/draft"  className='text-[1.5rem] py-[.5rem] text-center border-b-2 hover:bg-[#8034eb] hover:text-white'>post</Link>
+                    <Link to="/blogs/draft"  className='text-[1.5rem] py-[.5rem] text-center border-b-2 hover:bg-[#8034eb] hover:text-white'>post</Link>
                     <Link to="/newsletter"  className='text-[1.5rem] py-[.5rem] text-center hover:bg-[#8034eb] hover:text-white'>Newsletter</Link>
                     <Link to="" onClick={signUserOut} className='text-[1.5rem] py-[.5rem] text-center hover:bg-[#8034eb] hover:text-white'>logout</Link>
                 </div>
