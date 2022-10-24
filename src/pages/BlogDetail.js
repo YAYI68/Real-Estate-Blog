@@ -53,7 +53,7 @@ export const BlogDetail = () => {
              <img src={blog.imageURL} alt="" className='w-full h-full' />
           </div>
           <div id="blogContent" className='w-full mt-[2rem] '>
-            <p className='text-[1.8rem] leading-[4rem] text-gray-500 whitespace-pre-line .text-margin-start .text-margin-end .text-inline-start .text-inline-end '>
+            <p className='text-[1.8rem] leading-[4rem] text-gray-700 whitespace-pre-line .text-margin-start .text-margin-end .text-inline-start .text-inline-end '>
             {blog.content}
             </p>
           </div>
@@ -81,8 +81,8 @@ export const BlogDetail = () => {
            </div>
            <div className=' w-full mt-[2rem]'>
           <form className='flex flex-col mx-auto'>
-            <input type="text"  className='w-full text-[1.5rem] h-[3rem] rounded outline-none border-2 p-2 border-[#8034eb]' placeholder='Name' />
-            <textarea cols="30" rows="10"  placeholder='Comment' className='rounded p-2 w-full text-[1.5rem] mt-[1rem] outline-none border-2 border-[#8034eb]'  />
+            <input type="text"  className='w-full text-[1.5rem] h-[3rem] rounded outline-none focus:border-2 p-2 focus:border-[#8034eb]' placeholder='Name' />
+            <textarea cols="30" rows="10"  placeholder='Comment' className='rounded w-full text-[1.5rem] mt-[1rem] outline-none focus:border-2 p-2 focus:border-[#8034eb]'  />
             <button className='w-full bg-[#8034eb] text-[1.5rem] mt-2 py-2 rounded text-[white]'>Comment</button>
           </form>
         </div>
