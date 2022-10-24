@@ -62,8 +62,7 @@ export const Carousel = ({sliderBlogs}) => {
                     <p className='text-[white] text-[2.5rem]'> The content of my blog and story from london  The content of my blog and story from london The content of my blog and story from london  </p>
                     <Link to={`/${blog.slug}`} state={{id:blog.id}} className='text-[white] text-[1.5rem] px-[2rem] py-[1rem] bg-[#8034eb] w-fit text-center my-[1.5rem] rounded' >Read More</Link>
                 </div>
-              </div>    
-                         
+              </div>             
             ))}
             <div className='absolute bottom-5 left-1/2'>
               {sliderBlogs.map((image,i)=>(

@@ -54,6 +54,7 @@ export const CreatePost =()=>{
       const content = contentRef.current.value;
       const file = imgFile
       const slug = title.toLowerCase().replaceAll(" ","_")
+      const excerpts = content.substr(0,100)
       const postRef = doc(db,"posts",`${postId}`) 
       
      
@@ -61,6 +62,7 @@ export const CreatePost =()=>{
 
       const data = {
         title,
+        excerpts,
         content,
         blogState:state,
         publishAt:date,
@@ -130,7 +132,7 @@ export const CreatePost =()=>{
             <input  ref={titleRef} defaultValue={blog.title}  type="text" placeholder='Title' className='text-[2rem]  focus:border-2 focus:border-solid border-none w-full my-5 rounded p-2 focus:border-[#8034eb] outline-none'/>
           <div class="flex justify-center items-center w-full">
             <label for="dropzone-file" class="flex flex-col justify-center items-center w-full h-[30rem] bg-gray-50 rounded-lg border-2 border-[#8034eb] border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-            <div class="flex flex-col justify-center items-center pt-5 pb-6">
+            <div class="flex flex-col h-full w-full justify-center items-center pt-5 pb-6">
               {preview || blog.imageURL ?   
               <img src={preview?preview:blog.imageURL} alt="" className=' h-full w-full' />
               :

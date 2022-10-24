@@ -111,6 +111,7 @@ export const createNewPost = ()=>async(dispatch)=>{
           const author = {id:snapshot.id,...snapshot.data()}
         const newPost = {
             title:"Write your blog title",
+            excerpts:"",
             content:" Write a Story",
             createdAt:currentDate,
             blogState:"draft",

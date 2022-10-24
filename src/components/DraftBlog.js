@@ -26,7 +26,7 @@ export const DraftBlog = ({blog}) => {
         </div>
         <div className='basis-[70%] h-full flex flex-col px-[1rem] '>
             <h3 className='text-[2rem] font-bold'>{blog.title}</h3>
-            <p className='text-[1.5rem] text-[#585858]'>{blog.content}</p>
+            <p className='text-[1.5rem] text-[#585858]'>{blog.excerpts}</p>
             <div className='mt-2 flex justify-between text-[1.4rem] text-[#585858]'>
                 <p>{blog.createdAt}</p>
                 <div className='flex justify-between w-[12%]'>

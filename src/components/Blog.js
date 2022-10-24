@@ -17,7 +17,7 @@ export const Blog = ({blogs}) => {
             </div>
             <div className='m-[.7rem] flex flex-col'>
             <Link to={`/${blog.slug}`} state={{id:blog.id}} className='text-[2.2rem] text-[#ff8400] font-bold'>{blog.title}</Link>
-            <p className='text-[1.5rem]'>{blog.content}</p>
+            <p className='text-[1.5rem]'>{blog.excerpts}</p>
             <div className='flex justify-between items-center w-full mt-[1rem]'>
                <Link to={`/${blog.slug}`} state={{id:blog.id}} className='px-[2rem] py-[1rem]  text-[1.2rem] bg-[#8034eb] w-fit text-center text-white  rounded'>Read More</Link>
                <p className='text-[1.2rem] text-[grey] mr-[2rem]'>July 15, 2022</p>
