@@ -1,7 +1,7 @@
 import React from 'react'
 
-export const Section = ({children}) => {
+export const Section = ({children,className}) => {
   return (
-    <section className='my-[3rem] mx-[5rem]'>{children}</section>
+    <section className={`my-[3rem] ${className} `}>{children}</section>
   )
 }
