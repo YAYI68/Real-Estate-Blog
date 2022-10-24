@@ -25,28 +25,27 @@ export const BlogDetail = () => {
       {success && 
       <Fragment >
       <Section className={`flex gap-2`}>
-        <aside className='w-[20%] '>
-          
-        </aside>
-        <article className=' w-[50%] flex flex-col mt-[5rem]'>
-          <div className=' w-full flex flex-col  rounded px-2 py-10'>
-          <div className=' h-[5rem] flex w-full px-[.5rem] justify-between mt-3'>
-            <div className='flex h-full basis-[30%] '>
-              <div className='basis-[18%] h-full  rounded-full mr-4'>
+        <aside className='w-[20%] relative '>
+        <div className=' bg-red-500 w-[80%] py-[1rem] absolute top-[12%] justify-center flex flex-col  px-[1rem] gap-5 mt-3'>
+            <div className='flex flex-col gap-5 items-center '>
+              <div className=' h-[15rem] w-[15rem]  rounded-full mr-4'>
                 <img src={blog.author.photoURL} className='w-full h-full rounded-full' alt="" />
               </div>
               <Link to={'/profile'}><p className='text-[1.5rem] font-bold mr-4 text-[#8034eb]'>{blog.author.displayName}</p></Link> 
               {/* <p className='text-[1.5rem] text-[grey]'>{blog.publishAt?blog.publishAt:""}</p> */}
             </div>
             <div className='basis-[10%]'>
-            <div className='w-full h-[40%] flex items-center justify-between'>
+              <div className='w-full h-[40%] flex items-center justify-between'>
                 <button  onClick={()=>window.open(blog.author.facebook,'_blank')} className="h-full"><FaFacebookF  className='h-full text-[1rem] fill-[#8034eb]'/></button>
                 <button   onClick={()=>window.open(blog.author.twitter,'_blank')} className="h-full"><FaTwitter className='h-full text-[1rem] fill-[#8034eb]' /></button>
                 <button   onClick={()=>window.open(blog.author.instagram,'_blank')} className="h-full"><FaInstagram className='h-full text-[1rem] fill-[#8034eb]'/></button>
                 <button   onClick={()=>window.open(blog.author.linkedIn,'_blank')} className="h-full"><FaLinkedinIn className='h-full text-[1rem] fill-[#8034eb]'/></button>
-            </div>   
+              </div>   
             </div>
           </div>
+        </aside>
+        <article className=' w-[50%] flex flex-col mt-[5rem]'>
+          <div className=' w-full flex flex-col  rounded px-2 py-10'>
           <div id='blogTitle' className='w-full'>
             <h2 className='text-[4rem]   font-bold my-[2rem]'>{blog.title}</h2>
           </div>
@@ -65,7 +64,6 @@ export const BlogDetail = () => {
           </p>
           </div>
           </div>
-
           <div className=' w-full mt-[2rem]'>
            <div className='mx-auto my-[2rem] bg-white p-5'>
             <div className='flex items-center'>
