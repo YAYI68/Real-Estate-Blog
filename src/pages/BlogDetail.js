@@ -25,24 +25,24 @@ export const BlogDetail = () => {
       {success && 
       <Fragment >
       <Section className={`flex gap-2`}>
-        <aside className='w-[20%] relative '>
-        <div className=' bg-red-500 w-[80%] py-[1rem] absolute top-[12%] justify-center flex flex-col  px-[1rem] gap-5 mt-3'>
-            <div className='flex flex-col gap-5 items-center '>
-              <div className=' h-[15rem] w-[15rem]  rounded-full mr-4'>
-                <img src={blog.author.photoURL} className='w-full h-full rounded-full' alt="" />
-              </div>
-              <Link to={'/profile'}><p className='text-[1.5rem] font-bold mr-4 text-[#8034eb]'>{blog.author.displayName}</p></Link> 
-              {/* <p className='text-[1.5rem] text-[grey]'>{blog.publishAt?blog.publishAt:""}</p> */}
+        <aside className='w-[20%] relative mt-[5rem] mx-auto'>
+         <div className='bg-white absolute top-[10%] w-[90%] shadow-lg rounded p-5'>
+          <div className='w-full h-full flex flex-col items-center text-gray-600'>
+            <div className='w-[20rem] h-[20rem] my-2 rounded-full border-2 hover:border-4 hover:shadow-md cursor-pointer border-[#ff8400]'>
+              <img src={blog.author.photoURL} alt="profile" className='rounded-full' />
             </div>
-            <div className='basis-[10%]'>
-              <div className='w-full h-[40%] flex items-center justify-between'>
-                <button  onClick={()=>window.open(blog.author.facebook,'_blank')} className="h-full"><FaFacebookF  className='h-full text-[1rem] fill-[#8034eb]'/></button>
-                <button   onClick={()=>window.open(blog.author.twitter,'_blank')} className="h-full"><FaTwitter className='h-full text-[1rem] fill-[#8034eb]' /></button>
-                <button   onClick={()=>window.open(blog.author.instagram,'_blank')} className="h-full"><FaInstagram className='h-full text-[1rem] fill-[#8034eb]'/></button>
-                <button   onClick={()=>window.open(blog.author.linkedIn,'_blank')} className="h-full"><FaLinkedinIn className='h-full text-[1rem] fill-[#8034eb]'/></button>
-              </div>   
+            <div className='text-[1.6rem] my-[1rem] flex flex-col items-center'>
+            <Link to="/profile" className='text-center text-[#8034eb]'>{blog.author.displayName}</Link>
+            <p>{blog.author.headLine}</p>
             </div>
-          </div>
+            <div className='w-[50%] mx-auto flex items-center justify-between my-[1rem]'>
+                <button onClick={()=>window.open(blog.author.facebook,'_blank')} className="h-full"><FaFacebookF  className='h-full text-[1.8rem] fill-[#8034eb]'/></button>
+                <button onClick={()=>window.open(blog.author.twitter,'_blank')} className="h-full"><FaTwitter className='h-full text-[1.8rem] fill-[#8034eb]' /></button>
+                <button onClick={()=>window.open(blog.author.instagram,'_blank')} className="h-full"><FaInstagram className='h-full text-[1.8rem] fill-[#8034eb]'/></button>
+                <button onClick={()=>window.open(blog.author.linkedIn,'_blank')} className="h-full"><FaLinkedinIn className='h-full text-[1.8rem] fill-[#8034eb]'/></button>
+            </div>
+          </div>    
+         </div>
         </aside>
         <article className=' w-[50%] flex flex-col mt-[5rem]'>
           <div className=' w-full flex flex-col  rounded px-2 py-10'>
@@ -89,10 +89,25 @@ export const BlogDetail = () => {
         </div>
 
         </article>
-        <aside className='w-[20%]'>
-          
-        </aside>
-        
+        <aside className='w-[25%] mt-[5rem] relative'>
+          <div className='w-[90%] p-2 border-2 shadow-md absolute top-[10%] bg-white dark:bg-black'>
+            <p className='text-[2rem] font-medium text-center'>Latest Blogs</p>
+            <div className='w-full flex flex-col gap-5 '>
+              <div className='my-1 w-full flex flex-col gap-2'>
+                 <small className='text-[1.2rem] text-gray-500'>Oct,24,2022</small>
+                 <Link to={``}  className='font-semibold text-gray-800 text-[1.5rem] hover:text-[#8034eb] hover:underline'>15 Useful Custom React Hooks for Your Next Web App</Link>
+              </div>
+              <div className='my-1 w-full flex flex-col gap-2'>
+                 <small className='text-[1.2rem] text-gray-500 '>Oct,24,2022</small>
+                 <Link to={``} className='font-semibold text-[1.5rem] text-gray-800 hover:text-[#8034eb] hover:underline'>15 Useful Custom React Hooks for Your Next Web App</Link>
+              </div>
+              <div className='my-1 w-full flex flex-col gap-2'>
+                 <small className='text-[1.2rem] text-gray-500'>Oct,24,2022</small>
+                 <Link to={``} className='font-semibold text-[1.5rem] text-gray-800 hover:text-[#8034eb] hover:underline'>15 Useful Custom React Hooks for Your Next Web App</Link>
+              </div>
+            </div>
+          </div>
+        </aside>  
       </Section>
       </Fragment>
       }
