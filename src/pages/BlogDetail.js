@@ -26,7 +26,7 @@ export const BlogDetail = () => {
       <Fragment >
       <Section>
         <article className='px-[20rem] w-full mt-[5rem]'>
-          <div className='bg-white w-full flex flex-col  rounded px-2 py-10'>
+          <div className=' w-full flex flex-col  rounded px-2 py-10'>
           <div className=' h-[5rem] flex w-full px-[.5rem] justify-between mt-3'>
             <div className='flex h-full basis-[30%] '>
               <div className='basis-[18%] h-full  rounded-full mr-4'>
@@ -51,13 +51,14 @@ export const BlogDetail = () => {
              <img src={blog.imageURL} alt="" className='w-full h-full' />
           </div>
           <div id="blogContent" className='w-full mt-[2rem] px-[5rem]'>
-            <p className='text-[1.8rem] leading-[4rem] text-gray-500 whitespace-pre-line '>
+            <p className='text-[1.8rem] leading-[4rem] text-gray-500 whitespace-pre-line .text-margin-start .text-margin-end .text-inline-start .text-inline-end '>
+            {blog.content}
             </p>
           </div>
           <div className='px-[10rem] w-full flex justify-end'>
           <button className='h-[3rem] w-[3rem] '><FaComment className='w-[80%] h-[80%] flex items-center ' /></button>
-          <p className='text-[1.5rem] text-[#8034eb] font-bold whitespace-pre-wrap'>
-            {blog.content}
+          <p className='text-[1.8rem] text-gray-600  font-medium '>
+           12
           </p>
           </div>
           </div>

@@ -11,8 +11,8 @@ export const Blog = ({blogs}) => {
     <Section>   
       <div className='flex w-full flex-wrap gap-4 px-[10rem]'>
         {blogs.map((blog,index)=>(
-        <div className='flex flex-col basis-[30%] h-[35rem] rounded shadow mt-[1.5rem] p-1 '>
-            <div className='w-full h-[60%] rounded'>
+        <div className='flex flex-col basis-[30%]  rounded shadow mt-[1.5rem] p-1 '>
+            <div className='w-full h-[20rem] rounded'>
                 <img src={blog.imageURL} alt={blog.title} className='h-full w-full rounded' />
             </div>
             <div className='m-[.7rem] flex flex-col'>
