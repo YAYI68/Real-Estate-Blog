@@ -78,13 +78,29 @@ export const  getAllPosts =()=>async(dispatch)=>{
 export const getPost = (id)=>async (dispatch)=>{
     try{
         dispatch({type:POST_DETAIL_REQUEST})
+         
+        const getPost = async()=>{
+            const postRef = doc(db,'posts',`${id}`)
+            const blogshot = await getDoc(postRef)
+            const post = {id:blogshot.id,...blogshot.data()}
+            return post
+        }
 
-        const postRef = doc(db,'posts',`${id}`)
-        const blogshot = await getDoc(postRef)
-        const post = {id:blogshot.id,...blogshot.data()}
+        const getComments = async()=>{
+            const commentsRef = collection(db,'comments')
+            const q = query(commentsRef,where("blogId", "==", id))
+            const commentShots = await getDocs(q)
+            const comments = commentShots.docs.map((doc)=>({commentId:doc.id,...doc.data()}))
+            return comments      
+       }
+       const [post, comments] = await Promise.all([getPost(), getComments()])
+
         dispatch({
             type:POST_DETAIL_SUCCESS,
-            payload:post,
+            payload:{
+                post,
+                comments,
+            }
         })
         
     }

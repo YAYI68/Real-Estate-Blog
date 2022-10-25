@@ -1,17 +1,21 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { Main } from '../components/Main';
 import { Section } from '../components/Section';
 import { FaFacebookF,FaTwitter,FaInstagram,FaLinkedinIn, FaComment} from 'react-icons/fa';
 import { Link,useLocation,useParams } from "react-router-dom";
-import { blogPost } from '../data/dummy';
 import { getPost } from '../store/posts/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { createBlogComment } from '../store/comments/actions';
 
 
 export const BlogDetail = () => {
+  const commentNameRef =   useRef(null)
+  const commentContentRef = useRef(null)
   const dispatch = useDispatch();
   const postDetail =  useSelector((state)=>state.postDetail);
-  const { success, error , blog, loading, } = postDetail;
+  const { success:blogSucess, error , blog, loading,comments } = postDetail;
+  const createComment = useSelector((state)=>state.createComment)
+  const {loading:commentLoading,success:commentSuccess, error:commentError  } = createComment;
   const location = useLocation();
   const {id} =  location.state
 
@@ -19,10 +23,25 @@ export const BlogDetail = () => {
      dispatch(getPost(id))
    },[id,dispatch])
 
+   
+   const handleSubmit = (e)=>{
+     e.preventDefault();
+     const  commentName = commentNameRef.current.value;
+     const commentContent = commentContentRef.current.value;
+     const data = {
+      blogId:id,
+      commentName,
+      commentContent,
+      commentDate: new Date(),
+     }
+     console.log({blogId:blog.id,data})
+     dispatch(createBlogComment(data))
+   }
+
 
   return (
     <Main>
-      {success && 
+      {blogSucess && 
       <Fragment >
       <Section className={`flex gap-2`}>
         <aside className='w-[20%] relative mt-[5rem] mx-auto'>
@@ -65,24 +84,22 @@ export const BlogDetail = () => {
           </div>
           </div>
           <div className=' w-full mt-[2rem]'>
-           <div className='mx-auto my-[2rem] bg-white p-5'>
-            <div className='flex items-center'>
-               <p className='text-[1.4rem] text-[#8034eb] mr-[2rem] font-bold'>Yayi</p>
-               <p className='text-[1rem]' >July 17,2020</p>
-            </div>
-            <p className='text-[1.5rem] mt-1'>Nice Write up</p>
-           </div>
-           <div className='mx-auto my-[2rem] bg-white p-5'>
-            <div className='flex items-center'>
-               <p className='text-[1.4rem] text-[#8034eb] mr-[2rem] font-bold'>Biodun</p>
-               <p className='text-[1rem]' >July 17,2020</p>
-            </div>
-            <p className='text-[1.5rem] mt-1'>Nice Write up</p>
-           </div>
+            {comments? 
+            comments.map((comment)=>(
+            <div className='mx-auto my-[2rem] bg-white p-5'>
+              <div className='flex items-center'>
+                 <p className='text-[1.4rem] text-[#8034eb] mr-[2rem] font-bold'>{comment.commentName}</p>
+                 <p className='text-[1rem]' >july 12,2020</p>
+              </div>
+              <p className='text-[1.5rem] mt-1'>{comment.commentContent}</p>
+             </div>
+            )):
+            <p>No Comment yet</p>
+          }
            <div className=' w-full mt-[2rem]'>
-          <form className='flex flex-col mx-auto'>
-            <input type="text"  className='w-full text-[1.5rem] h-[3rem] rounded outline-none focus:border-2 p-2 focus:border-[#8034eb]' placeholder='Name' />
-            <textarea cols="30" rows="10"  placeholder='Comment' className='rounded w-full text-[1.5rem] mt-[1rem] outline-none focus:border-2 p-2 focus:border-[#8034eb]'  />
+          <form className='flex flex-col mx-auto' onSubmit={handleSubmit}>
+            <input  ref={commentNameRef} type="text"  className='w-full text-[1.5rem] h-[3rem] rounded outline-none focus:border-2 p-2 focus:border-[#8034eb]' placeholder='Name' />
+            <textarea ref={commentContentRef} cols="30" rows="10"  placeholder='Comment' className='rounded w-full text-[1.5rem] mt-[1rem] outline-none focus:border-2 p-2 focus:border-[#8034eb]'  />
             <button className='w-full bg-[#8034eb] text-[1.5rem] mt-2 py-2 rounded text-[white]'>Comment</button>
           </form>
         </div>
