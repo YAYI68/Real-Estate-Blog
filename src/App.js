@@ -1,6 +1,5 @@
 
 import { LoginPage } from './pages/LoginPage';
-import { RegisterPage } from './pages/RegisterPage';
 import { HomePage } from './pages/HomePage';
 import { Routes,Route } from 'react-router-dom';
 import { CreatePost } from './pages/CreatePost';
@@ -9,6 +8,9 @@ import { BlogDetail } from './pages/BlogDetail';
 import { Header } from './components/Header';
 import { DraftPage } from './pages/DraftPage';
 import { PublishedPage } from './pages/PublishedPage';
+import { BlogPage } from './pages/BlogPage';
+
+
 
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
       <Header />
      <Routes>
       <Route path='/' element={<HomePage/>}/>
+      <Route path='/blogs' element={<BlogPage/>} />
       <Route path='/profile' element={<UserProfile/>}/>
       <Route path='/login' element={<LoginPage/>}/>
       <Route path='/:slug' element={<BlogDetail/>}/>

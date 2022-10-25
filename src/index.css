@@ -97,6 +97,12 @@ body {
     animation:slider3 10s ease-in-out infinite
 }
 
+@layer base{
+    body{
+        @apply dark:bg-black
+    }
+}
+
 @layer utilities{
   .octagon{
     clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);

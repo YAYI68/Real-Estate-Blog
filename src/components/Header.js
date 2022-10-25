@@ -50,7 +50,7 @@ export const Header = () => {
             </form>
             <ul className='w-[15%] flex items-center justify-between list-none'>
                 <li><Link to="/" className="text-[1.5rem] font-[400] hover:text-[#8034eb]">Home</Link></li>
-                <li><Link to="" className="text-[1.5rem] font-[400] hover:text-[#8034eb]">Blog</Link></li>
+                <li><Link to="/blogs" className="text-[1.5rem] font-[400] hover:text-[#8034eb]">Blog</Link></li>
                 <li><Link to="/profile" className="text-[1.5rem] font-[400] hover:text-[#8034eb]">About me</Link></li> 
             </ul>
             <div className='w-[7%] h-[50%] flex items-center justify-between'>

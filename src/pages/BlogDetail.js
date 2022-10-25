@@ -6,6 +6,7 @@ import { Link,useLocation,useParams } from "react-router-dom";
 import { getPost } from '../store/posts/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { createBlogComment } from '../store/comments/actions';
+import { currentDate } from '../utils/blog_util';
 
 
 export const BlogDetail = () => {
@@ -32,7 +33,7 @@ export const BlogDetail = () => {
       blogId:id,
       commentName,
       commentContent,
-      commentDate: new Date(),
+      commentDate: currentDate,
      }
      console.log({blogId:blog.id,data})
      dispatch(createBlogComment(data))

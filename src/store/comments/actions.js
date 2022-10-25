@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, setDoc } from "firebase/firestore"
+import { addDoc, collection} from "firebase/firestore"
 import { db } from "../../firebaseConfig"
 
 export const BLOG_COMMENT_LIST_REQUEST = "BLOG_COMMENT_LIST_REQUEST"
