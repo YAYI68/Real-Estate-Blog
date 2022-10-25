@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const RelatedBlog = () => {
   return (
-    <div className='w-[90%] p-2 border-2 shadow-md absolute top-[10%] bg-white dark:bg-black'>
+    <div className='w-[90%] p-2 border-2 shadow-md absolute top-[10%] bg-white dark:bg-gray-800 rounded-md dark:text-white'>
     <p className='text-[2rem] font-medium text-center'>Latest Blogs</p>
     <div className='w-full flex flex-col gap-5 '>
       <div className='my-1 w-full flex flex-col gap-2'>

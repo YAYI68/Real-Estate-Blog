@@ -15,7 +15,7 @@ import { BlogPage } from './pages/BlogPage';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App dark">
       <Header />
      <Routes>
       <Route path='/' element={<HomePage/>}/>

@@ -32,11 +32,11 @@ export const BlogDetail = () => {
     <Main>
       {blogSucess && 
       <Fragment >
-      <Section className={`flex gap-2`}>
-        <aside className='w-[20%] relative mt-[5rem] mx-auto'>
-         <div className='bg-white absolute top-[10%] w-[90%] shadow-lg rounded p-5'>
+      <Section className={`flex gap-2 lg:justify-center dark:bg-black dark:text-white`}>
+        <aside className='w-[20%] relative mt-[5rem] mx-auto lg:hidden px-4'>
+         <div className='bg-white dark:bg-gray-800 dark:text-white absolute top-[10%] w-full shadow-lg rounded p-5'>
           <div className='w-full h-full flex flex-col items-center text-gray-600'>
-            <div className='w-[20rem] h-[20rem] my-2 rounded-full border-2 hover:border-4 hover:shadow-md cursor-pointer border-[#ff8400]'>
+            <div className='w-[20rem] h-[20rem] xl:h-[15rem] xl:w-[15rem] my-2 rounded-full border-2 hover:border-4 hover:shadow-md cursor-pointer border-[#ff8400]'>
               <img src={blog.author.photoURL} alt="profile" className='rounded-full' />
             </div>
             <div className='text-[1.6rem] my-[1rem] flex flex-col items-center'>
@@ -52,16 +52,16 @@ export const BlogDetail = () => {
           </div>    
          </div>
         </aside>
-        <article className=' w-[50%] flex flex-col mt-[5rem]'>
+        <article className=' w-[50%] flex flex-col mt-[4rem] lg:mt-[2rem] lg:w-[75%] md:w-[90%]'>
           <div className=' w-full flex flex-col  rounded px-2 py-10'>
           <div id='blogTitle' className='w-full'>
-            <h2 className='text-[4rem]   font-bold my-[2rem]'>{blog.title}</h2>
+            <h2 className='text-[4rem]   font-bold my-[2rem] lg:text-[3rem] sm:text-[2.5rem]'>{blog.title}</h2>
           </div>
-          <div id='blogImg' className='h-[45rem] w-full mt-[1rem]'>
+          <div id='blogImg' className='h-[45rem] md:h-[35rem] w-full mt-[1rem]'>
              <img src={blog.imageURL} alt="" className='w-full h-full' />
           </div>
           <div id="blogContent" className='w-full mt-[2rem] '>
-            <p className='text-[1.8rem] leading-[4rem] text-gray-700 whitespace-pre-line .text-margin-start .text-margin-end .text-inline-start .text-inline-end '>
+            <p className='text-[1.8rem] lg:text-[1.5rem] leading-[4rem] text-gray-700 whitespace-pre-line .text-margin-start .text-margin-end .text-inline-start .text-inline-end '>
             {blog.content}
             </p>
           </div>
@@ -85,7 +85,7 @@ export const BlogDetail = () => {
         </div>
 
         </article>
-        <aside className='w-[25%] mt-[5rem] relative'>
+        <aside className='w-[25%] mt-[5rem] relative lg:hidden px-2'>
          <RelatedBlog />
         </aside>  
       </Section>
