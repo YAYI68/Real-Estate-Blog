@@ -8,8 +8,7 @@ import { getUserProfile } from '../store/users/actions';
 import { ref, uploadBytesResumable,getDownloadURL,uploadBytes  } from "firebase/storage";
 import { useParams,useNavigate} from "react-router-dom"
 import { getPost, updateNewPost } from '../store/posts/actions';
-import { doc, updateDoc } from 'firebase/firestore';
-import { currentDate } from '../utils/blog_util';
+import { doc, Timestamp, updateDoc } from 'firebase/firestore';
 
 
 
@@ -65,7 +64,7 @@ export const CreatePost =()=>{
         excerpts,
         content,
         blogState:state,
-        publishAt:date,
+        publishAt:date?Timestamp.fromDate(new Date()):"",
         slug,      
       }
 
@@ -98,7 +97,7 @@ export const CreatePost =()=>{
 
     const publishHandler = async(e)=>{
       e.preventDefault();
-      await submit("publish",currentDate)
+      await submit("publish",Timestamp)
       console.log("Published was clicked")
      }
 

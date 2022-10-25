@@ -6,12 +6,16 @@ import { Link,useLocation,useParams } from "react-router-dom";
 import { getPost } from '../store/posts/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { createBlogComment } from '../store/comments/actions';
-import { currentDate } from '../utils/blog_util';
+import { convertTimeToDate} from '../utils/blog_util';
+import { Timestamp } from 'firebase/firestore';
+import { Comment } from '../components/Comment';
+import { CommentForm } from '../components/CommentForm';
+import { RelatedBlog } from '../components/RelatedBlog';
+
 
 
 export const BlogDetail = () => {
-  const commentNameRef =   useRef(null)
-  const commentContentRef = useRef(null)
+
   const dispatch = useDispatch();
   const postDetail =  useSelector((state)=>state.postDetail);
   const { success:blogSucess, error , blog, loading,comments } = postDetail;
@@ -19,26 +23,10 @@ export const BlogDetail = () => {
   const {loading:commentLoading,success:commentSuccess, error:commentError  } = createComment;
   const location = useLocation();
   const {id} =  location.state
-
+   
    useEffect(()=>{
      dispatch(getPost(id))
    },[id,dispatch])
-
-   
-   const handleSubmit = (e)=>{
-     e.preventDefault();
-     const  commentName = commentNameRef.current.value;
-     const commentContent = commentContentRef.current.value;
-     const data = {
-      blogId:id,
-      commentName,
-      commentContent,
-      commentDate: currentDate,
-     }
-     console.log({blogId:blog.id,data})
-     dispatch(createBlogComment(data))
-   }
-
 
   return (
     <Main>
@@ -77,54 +65,28 @@ export const BlogDetail = () => {
             {blog.content}
             </p>
           </div>
-          <div className=' w-full flex justify-end'>
+          <div className=' w-full flex justify-end p-2'>
           <button className='h-[3rem] w-[3rem] '><FaComment className='w-[80%] h-[80%] flex items-center ' /></button>
-          <p className='text-[1.8rem] text-gray-600  font-medium '>
-           12
+          <p className='text-[1.8rem]  font-medium text-[#8034eb]'>
+           {comments.length}
           </p>
           </div>
           </div>
           <div className=' w-full mt-[2rem]'>
             {comments? 
             comments.map((comment)=>(
-            <div className='mx-auto my-[2rem] bg-white p-5'>
-              <div className='flex items-center'>
-                 <p className='text-[1.4rem] text-[#8034eb] mr-[2rem] font-bold'>{comment.commentName}</p>
-                 <p className='text-[1rem]' >july 12,2020</p>
-              </div>
-              <p className='text-[1.5rem] mt-1'>{comment.commentContent}</p>
-             </div>
+            <Comment comment={comment} />
             )):
             <p>No Comment yet</p>
           }
            <div className=' w-full mt-[2rem]'>
-          <form className='flex flex-col mx-auto' onSubmit={handleSubmit}>
-            <input  ref={commentNameRef} type="text"  className='w-full text-[1.5rem] h-[3rem] rounded outline-none focus:border-2 p-2 focus:border-[#8034eb]' placeholder='Name' />
-            <textarea ref={commentContentRef} cols="30" rows="10"  placeholder='Comment' className='rounded w-full text-[1.5rem] mt-[1rem] outline-none focus:border-2 p-2 focus:border-[#8034eb]'  />
-            <button className='w-full bg-[#8034eb] text-[1.5rem] mt-2 py-2 rounded text-[white]'>Comment</button>
-          </form>
-        </div>
+             <CommentForm blogId={id} />
+            </div>
         </div>
 
         </article>
         <aside className='w-[25%] mt-[5rem] relative'>
-          <div className='w-[90%] p-2 border-2 shadow-md absolute top-[10%] bg-white dark:bg-black'>
-            <p className='text-[2rem] font-medium text-center'>Latest Blogs</p>
-            <div className='w-full flex flex-col gap-5 '>
-              <div className='my-1 w-full flex flex-col gap-2'>
-                 <small className='text-[1.2rem] text-gray-500'>Oct,24,2022</small>
-                 <Link to={``}  className='font-semibold text-gray-800 text-[1.5rem] hover:text-[#8034eb] hover:underline'>15 Useful Custom React Hooks for Your Next Web App</Link>
-              </div>
-              <div className='my-1 w-full flex flex-col gap-2'>
-                 <small className='text-[1.2rem] text-gray-500 '>Oct,24,2022</small>
-                 <Link to={``} className='font-semibold text-[1.5rem] text-gray-800 hover:text-[#8034eb] hover:underline'>15 Useful Custom React Hooks for Your Next Web App</Link>
-              </div>
-              <div className='my-1 w-full flex flex-col gap-2'>
-                 <small className='text-[1.2rem] text-gray-500'>Oct,24,2022</small>
-                 <Link to={``} className='font-semibold text-[1.5rem] text-gray-800 hover:text-[#8034eb] hover:underline'>15 Useful Custom React Hooks for Your Next Web App</Link>
-              </div>
-            </div>
-          </div>
+         <RelatedBlog />
         </aside>  
       </Section>
       </Fragment>

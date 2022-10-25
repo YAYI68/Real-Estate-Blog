@@ -18,7 +18,6 @@ export const Carousel = ({sliderBlogs}) => {
       }
     }, [curSlide])
     let maxSlide = sliderBlogs.length
-    console.log({maxSlide})
 
     const moveRight = ()=>{
         if(curSlide >= maxSlide - 1){
@@ -52,7 +51,7 @@ export const Carousel = ({sliderBlogs}) => {
           <svg className="w-8 h-8 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         </button>
             {sliderBlogs.map((blog,i)=>(
-                <div   style={{
+                <div key={i}  style={{
                   transform: `translateX( ${100 * (i-curSlide)}% )`
                 }} className={`absolute top-[0] w-full  h-full   bg-no-repeat bg-cover   transition-transform `}> 
                 <img src={blog.imageURL} alt="" className=" h-full w-full brightness-[.4] object-top" />

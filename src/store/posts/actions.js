@@ -1,6 +1,6 @@
 import { auth, db } from "../../firebaseConfig";
-import { collection,getDocs,getDoc, doc, addDoc, updateDoc, where, query, orderBy, limit } from "firebase/firestore";
-import { currentDate } from "../../utils/blog_util";
+import { collection,getDocs,getDoc, doc, addDoc, updateDoc, where, query, limit, Timestamp } from "firebase/firestore";
+
 
 
 
@@ -129,7 +129,7 @@ export const createNewPost = ()=>async(dispatch)=>{
             title:"Write your blog title",
             excerpts:"",
             content:" Write a Story",
-            createdAt:currentDate,
+            createdAt:Timestamp.fromDate(new Date()),
             blogState:"draft",
             imageURL:"",
             publishAt:"",
