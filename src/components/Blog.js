@@ -9,13 +9,13 @@ export const Blog = ({blogs}) => {
 
   return (
     <Section>   
-      <div className='flex w-full flex-wrap gap-4 px-[10rem] dark:text-white '>
+      <div className='flex w-full flex-wrap gap-4 px-[10rem] lg:px-[5rem] md:flex-col md:items-center md:px-[1rem] dark:text-white  '>
         {blogs.map((blog,index)=>(
-        <div key={index} className='flex flex-col  basis-[30%]  rounded shadow mt-[1.5rem] p-1 '>
+        <div key={index} className='flex flex-col  basis-[30%]  md:w-[90%] lg:basis-[48%]  rounded shadow mt-[1.5rem] p-1 dark:text-white dark:bg-gray-800'>
             <div className='w-full h-[20rem] rounded'>
                 <img src={blog.imageURL} alt={blog.title} className='h-full w-full rounded' />
             </div>
-            <div className='m-[.7rem] flex flex-col h-[15rem]'>
+            <div className='m-[.7rem] flex flex-col h-[15rem] md:h-[18rem] lg:h-[20rem]'>
              <div className="flex flex-col h-[70%] w-full gap-5">
              <Link to={`/${blog.slug}`} state={{id:blog.id}} className='text-[2.2rem] text-[#ff8400] font-bold mb-2'>{blog.title}</Link>
              <p className='text-[1.5rem] mb-2'>{blog.excerpts}</p>    

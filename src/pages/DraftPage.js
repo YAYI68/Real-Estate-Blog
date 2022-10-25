@@ -29,10 +29,6 @@ export const DraftPage = () => {
        
   },[createSuccess,navigate,createdBlog,dispatch]);
   
-    // useEffect(() => {
-    
-    // },[dispatch]);
- 
     console.log({allBlogs})
 
   const writePost = ()=>{
@@ -41,19 +37,19 @@ export const DraftPage = () => {
   
   return (
     <Main>
-       <Section>
-        <div className='px-[25rem]'>
-            <div className="flex mb-[2rem] items-center justify-between w-full">
-              <h2 className='text-[4rem] font-bold '>Your Posts</h2>
+       <Section className={`flex flex-col items-center`}>
+        <div className='flex flex-col w-[50%] lg:w-[80%] md:w-full '>
+            <div className="flex mb-[2rem] md:mt-[1.5rem] items-center justify-between w-full">
+              <h2 className='text-[4rem] md:text-[2.5rem] sm:text-[1.5rem] font-bold '>Your Posts</h2>
               <div>
-               <button onClick={writePost} className='border-2 px-[2rem] py-[1rem] text-[1.5rem] rounded-[.5rem] text-white bg-[#8034eb]'>Write a post</button>
+               <button onClick={writePost} className='border-2 px-[2rem] py-[1rem] text-[1.5rem] sm:text-[1.2rem] sm:font-semibold rounded-[.5rem] text-white bg-[#8034eb]'>Write a post</button>
               </div>
             </div> 
             <div className='w-full mb-[2rem] '>
              <TabSlide current='draft'/>
            </div>
            {allPostsSuccess && allBlogs.length >0 &&
-           <div className='w-full mb-[2rem] '>
+           <div className='w-full mb-[2rem] flex flex-col gap-4'>
             {allBlogs.map((blog,index)=>(
              <DraftBlog key={blog.id} blog={blog} />
             ))}

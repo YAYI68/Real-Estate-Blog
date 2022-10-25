@@ -4,30 +4,20 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
+    screens: {
+      '2xl': {'max': '1535px'},
+      // => @media (max-width: 1535px) { ... }
+      'xl': {'max': '1279px'},
+      // => @media (max-width: 1279px) { ... }
+      'lg': {'max': '1023px'},
+      // => @media (max-width: 1023px) { ... }
+      'md': {'max': '768px'},
+      // => @media (max-width: 767px) { ... }
+      'sm': {'max': '639px'},
+      // => @media (max-width: 639px) { ... }
+    },
     extend: {
-      keyframes: {
-        slide1: {
-          '0%': { transform: 'translateX(0%)' },
-          '50%': { transform: 'translateX(-100%)' },
-          '100%': { transform: 'translateX(-200%)' },
-        },
-        slide2: {
-          '0%': { transform: 'translateX(100%)' },
-          '50%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-100%)' },
-        },
-        slide3: {
-          '0%': { transform: 'translateX(200%)' },
-          '50%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(0%)' },
-        },
-        animation: {
-            slide1: 'slide1 5s ease-in-out infinite',
-            slide2: 'slide2 5s ease-in-out infinite',
-            slide3: 'slide3 5s ease-in-out infinite',
-          },
-        
-      }
+    
     },
   },
   plugins: [],
