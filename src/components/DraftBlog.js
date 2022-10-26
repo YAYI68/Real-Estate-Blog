@@ -18,7 +18,7 @@ export const DraftBlog = ({blog}) => {
 
   return (
     <div className='w-full border-b-[2px] py-[1rem] bg-white dark:bg-slate-900 text-white'>
-      <div className='flex w-[90%] md:w-full h-[15rem] lg:h-[13rem] md:h-[10rem] items-center'> 
+      <div className='flex w-[90%] md:w-full h-[15rem] lg:h-[13rem] md:h-[13rem] items-center'> 
         <div className='basis-[30%] mx-[1rem] h-full'>
            <img src={blog.imageURL} className='w-full h-full' alt="" />
         </div>
