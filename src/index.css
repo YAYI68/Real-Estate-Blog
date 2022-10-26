@@ -42,7 +42,6 @@ body {
 
 .main{
     grid-area:"main";
-    background-color:red;
 }
 .footer{
     grid-area:"footer" 
@@ -75,6 +74,13 @@ body {
   }
   .text-inline-end{
     margin-inline-end: 0px;
+  }
+ 
+}
+
+@layer utilities{
+  .label{
+    @apply text-white
   }
 }
 

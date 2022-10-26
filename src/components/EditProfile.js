@@ -131,12 +131,12 @@ export const EditProfile = ({setEditProfile,user}) => {
     <Main>
      <Section >
      <div  onClick={()=>setEditProfile(false)} className='fixed z-[20]  w-[100vw]  h-[100vh] bg-[rgb(0,0,0,0.69)]  left-0 top-0  flex items-center justify-center'></div>
-     <div   className='fixed z-[25]  w-[50%]  h-[100vh] top-0 left-[30%] flex items-center justify-center'>
-      <div className='w-[50%] h-[85%] m-auto bg-[white]  rounded flex flex-col fixed '>
+     <div   className='fixed z-[25]  w-[50%]  lg:left-[25%]  sm:left-[25%] h-[100vh] top-0 left-[25%] flex items-center justify-center'>
+      <div className='w-[50%] md:w-[80%] sm:w-[90%] lg:w-[80%] h-[85%] m-auto bg-[white]  rounded flex flex-col fixed '>
         <div className='flex p-[1rem] justify-between  border-b-2'>
          <div className='flex items-center basis-[30%]'>
            <button onClick={()=>setEditProfile(false)} className='mr-4'><FaTimes className='text-[2.5rem] fill-[#8034eb] '/></button>
-           <p className='text-[2rem] font-bold'>EditProfile</p>
+           <p className='text-[2rem] font-bold lg:text-[1.5rem]'>EditProfile</p>
          </div>
           <button onClick={handleSubmit} className="py-3 px-8 rounded-[.5rem] text-[1.5rem]  bg-[#8034eb] text-white ">Save</button>
         </div>
@@ -154,7 +154,7 @@ export const EditProfile = ({setEditProfile,user}) => {
           </label>
           <p className='text-center text-[1.6rem] font-bold mt-5'>Change Image</p>
           </div>
-          <div className='flex justify-between mt-[5rem]'>
+          <div className='flex justify-between mt-[5rem] lg:flex-col lg:gap-3'>
             <div className='basis-[47%]'>
             <label for='firstName' className='text-[1.5rem] text-gray-600 mb-2'>Display Name</label>
             <input id='firstName' type="text" 
