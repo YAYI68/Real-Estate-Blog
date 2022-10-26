@@ -113,9 +113,9 @@ export const CreatePost =()=>{
     <Main>
       {detailSuccess &&    
       <Section>
-        <div className=' text-[1.5rem] mt-3 mx-auto px-[20rem] '>
-          <div className='bg-white w-full px-[2rem] py-[2rem] overflow-y-scroll'>
-          <div className='w-full py-[2rem]'>
+        <div className='w-screen text-[1.5rem] lg:px-2  flex flex-col items-center'>
+          <div className='bg-white w-[50%] px-[2rem] py-[2rem] overflow-y-scroll'>
+          <div className='w-full py-[2rem] sticky '>
             <div className='flex justify-between items-center '>
              <button onClick={submitHandler} className='text-white bg-[#5feb34] px-[1rem] py-2 rounded-[.5rem] w-fit'>Saved to Draft</button> 
   {/* <div role="status">
