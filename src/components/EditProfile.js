@@ -132,15 +132,15 @@ export const EditProfile = ({setEditProfile,user}) => {
      <Section >
      <div  onClick={()=>setEditProfile(false)} className='fixed z-[20]  w-[100vw]  h-[100vh] bg-[rgb(0,0,0,0.69)]  left-0 top-0  flex items-center justify-center'></div>
      <div   className='fixed z-[25]  w-[50%]  lg:left-[25%]  sm:left-[25%] h-[100vh] top-0 left-[25%] flex items-center justify-center'>
-      <div className='w-[50%] md:w-[80%] sm:w-[90%] lg:w-[80%] h-[85%] m-auto bg-[white]  rounded flex flex-col fixed '>
-        <div className='flex p-[1rem] justify-between  border-b-2'>
+      <div className='w-[50%] md:w-[80%] sm:w-[90%] lg:w-[80%] h-[85%] m-auto bg-white dark:bg-slate-900 dark:text-white  rounded flex flex-col fixed '>
+        <div className='flex p-[1rem] justify-between  border-b-2 dark:border-b-black '>
          <div className='flex items-center basis-[30%]'>
-           <button onClick={()=>setEditProfile(false)} className='mr-4'><FaTimes className='text-[2.5rem] fill-[#8034eb] '/></button>
+           <button onClick={()=>setEditProfile(false)} className='mr-4 h-14 w-14 flex items-center justify-center rounded-full hover:bg-slate-200'><FaTimes className='text-[2.5rem] fill-[#8034eb] '/></button>
            <p className='text-[2rem] font-bold lg:text-[1.5rem]'>EditProfile</p>
          </div>
           <button onClick={handleSubmit} className="py-3 px-8 rounded-[.5rem] text-[1.5rem]  bg-[#8034eb] text-white ">Save</button>
         </div>
-        <div className='bg-white flex-grow overflow-y-scroll pb-[6rem]'>
+        <div className=' flex-grow overflow-y-scroll pb-[6rem] dark:bg-slate-900 '>
         <form className='flex flex-col w-full h-full p-4' onSubmit={handleSubmit}>
           <div className='h-[15rem] w-[15rem] mx-auto  mt-[2rem] cursor-pointer hover:scale-[1.2] transition-[transform]'>
           <label for='editProfile' className=' cursor-pointer mb-4'>
@@ -156,81 +156,81 @@ export const EditProfile = ({setEditProfile,user}) => {
           </div>
           <div className='flex justify-between mt-[5rem] lg:flex-col lg:gap-3'>
             <div className='basis-[47%]'>
-            <label for='firstName' className='text-[1.5rem] text-gray-600 mb-2'>Display Name</label>
+            <label for='firstName' className='text-[1.5rem] dark:text-white text-gray-600 mb-2'>Display Name</label>
             <input id='firstName' type="text" 
              defaultValue={user.displayName}
              ref={displayNameRef} 
-            className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]'
+            className='w-full text-[1.5rem] dark:bg-gray-700 dark:text-white h-[4rem] bg-gray-200 outline-none p-2 border-2 rounded focus:border-[#8034eb]'
              placeholder='Display Name'/>
             </div>
             <div className='basis-[47%]'>
-            <label for='lastName' className='text-[1.5rem] text-gray-600 mb-2'>Email</label>
+            <label for='lastName' className='dark:bg-gray-700 dark:text-white text-[1.5rem] text-gray-600 mb-2 '>Email</label>
             <input id='lastName' type="email"  
             defaultValue={user.email}
             ref={emailRef}
-            className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 rounded border-2 focus:border-[#8034eb]' 
+            className='w-full text-[1.5rem] h-[4rem] outline-none dark:bg-gray-700 dark:text-white bg-gray-200 p-2 rounded border-2 focus:border-[#8034eb]' 
             placeholder='Email'/>
             </div>
           </div>
           <div className='mt-[2rem]'>
-            <label className='text-[1.5rem] text-gray-600 mb-2'>Headline</label>
+            <label className='text-[1.5rem] text-gray-600 mb-2 dark:text-white'>Headline</label>
             <input type="text"
             defaultValue={user.headLine}
              ref={headLineRef}
-             className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]'/>
+             className='w-full text-[1.5rem] h-[4rem] outline-none dark:bg-gray-700 dark:text-white bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]'/>
           </div>
 
           <div className='mt-[2rem]'>
-            <label className='text-[1.5rem] text-gray-600 mb-2'>Bio</label>
+            <label className='text-[1.5rem] text-gray-600 mb-2 dark:text-white'>Bio</label>
             <textarea cols="30" rows="5" 
             defaultValue={user.bio}
              ref={bioRef}
-             className='w-full text-[1.5rem]  outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]'
+             className='w-full text-[1.5rem] dark:bg-gray-700 dark:text-white  outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]'
              placeholder='A bit about yourself' />
           </div>
 
           <div className='mt-[2rem]'>
-            <label className='text-[1.5rem] text-gray-600 mb-2'>Facebook</label>
+            <label className='text-[1.5rem] text-gray-600 mb-2 dark:text-white'>Facebook</label>
             <input type="text" 
             defaultValue={user.facebook}
              ref={facebookRef}
-            className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]' 
+            className='w-full text-[1.5rem] dark:bg-gray-700 dark:text-white h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]' 
             placeholder='Your facebook url link'/>
           </div>
 
           <div className='mt-[2rem]'>
-            <label className='text-[1.5rem] text-gray-600 mb-2'>Instagram</label>
+            <label className='text-[1.5rem] text-gray-600 mb-2 dark:text-white'>Instagram</label>
             <input type="text" 
             defaultValue={user.instagram}
             ref={instagramRef}
-            className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]' 
+            className='w-full text-[1.5rem] dark:bg-gray-700 dark:text-white h-[4rem] outline-none bg-gray-200 p-2 border-2 rounded focus:border-[#8034eb]' 
             placeholder='Your instagram url link'/>
           </div>
 
           <div className='mt-[2rem]'>
-            <label className='text-[1.5rem] text-gray-600 mb-2'>LinkedIn</label>
+            <label className='text-[1.5rem] text-gray-600 mb-2 dark:text-white'>LinkedIn</label>
             <input type="text"
             defaultValue={user.linkedIn}
             ref={linkedInRef} 
-            className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 p-2 rounded border-2 focus:border-[#8034eb]' 
+            className='w-full text-[1.5rem] dark:bg-gray-700 dark:text-white h-[4rem] outline-none bg-gray-200 p-2 rounded border-2 focus:border-[#8034eb]' 
             placeholder='Your LinkedIn url link'/>
           </div>
 
           <div className='mt-[2rem]'>
-            <label className='text-[1.5rem] text-gray-600 mb-2'>Twitter</label>
+            <label className='text-[1.5rem] text-gray-600 mb-2 dark:text-white'>Twitter</label>
             <input type="text" 
             defaultValue={user.twitter}
             ref={twitterRef}
-            className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 rounded p-2 border-2 focus:border-[#8034eb]' 
+            className='w-full text-[1.5rem] dark:bg-gray-700 dark:text-white h-[4rem] outline-none bg-gray-200 rounded p-2 border-2 focus:border-[#8034eb]' 
             placeholder='Your Twitter url link'/>
           </div>
 
           <div className='mt-[2rem]'>
-            <label className='text-[1.5rem] text-gray-600 mb-2'>Phone Number</label>
+            <label className='text-[1.5rem] text-gray-600 mb-2 dark:text-white'>Phone Number</label>
             <input type="text"
             defaultValue={user.phoneNumber}
             ref={phoneNumberRef} 
-            className='w-full text-[1.5rem] h-[4rem] outline-none bg-gray-200 rounded p-2 border-2 focus:border-[#8034eb]' 
+            className='w-full text-[1.5rem] dark:bg-gray-700 dark:text-white h-[4rem] outline-none bg-gray-200 rounded p-2 border-2 focus:border-[#8034eb]' 
             placeholder='Your Phone Number'/>
           </div>
           <div className='mt-[2rem] mb-[2rem]'>
