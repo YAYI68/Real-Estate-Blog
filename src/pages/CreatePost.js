@@ -153,7 +153,7 @@ export const CreatePost =()=>{
           </label>
          </div>
          <div className='w-full  my-[1rem]'>
-           <textarea ref={contentRef} defaultValue={blog.content} cols="30" rows="10" placeholder='Write a story' className='w-full h-full  border-2 focus:border-solid border-none p-3 rounded focus:border-[#8034eb] outline-none '/> 
+           <textarea ref={contentRef} defaultValue={blog.content} cols="30" rows="10" placeholder='Write a story' className=' dark:bg-gray-600 dark:text-white w-full h-full  border-2 focus:border-solid border-none p-3 rounded focus:border-[#8034eb] outline-none '/> 
          </div>
         </form>
           </div>

@@ -39,9 +39,9 @@ export const DraftPage = () => {
     <Main>
        <Section className={`flex flex-col dark:bg-black items-center mt-[5rem]`}>
         <div className='flex flex-col w-[50%] lg:w-[80%] md:w-full fixed z-10 h-[90vh] '>
-           <div className='flex flex-col w-full px-4  bg-white dark:bg-slate-900'>
+           <div className='flex flex-col w-full pt-4 px-4  bg-white dark:bg-slate-900'>
            <div className="flex mb-[2rem] md:mt-[1.5rem] items-center justify-between w-full">
-              <h2 className='text-[4rem] md:text-[2.5rem] sm:text-[1.5rem] font-bold '>Your Posts</h2>
+              <h2 className='text-[4rem] md:text-[2.5rem] sm:text-[1.5rem] font-bold  dark:text-white'>Your Posts</h2>
               <div>
                <button onClick={writePost} className='border-2 px-[2rem] py-[1rem] text-[1.5rem] sm:text-[1.2rem] sm:font-semibold rounded-[.5rem] text-white bg-[#8034eb]'>Write a post</button>
               </div>
