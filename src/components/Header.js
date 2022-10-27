@@ -58,7 +58,9 @@ export const Header = () => {
         <MobileNav currentMode={currentMode}
         setModeDropdown={setModeDropdown}  
         modeDropdown={modeDropdown} 
-        toggleMode={toggleMode} userInfo={userInfo}  />
+        toggleMode={toggleMode} userInfo={userInfo}
+        signUserOut={signUserOut}
+        />
     </header>
   )
 }

@@ -65,7 +65,7 @@ export const Carousel = ({sliderBlogs}) => {
             ))}
             <div className='absolute bottom-5 left-1/2 -translate-x-1/2'>
               {sliderBlogs.map((image,i)=>(
-                <button style={curSlide===i?{border:'2px solid white',background:'gray'}:{}} onClick={()=>SlideBtn(i)} className={`h-4 w-4 rounded-full ${curSlide===i?'bg-gray-700 border-2 border-white':''} border-2 border-white bg-white m-2`}></button>
+                <button key={i} style={curSlide===i?{border:'2px solid white',background:'gray'}:{}} onClick={()=>SlideBtn(i)} className={`h-4 w-4 rounded-full ${curSlide===i?'bg-gray-700 border-2 border-white':''} border-2 border-white bg-white m-2`}></button>
               ))}
             </div>     
           

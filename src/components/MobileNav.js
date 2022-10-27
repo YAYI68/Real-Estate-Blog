@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 
 
 
-export const MobileNav = ({ currentMode,setModeDropdown,modeDropdown,toggleMode,userInfo }) => {
+export const MobileNav = ({ currentMode,setModeDropdown,modeDropdown,toggleMode,userInfo,signUserOut }) => {
     const [navSlide, setNavSlide] = useState(false);
 
 
   return (
     <nav className='h-full w-full dark:bg-black bg-white hidden  md:flex py-[1.5rem] items-center  justify-between relative'>
-    <h3 className='text-[#8034eb] text-[2rem] ml-6'>Blog</h3>
+    <Link to="/" className='text-[#8034eb] text-[2rem] ml-6'>Blog</Link>
     <div className='flex gap-10 mr-3'>
 <div className='relative flex items-center justify-center'>
 <button onClick={()=>setModeDropdown(!modeDropdown)} type="" className='w-10 h-10'>
@@ -47,13 +47,13 @@ export const MobileNav = ({ currentMode,setModeDropdown,modeDropdown,toggleMode,
     <div className={` absolute right-0 top-[100%] float-left border-t-2 ${navSlide ? 'w-screen':'w-0'} transition-[width] ease-in-out duration-200  h-[55vh] bg-white dark:bg-black`}>
       <ul className='flex flex-col h-full w-full justify-between dark:text-white '>
          <div className='w-full'>
-          <li onClick={()=>setNavSlide(false)} className='w-full border-b-2'><Link to={`/`} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">Home</Link></li>
-          <li onClick={()=>setNavSlide(false)} className='w-full border-b-2'><Link to={`/blogs`} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">Blog</Link></li>
-          <li onClick={()=>setNavSlide(false)} className='w-full border-b-2'><Link to={`/profile`} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">About Me</Link></li>  
+          <li onClick={()=>setNavSlide(false)} className='w-full border-b-2'><Link to={`/`} className="w-full block px-2 py-4 text-center text-[1.8rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">Home</Link></li>
+          <li onClick={()=>setNavSlide(false)} className='w-full border-b-2'><Link to={`/blogs`} className="w-full block px-2 py-4 text-center text-[1.8rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">Blog</Link></li>
+          <li onClick={()=>setNavSlide(false)} className='w-full border-b-2'><Link to={`/profile`} className="w-full block px-2 py-4 text-center text-[1.8rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">About Me</Link></li>  
           {userInfo?  
           <Fragment >
-              <li onClick={()=>setNavSlide(false)} className='w-full border-b-2'><Link to={`/blogs/draft`} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">Posts</Link></li>  
-              <li onClick={()=>setNavSlide(false)} className='w-full border-b-2'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">Newsletter</Link></li>
+              <li onClick={()=>setNavSlide(false)} className='w-full border-b-2'><Link to={`/blogs/draft`} className="w-full block px-2 py-4 text-center text-[1.8rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">Posts</Link></li>  
+              <li onClick={()=>setNavSlide(false)} className='w-full border-b-2'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.8rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">Newsletter</Link></li>
           </Fragment>         
           :
           ""
@@ -61,9 +61,9 @@ export const MobileNav = ({ currentMode,setModeDropdown,modeDropdown,toggleMode,
          </div>    
         <div className='w-full'>
          {!userInfo ?   
-         <li onClick={()=>setNavSlide(false)} className='w-full'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold bg-[#8034eb]  text-white ">LogIn </Link></li>
+         <li onClick={()=>setNavSlide(false)} className='w-full'><Link to={`/login`} className="w-full block px-2 py-4 text-center text-[1.8rem] font-semibold bg-[#8034eb]  text-white ">LogIn </Link></li>
         :
-         <li onClick={()=>setNavSlide(false)} className='w-full'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold bg-[#8034eb]  text-white ">Logout </Link></li>    
+         <li onClick={()=>setNavSlide(false)} className='w-full'><Link onClick={signUserOut} to={``} className="w-full block px-2 py-4 text-center text-[1.8rem] font-semibold bg-[#8034eb]  text-white ">Logout </Link></li>    
         }   
         </div>
         
