@@ -47,13 +47,13 @@ export const MobileNav = ({ currentMode,setModeDropdown,modeDropdown,toggleMode,
     <div className={` absolute right-0 top-[100%] float-left border-t-2 ${navSlide ? 'w-screen':'w-0'} transition-[width] ease-in-out duration-200  h-[55vh] bg-white dark:bg-black`}>
       <ul className='flex flex-col h-full w-full justify-between dark:text-white '>
          <div className='w-full'>
-          <li className='w-full border-b-2'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">Home</Link></li>
-          <li className='w-full border-b-2'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">Blog</Link></li>
-          <li className='w-full border-b-2'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">About Me</Link></li>  
+          <li onClick={()=>setNavSlide(false)} className='w-full border-b-2'><Link to={`/`} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">Home</Link></li>
+          <li onClick={()=>setNavSlide(false)} className='w-full border-b-2'><Link to={`/blogs`} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">Blog</Link></li>
+          <li onClick={()=>setNavSlide(false)} className='w-full border-b-2'><Link to={`/profile`} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">About Me</Link></li>  
           {userInfo?  
           <Fragment >
-              <li className='w-full border-b-2'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">Posts</Link></li>  
-              <li className='w-full border-b-2'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">Newsletter</Link></li>
+              <li onClick={()=>setNavSlide(false)} className='w-full border-b-2'><Link to={`/blogs/draft`} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">Posts</Link></li>  
+              <li onClick={()=>setNavSlide(false)} className='w-full border-b-2'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold  hover:bg-[#8034eb] hover:text-white ">Newsletter</Link></li>
           </Fragment>         
           :
           ""
@@ -61,9 +61,9 @@ export const MobileNav = ({ currentMode,setModeDropdown,modeDropdown,toggleMode,
          </div>    
         <div className='w-full'>
          {!userInfo ?   
-         <li className='w-full'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold bg-[#8034eb]  text-white ">LogIn </Link></li>
+         <li onClick={()=>setNavSlide(false)} className='w-full'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold bg-[#8034eb]  text-white ">LogIn </Link></li>
         :
-         <li className='w-full'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold bg-[#8034eb]  text-white ">Logout </Link></li>    
+         <li onClick={()=>setNavSlide(false)} className='w-full'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold bg-[#8034eb]  text-white ">Logout </Link></li>    
         }   
         </div>
         
