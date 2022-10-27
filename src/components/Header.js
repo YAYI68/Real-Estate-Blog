@@ -46,7 +46,7 @@ export const Header = () => {
       }
 
   return (
-    <header className="header w-screen   flex items-center justify-center fixed  z-20 ">
+    <header className="header w-screen top-0 left-0  flex items-center justify-center fixed  z-20 ">
         <nav className="h-full w-full dark:bg-black bg-white lg:w-full md:hidden flex justify-between items-center py-[1.5rem] pl-6 pr-3">
             <Link to="/" className='text-[2rem] text-center font-bold text-[#8034eb] italic w-[10%]'>Blog</Link>
             <form className='w-[25%] flex items-center  h-[50%] border-2 border-[#8034eb] rounded-lg'>
@@ -108,6 +108,7 @@ export const Header = () => {
        </div>
            
         </nav>
+        {/* Mobile Navbar */}
         <nav className='h-full w-full bg-white hidden  md:flex py-[1.5rem] items-center  justify-between relative'>
             <h3 className='text-[#8034eb] text-[2rem] ml-6'>Blog</h3>
             <div className='flex gap-10 mr-3'>
