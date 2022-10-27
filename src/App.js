@@ -17,7 +17,7 @@ import { useStateContext } from './context/ContextProvider';
 function App() {
    const { currentMode } = useStateContext();
   return (
-    <div className={ ` App ${currentMode==="dark"?"dark":""} `}>
+    <div className={ ` App ${currentMode==="Dark"?"dark":""}  dark:bg-black`}>
       <Header />
      <Routes>
       <Route path='/' element={<HomePage/>}/>

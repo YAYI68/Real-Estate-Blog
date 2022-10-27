@@ -12,21 +12,16 @@ export const Header = () => {
     const [ modeDropdown, setModeDropdown ] = useState(false)
     const [navSlide, setNavSlide] = useState(false);
     const [userDisplay,setUserDisplay] = useState(false)
-    const {currentMode,setMode} =  useStateContext();
-    // const [ theme, setTheme ] = useState("")
+    const {currentMode,setMode,userInfo} =  useStateContext();
+
     const dropRef = useRef()
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { userInfo } = useStateContext();
 
     const toggleMode = (mode)=>{
         setMode(mode);
         setModeDropdown(false);
-        console.log({mode})
       }
-
-      console.log({currentMode})
-
     
    useEffect(() => {
     const closeSlider = (e)=>{
@@ -52,7 +47,7 @@ export const Header = () => {
 
   return (
     <header className="header w-screen   flex items-center justify-center fixed  z-20 ">
-        <nav className="h-full w-full bg-white lg:w-full md:hidden flex justify-between items-center py-[1.5rem] pl-6 pr-3">
+        <nav className="h-full w-full dark:bg-black bg-white lg:w-full md:hidden flex justify-between items-center py-[1.5rem] pl-6 pr-3">
             <Link to="/" className='text-[2rem] text-center font-bold text-[#8034eb] italic w-[10%]'>Blog</Link>
             <form className='w-[25%] flex items-center  h-[50%] border-2 border-[#8034eb] rounded-lg'>
                 <input type="text" className='h-full w-[90%] focus:outline-none text-[1.3rem] p-2'/>
@@ -61,9 +56,9 @@ export const Header = () => {
                 </button>
             </form>
             <ul className='w-[20%] gap-2 flex items-center justify-between list-none'>
-                <li><Link to="/" className="text-[1.5rem] font-[400] hover:text-[#8034eb]">Home</Link></li>
-                <li><Link to="/blogs" className="text-[1.5rem] font-[400] hover:text-[#8034eb]">Blog</Link></li>
-                <li><Link to="/profile" className="text-[1.5rem] font-[400] hover:text-[#8034eb]">About me</Link></li> 
+                <li><Link to="/" className="text-[1.5rem] font-medium dark:hover:text-[#8034eb] hover:text-[#8034eb] dark:text-white">Home</Link></li>
+                <li><Link to="/blogs" className="text-[1.5rem] font-medium dark:hover:text-[#8034eb] hover:text-[#8034eb] dark:text-white">Blog</Link></li>
+                <li><Link to="/profile" className="text-[1.5rem] font-medium dark:hover:text-[#8034eb] hover:text-[#8034eb] dark:text-white">About me</Link></li> 
             </ul>
             <div className='w-[10%] h-[50%] flex items-center gap-5'>
                 <button className="h-full"><FaFacebookF  className=' w-5 h-5 fill-[#8034eb]'/></button>
@@ -91,11 +86,26 @@ export const Header = () => {
             <li className='w-fit border-[1px] border-[#8034eb] hover:bg-[#8034eb] flex justify-center items-center px-3 py-2 rounded text-[#8034eb] hover:text-white'><Link to="/login" className="text-[1.5rem]  font-[400] hover:text-[white]">Login</Link></li> 
             </ul>
            } 
-            <div className='w-[5%]'>
-               <button>
-                <svg className="w-8 h-8 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-               </button>
-            </div>
+     <div className='relative flex items-center justify-center w-[10%]'>
+        <button className="bg-[#8034eb]" onClick={()=>setModeDropdown(!modeDropdown)} type="" className='w-10 h-10'>
+        {currentMode === "Dark" ?
+        <svg className="w-full h-full fill-[#8034eb]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+        :
+        <svg className="w-full h-full fill-[#8034eb]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+         }
+        </button>
+      
+       {modeDropdown && 
+        <ul className='absolute z-10 top-[100%] border-light-blue dark:border-light-blue translate-x-[-2rem] border-2 w-fit bg-white dark:bg-black shadow-xl rounded-md py-1'>
+          <li onClick={()=>toggleMode('Light')} className='flex items-center cursor-pointer py-2 px-4 dark:text-white gap-2 font-semibold dark:hover:bg-slate-800  hover:bg-slate-300 rounded-sm'>
+          <svg className={`w-6 h-6 ${currentMode === 'Light'? 'text-light-blue': '' }`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+          <span  className={`${currentMode === 'Light'? 'text-light-blue': '' } text-[1.3rem]`}>Light</span></li>
+          <li onClick={()=>toggleMode('Dark')} className={`flex items-center cursor-pointer py-2 px-4 dark:text-white gap-2 font-semibold dark:hover:bg-slate-800  hover:bg-slate-300 rounded-sm`}>
+          <svg className={` w-6 h-6 ${currentMode === 'Dark'? 'fill-light-blue': '' }`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+            <span className={`${currentMode === 'Dark'? 'text-light-blue': '' } text-[1.3rem]`}>Dark</span></li>
+        </ul>
+       }
+       </div>
            
         </nav>
         <nav className='h-full w-full bg-white hidden  md:flex py-[1.5rem] items-center  justify-between relative'>
