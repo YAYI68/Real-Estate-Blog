@@ -41,7 +41,7 @@ export const BlogDetail = () => {
             </div>
             <div className='text-[1.6rem] my-[1rem] flex flex-col items-center'>
             <Link to="/profile" className='text-center text-[#8034eb]'>{blog.author.displayName}</Link>
-            <p>{blog.author.headLine}</p>
+            <p className='dark:text-gray-100'>{blog.author.headLine}</p>
             </div>
             <div className='w-[50%] mx-auto flex items-center justify-between my-[1rem]'>
                 <button onClick={()=>window.open(blog.author.facebook,'_blank')} className="h-full"><FaFacebookF  className='h-full text-[1.8rem] fill-[#8034eb]'/></button>
@@ -61,7 +61,7 @@ export const BlogDetail = () => {
              <img src={blog.imageURL} alt="" className='w-full h-full' />
           </div>
           <div id="blogContent" className='w-full mt-[2rem] '>
-            <p className='text-[1.8rem] lg:text-[1.5rem] leading-[4rem] text-gray-700 whitespace-pre-line .text-margin-start .text-margin-end .text-inline-start .text-inline-end '>
+            <p className='text-[1.8rem] lg:text-[1.5rem] leading-[4rem] text-gray-700 dark:text-gray-200 whitespace-pre-line .text-margin-start .text-margin-end .text-inline-start .text-inline-end '>
             {blog.content}
             </p>
           </div>
@@ -86,7 +86,7 @@ export const BlogDetail = () => {
 
         </article>
         <aside className='w-[25%] mt-[5rem] relative lg:hidden px-2'>
-         <RelatedBlog />
+         {/* <RelatedBlog /> */}
         </aside>  
       </Section>
       </Fragment>
