@@ -64,8 +64,6 @@ export const EditProfile = ({setEditProfile,user}) => {
     const linkedIn = linkedInRef.current.value
     const file = imgFile
    
-    console.log("Save was clicked")
-
     const data = {
       uid:auth.currentUser.uid,
       displayName,
@@ -121,11 +119,6 @@ export const EditProfile = ({setEditProfile,user}) => {
    }
 
      
-    
-
-
-
-
 
   return (
     <Main>
@@ -233,8 +226,8 @@ export const EditProfile = ({setEditProfile,user}) => {
             className='w-full text-[1.5rem] dark:bg-gray-700 dark:text-white h-[4rem] outline-none bg-gray-200 rounded p-2 border-2 focus:border-[#8034eb]' 
             placeholder='Your Phone Number'/>
           </div>
-          <div className='mt-[2rem] mb-[2rem]'>
-           <button className="py-3 px-8 rounded-[.5rem] text-[1.5rem]  bg-[#8034eb] text-white ">Save</button>
+          <div className='mt-[2rem]  mb-[2rem]'>
+            <div className='h-[5rem]'></div>
           </div>
         </form>      
         </div>

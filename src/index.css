@@ -84,4 +84,9 @@ body {
   }
 }
 
+@layer base{
+  .slideIn{
+    @apply w-screen transition ease-in-out duration-200
+  }
+}
 

@@ -1,5 +1,5 @@
-import React,{useState,useEffect,useRef} from 'react'
-import { FaFacebookF,FaTwitter,FaInstagram,FaLinkedinIn,FaUserCircle, FaSearch } from 'react-icons/fa';
+import React,{useState,useEffect,useRef, Fragment} from 'react'
+import { FaFacebookF,FaTwitter,FaInstagram,FaLinkedinIn,FaUserCircle, FaSearch, FaBars } from 'react-icons/fa';
 import { Link,useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import {  logOutUser } from '../store/users/actions';
@@ -9,6 +9,7 @@ import { useStateContext } from '../context/ContextProvider';
 
 
 export const Header = () => {
+    const [navSlide, setNavSlide] = useState(false);
     const [userDisplay,setUserDisplay] = useState(false)
     const dropRef = useRef()
     const dispatch = useDispatch()
@@ -85,6 +86,29 @@ export const Header = () => {
                </button>
             </div>
            
+        </nav>
+        <nav className='h-full w-full bg-white hidden md:flex py-[1.5rem] items-center  justify-between relative'>
+            <h3 className='text-blue-800 text-[2rem] ml-6'>Blog</h3>
+            <div className='flex gap-10 mr-3'>
+               <button className='mr-5'>
+                <svg className="w-8 h-8 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+               </button>
+               <Fragment>
+               { navSlide ?
+                  <button onclick={()=>setNavSlide(false)} type="" className='h-14 w-14 p-2 hover:bg-slate-200 rounded-full flex items-center justify-center '>
+                  <svg className="h-[90%] w-[90%]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+                :  
+               <button onclick={()=>setNavSlide(true)} type="" className='h-14 w-14 p-2 hover:bg-slate-200 rounded-full flex items-center justify-center '>
+                <FaBars className='h-[90%] w-[90%] ' />
+               </button>
+               }
+            
+               </Fragment>
+            </div>
+            <div className={`w-0 absolute top-[100%] ${navSlide && 'slide_in'} h-[50vh] bg-green-500`}>
+                
+            </div>
         </nav>
     </header>
   )
