@@ -131,7 +131,7 @@ export const CreatePost =()=>{
             </div>
             </div>
             <form className='overflow-y-scroll h-full'>
-            <input  ref={titleRef} defaultValue={blog.title}  type="text" placeholder='Title' className='text-[2rem] focus:border-2 focus:border-solid border-none w-full my-5 rounded p-2 focus:border-[#8034eb] outline-none'/>
+            <input  ref={titleRef} defaultValue={blog.title}  type="text" placeholder='Title' className='dark:bg-gray-600 dark:text-white text-[2rem] focus:border-2 focus:border-solid border-none w-full my-5 rounded p-2 focus:border-[#8034eb] outline-none'/>
           <div class="flex justify-center items-center w-full relative ">
           {preview && imgFile?
              <button onClick={closePreview}  className='mr-4 h-14 w-14 flex items-center justify-center rounded-full bg-[rgba(0,0,0,0.4)] absolute left-[2%] top-[10%]'><FaTimes className='text-[1.5rem] fill-white '/></button>

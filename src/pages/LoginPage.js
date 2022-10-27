@@ -35,22 +35,21 @@ export const LoginPage = () => {
 
   return (
     <Main>
-      <Section className={'mt-[10rem'}>
-         <div className='h-full w-full'>
-           <div className='m-auto w-[50%] bg-[white] shadow-md rounded'>
+      <Section className={'pt-[8rem] h-full w-full flex flex-col items-center justify-center'}>
+         
+           <div className='m-auto w-[50%] dark:bg-slate-900 dark:text-white bg-[white] lg:w-[70%] md:w-[90%] shadow-md rounded'>
              <form className='w-full p-[5rem] ' onSubmit={submitHandler}>
               <div className='flex-col flex mb-4'>
               <label htmlFor='userEmail' className='text-[1.5rem] mb-[.5rem]'>Email</label>
-              <input  onChange={(e)=>setEmail(e.target.value)}  type="email" id='userEmail' placeholder='Email' className='focus:border-[#8034eb] rounded text-[1.5rem] border-2 outline-none p-4' />
+              <input  onChange={(e)=>setEmail(e.target.value)}  type="email" id='userEmail' placeholder='Email' className=' dark:bg-gray-700 dark:text-white focus:border-[#8034eb] rounded text-[1.5rem] border-2 outline-none p-4' />
               </div>
               <div className='flex-col flex mb-4 '>
               <label htmlFor='userPassword' className='text-[1.5rem] mb-[.5rem]'>Password</label>
-              <input  onChange={(e)=>setPassword(e.target.value)} type="password" id='userPassword' placeholder='Password' className='focus:border-[#8034eb] rounded text-[1.5rem] p-4 border-2 outline-none' />
+              <input  onChange={(e)=>setPassword(e.target.value)} type="password" id='userPassword' placeholder='Password' className='dark:bg-gray-700 dark:text-white focus:border-[#8034eb] rounded text-[1.5rem] p-4 border-2 outline-none' />
               </div>
-              <button className='text-center w-fit bg-[#8034eb] text-[1.5rem] rounded py-2 px-6 mx-auto text-white'>Login</button>
+              <button className='text-center w-fit md:w-full bg-[#8034eb] text-[1.5rem] rounded py-2 px-6 mx-auto text-white'>Login</button>
              </form>
            </div>
-         </div>
       </Section>
     </Main>
   )
