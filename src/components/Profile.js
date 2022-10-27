@@ -8,7 +8,7 @@ export const Profile = ({setEditProfile, user}) => {
    
 
   return (
-    <Section className={'h-full flex flex-col items-center'}>
+    <Section className={'h-full mt-[10rem] lg:mt-[5rem] flex flex-col items-center'}>
         <div className='flex justify-around w-full mt-[5rem]   lg:flex-col lg:gap-8 lg:items-center'>
          <div className='basis-[30%] bg-white lg:w-[70%] md:w-[90%]  dark:text-white dark:bg-gray-800 shadow-lg rounded p-5'>
           <div className='w-full h-full flex flex-col items-center text-gray-600   '>

@@ -32,7 +32,7 @@ export const BlogDetail = () => {
     <Main>
       {blogSucess && 
       <Fragment >
-      <Section className={`flex gap-2 lg:justify-center dark:bg-black dark:text-white`}>
+      <Section className={`flex gap-2 lg:justify-center mt-[5rem] dark:bg-black dark:text-white`}>
         <aside className='w-[20%] relative mt-[5rem] mx-auto lg:hidden px-4'>
          <div className='bg-white dark:bg-gray-800 dark:text-white absolute top-[10%] w-full shadow-lg rounded p-5'>
           <div className='w-full h-full flex flex-col items-center text-gray-600'>

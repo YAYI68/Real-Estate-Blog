@@ -115,7 +115,7 @@ export const CreatePost =()=>{
   return (
     <Main>
       {detailSuccess &&    
-      <Section>
+      <Section className={`mt-[5rem]`}>
         <div className='w-screen text-[1.5rem] lg:px-2  flex flex-col items-center'>
           <div className='bg-white dark:bg-slate-900 w-[50%] md:w-full lg:w-[90%] lg:p-[1rem] px-[2rem] py-[2rem] fixed z-10 h-[95vh]'>
             <div className='w-full py-[2rem] '>

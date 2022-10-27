@@ -37,7 +37,7 @@ export const DraftPage = () => {
   
   return (
     <Main>
-       <Section className={`flex flex-col dark:bg-black items-center mt-[3rem]`}>
+       <Section className={`flex flex-col dark:bg-black items-center mt-[5rem]`}>
         <div className='flex flex-col w-[50%] lg:w-[80%] md:w-full fixed z-10 h-[90vh] '>
            <div className='flex flex-col w-full px-4  bg-white dark:bg-slate-900'>
            <div className="flex mb-[2rem] md:mt-[1.5rem] items-center justify-between w-full">

@@ -8,8 +8,8 @@ export const Blog = ({blogs}) => {
 
 
   return (
-    <Section className={'mt-[5rem]'}>   
-      <div className='flex w-full flex-wrap gap-4 px-[10rem] lg:px-[5rem] md:flex-col md:items-center md:px-[1rem] dark:text-white  '>
+    <Section className={'mt-[10rem]'}>   
+      <div className='flex w-full flex-wrap  gap-4 px-[10rem] lg:px-[5rem] md:flex-col md:items-center md:px-[1rem] dark:text-white  '>
         {blogs.map((blog,index)=>(
         <div key={index} className='flex flex-col  basis-[30%]  md:w-[90%] lg:basis-[48%]  rounded shadow mt-[1.5rem] p-1 dark:text-white dark:bg-gray-800'>
             <div className='w-full h-[20rem] rounded'>
