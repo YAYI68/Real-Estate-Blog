@@ -35,8 +35,7 @@ export const LoginPage = () => {
 
   return (
     <Main>
-      <Section className={'pt-[8rem] h-full w-full flex flex-col items-center justify-center'}>
-         
+      <Section className={'pt-[8rem] h-full w-full flex flex-col items-center justify-center'}> 
            <div className='m-auto w-[50%] dark:bg-slate-900 dark:text-white bg-[white] lg:w-[70%] md:w-[90%] shadow-md rounded'>
              <form className='w-full p-[5rem] ' onSubmit={submitHandler}>
               <div className='flex-col flex mb-4'>

@@ -60,7 +60,11 @@ export const MobileNav = ({ currentMode,setModeDropdown,modeDropdown,toggleMode,
         }
          </div>    
         <div className='w-full'>
-         <li className='w-full border-b-2'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold bg-[#8034eb]  text-white ">LogIn </Link></li>  
+         {!userInfo ?   
+         <li className='w-full'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold bg-[#8034eb]  text-white ">LogIn </Link></li>
+        :
+         <li className='w-full'><Link to={``} className="w-full block px-2 py-4 text-center text-[1.5rem] font-semibold bg-[#8034eb]  text-white ">Logout </Link></li>    
+        }   
         </div>
         
       </ul>  
