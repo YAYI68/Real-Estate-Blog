@@ -10,6 +10,14 @@ const stateContext = createContext();
 
 export const ContextProvider = ({children}) => {
     const [userInfo, setUserInfo ] = useState();
+    const themeMode = localStorage.getItem('theme')?localStorage.getItem("theme"):"Light";
+    const [ currentMode, setCurrentMode ] = useState(themeMode);
+
+      
+    const setMode = (mode)=>{
+      setCurrentMode(mode);
+      localStorage.setItem('theme',mode);
+      }
 
        
 useEffect(() => {
@@ -29,6 +37,8 @@ useEffect(() => {
   return (
     <stateContext.Provider   value={{
       userInfo,
+      currentMode,
+      setMode
     }}>
        { children }
     </stateContext.Provider>

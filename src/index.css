@@ -50,6 +50,9 @@ body {
 @layer base{
     body{
         @apply dark:bg-black
+    };
+    .slideIn{
+      @apply w-screen transition ease-in-out duration-200
     }
 }
 
@@ -85,8 +88,6 @@ body {
 }
 
 @layer base{
-  .slideIn{
-    @apply w-screen transition ease-in-out duration-200
-  }
+  
 }
 

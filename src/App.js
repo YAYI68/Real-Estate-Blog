@@ -9,13 +9,15 @@ import { Header } from './components/Header';
 import { DraftPage } from './pages/DraftPage';
 import { PublishedPage } from './pages/PublishedPage';
 import { BlogPage } from './pages/BlogPage';
+import { useStateContext } from './context/ContextProvider';
 
 
 
 
 function App() {
+   const { currentMode } = useStateContext();
   return (
-    <div className="App dark">
+    <div className={ ` App ${currentMode==="dark"?"dark":""} `}>
       <Header />
      <Routes>
       <Route path='/' element={<HomePage/>}/>
