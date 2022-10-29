@@ -10,12 +10,25 @@ import { DraftPage } from './pages/DraftPage';
 import { PublishedPage } from './pages/PublishedPage';
 import { BlogPage } from './pages/BlogPage';
 import { useStateContext } from './context/ContextProvider';
+import { Footer } from './components/Footer';
+import { useEffect } from 'react';
 
 
 
 
 function App() {
    const { currentMode } = useStateContext();
+   useEffect(() => {
+    
+    if(currentMode === "Dark"){
+      document.body.classList.add("bg-dark");
+      document.body.style.backgroundColor="black"
+    }
+   
+     return () => {
+     }
+   }, [currentMode])
+   
   return (
     <div className={ `  ${currentMode==="Dark"?"dark":""}  dark:bg-black bg-[#eee] min-h-[100vh]`}>
       <Header />
@@ -28,7 +41,7 @@ function App() {
       <Route path='/blogs/:id/edit' element={<CreatePost/>}/>
       <Route path='/blogs/draft' element={<DraftPage/>}/>
       <Route path='/blogs/public' element={<PublishedPage/>}/>
-     </Routes>  
+     </Routes> 
     </div>
   );
 }

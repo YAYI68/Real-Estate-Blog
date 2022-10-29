@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{Fragment, useEffect, useState} from 'react'
 import { Main } from '../components/Main'
 
 
@@ -7,6 +7,7 @@ import { Profile } from '../components/Profile';
 import { auth, db } from '../firebaseConfig';
 import { collection, doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { useStateContext } from '../context/ContextProvider';
+import { Footer } from '../components/Footer';
 
 
 
@@ -43,7 +44,7 @@ export const UserProfile = () => {
  }
 
   return (
-    <>
+    <Fragment>
     { userData && 
      <Main>
      <Profile  user={userData} setEditProfile={setEditProfile} />
@@ -52,7 +53,8 @@ export const UserProfile = () => {
     }
     </Main>
     }
-    </>
+    <Footer /> 
+    </Fragment>
   )
 }
 

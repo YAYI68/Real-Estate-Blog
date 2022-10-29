@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Blog } from '../components/Blog'
+import { Footer } from '../components/Footer';
 import { Main } from '../components/Main'
 import { getAllPublishPosts } from '../store/posts/actions';
 
@@ -16,10 +17,13 @@ export const BlogPage = () => {
     dispatch(getAllPublishPosts(6))
   },[dispatch])
   return (
+    <Fragment>
     <Main>
       {success && 
       <Blog blogs={blogs} />
       }
     </Main>
+    <Footer /> 
+    </Fragment>
   )
 }

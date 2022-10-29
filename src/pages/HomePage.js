@@ -4,6 +4,7 @@ import {Carousel} from "../components/Carousel"
 import {Blog} from "../components/Blog";
 import { getAllPublishPosts } from '../store/posts/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { Footer } from '../components/Footer';
 
 
 export const HomePage = () => {
@@ -17,6 +18,7 @@ export const HomePage = () => {
   },[dispatch])
  
   return (
+    <Fragment>
     <Main> 
       {success && 
       <>
@@ -25,5 +27,7 @@ export const HomePage = () => {
       </>     
       }
     </Main>
+    <Footer /> 
+    </Fragment>
   )
 }
