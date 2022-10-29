@@ -1,16 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaSearch, FaTwitter } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 
 export const MainNavbar = ({userInfo,dropRef,userDisplay,currentMode,setUserDisplay,signUserOut,modeDropdown,setModeDropdown,toggleMode}) => {
+   const navigate = useNavigate();  
+  const  [searchParams, setSearchParams] = useSearchParams();
+    const [ value, setValue ] = useState(); 
     
-   const handleSubmit = ()=>{}
+    const searchValue = searchParams.get("name") || ""
+
+   const handleSubmit = (e)=>{
+     e.preventDefault();
+     const name = value;
+     if(name){
+      setSearchParams({name})
+     }else{
+      setSearchParams({})
+     }
+    //  navigate("/blogs")
+
+   }
 
   return (
     <nav className="h-full w-full dark:bg-black bg-white lg:w-full md:hidden flex justify-between items-center py-[1.5rem] pl-6 pr-3">
     <Link to="/" className='text-[2rem] text-center font-bold text-[#8034eb] italic w-[10%]'>Blog</Link>
     <form onSubmit={handleSubmit} className='w-[25%] flex items-center  h-[50%] border-2 border-[#8034eb] rounded-lg dark:bg-slate-700'>
-        <input type="text" className='h-full dark:bg-slate-700 dark:text-white w-[90%] focus:outline-none text-[1.2rem] p-2'/>
+        <input  onChange={(e)=>setValue(e.target.value)} type="text" className='h-full dark:bg-slate-700 dark:text-white w-[90%] focus:outline-none text-[1.2rem] p-2'/>
         <button className='w-[10%] flex items-center justify-center'>
         <FaSearch  className='fill-[#8034eb] w-6 h-6' />
         </button>
