@@ -13,7 +13,7 @@ export const Footer = () => {
                 <li><Link to={`/profile`} className="hover:text-[#8034eb]" >  About me </Link></li>
             </ul>
         </div>
-        <div className='w-[10%] md:w-[50%] h-[50%] flex items-center gap-5'>
+        <div className='w-[20%] md:w-[50%] h-[50%] flex items-center gap-5'>
         <button className="h-12 w-12 flex items-center justify-center hover:bg-white rounded-full border-[#8034eb] border duration-[200ms] transition-[background-color] "><FaFacebookF  className=' w-8 h-8 fill-[#8034eb]'/></button>
         <button className="h-12 w-12 flex items-center justify-center hover:bg-white rounded-full border-[#8034eb] border "><FaTwitter className='w-8 h-8 fill-[#8034eb]' /></button>
         <button className="h-12 w-12 flex items-center justify-center hover:bg-white rounded-full border-[#8034eb] border "><FaInstagram className='w-8 h-8 fill-[#8034eb]'/></button>

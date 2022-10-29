@@ -7,11 +7,10 @@ import { UserProfile } from './pages/UserProfile';
 import { BlogDetail } from './pages/BlogDetail';
 import { Header } from './components/Header';
 import { DraftPage } from './pages/DraftPage';
-import { PublishedPage } from './pages/PublishedPage';
 import { BlogPage } from './pages/BlogPage';
 import { useStateContext } from './context/ContextProvider';
-import { Footer } from './components/Footer';
 import { useEffect } from 'react';
+import { PrivateRoutes } from './utils/PrivateRoutes';
 
 
 
@@ -38,8 +37,10 @@ function App() {
       <Route path='/profile' element={<UserProfile/>}/>
       <Route path='/login' element={<LoginPage/>}/>
       <Route path='/:slug' element={<BlogDetail/>}/>
+      <Route  element={<PrivateRoutes /> } >
       <Route path='/blogs/:id/edit' element={<CreatePost/>}/>
       <Route path='/blogs/draft' element={<DraftPage/>}/>
+      </Route>
      </Routes> 
     </div>
   );

@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom'
 
 export const MainNavbar = ({userInfo,dropRef,userDisplay,currentMode,setUserDisplay,signUserOut,modeDropdown,setModeDropdown,toggleMode}) => {
     
+   const handleSubmit = ()=>{}
+
   return (
     <nav className="h-full w-full dark:bg-black bg-white lg:w-full md:hidden flex justify-between items-center py-[1.5rem] pl-6 pr-3">
     <Link to="/" className='text-[2rem] text-center font-bold text-[#8034eb] italic w-[10%]'>Blog</Link>
-    <form className='w-[25%] flex items-center  h-[50%] border-2 border-[#8034eb] rounded-lg dark:bg-slate-700'>
+    <form onSubmit={handleSubmit} className='w-[25%] flex items-center  h-[50%] border-2 border-[#8034eb] rounded-lg dark:bg-slate-700'>
         <input type="text" className='h-full dark:bg-slate-700 dark:text-white w-[90%] focus:outline-none text-[1.2rem] p-2'/>
         <button className='w-[10%] flex items-center justify-center'>
         <FaSearch  className='fill-[#8034eb] w-6 h-6' />
@@ -33,7 +35,6 @@ export const MainNavbar = ({userInfo,dropRef,userDisplay,currentMode,setUserDisp
         <div ref={dropRef}  onClick={()=>setUserDisplay(false)} className='absolute  dark:bg-slate-900 border w-[15rem] top-[110%]  flex flex-col bg-white text-[#8034eb] right-[5%] rounded-[.5rem]   shadow-md '>
             <Link to="/profile" className='text-[1.5rem] py-[.5rem] text-center border-b-2 hover:bg-[#8034eb] hover:text-white'>Profile</Link>
             <Link to="/blogs/draft"  className='text-[1.5rem] py-[.5rem] text-center border-b-2 hover:bg-[#8034eb] hover:text-white'>post</Link>
-            <Link to="/newsletter"  className='text-[1.5rem] py-[.5rem] text-center border-b-2 hover:bg-[#8034eb] hover:text-white'>Newsletter</Link>
             <Link to="" onClick={signUserOut} className='text-[1.5rem] py-[.5rem] text-center hover:bg-[#8034eb] hover:text-white'>logout</Link>
         </div>
         }
