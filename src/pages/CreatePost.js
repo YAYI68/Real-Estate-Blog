@@ -22,14 +22,18 @@ export const CreatePost =()=>{
     const params = useParams()
     const postId = params.id
     const [preview,setPreview] = useState("")
+
     
     
   const postDetail = useSelector(state => state.postDetail)
   const { loading:detailLoading,success:detailSuccess,error:detailError,blog } = postDetail
 
   useEffect(()=>{
+    if(!auth.currentUser){
+      navigate("/login")
+    }    
         dispatch(getPost(postId))  
-  },[postId,dispatch])
+  },[postId,dispatch,navigate])
 
     useEffect (()=>{
       const reader = new FileReader()

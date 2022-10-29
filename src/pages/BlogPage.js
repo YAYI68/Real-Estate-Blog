@@ -18,12 +18,15 @@ export const BlogPage = () => {
   },[dispatch])
   return (
     <Fragment>
+        {success && 
+       <Fragment >
     <Main>
-      {success && 
       <Blog blogs={blogs} />
-      }
     </Main>
     <Footer /> 
+    </Fragment> 
+     }
+  
     </Fragment>
   )
 }

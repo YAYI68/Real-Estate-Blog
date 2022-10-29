@@ -18,8 +18,8 @@ export const UserProfile = () => {
   const [editProfile,setEditProfile] = useState(false)
   const [ isLoading , setIsLoading] = useState(true)
   const [userData, setUserData] = useState()
-  const { userInfo } = useStateContext();
-  const userId = auth.currentUser.uid
+  const { userInfo, authorId } = useStateContext();
+  const userId = auth.currentUser ?auth.currentUser.uid : authorId
 
   // console.log(userInfo.uid)
 
@@ -45,15 +45,19 @@ export const UserProfile = () => {
 
   return (
     <Fragment>
-    { userData && 
-     <Main>
-     <Profile  user={userData} setEditProfile={setEditProfile} />
-    {editProfile &&   
-    <EditProfile user={userData} setEditProfile={setEditProfile}/>
+
+    { userData ? 
+    <Fragment >     
+      <Main>
+      <Profile  user={userData} setEditProfile={setEditProfile} />
+     {editProfile &&   
+     <EditProfile user={userData} setEditProfile={setEditProfile}/>
+     }
+     </Main>
+     <Footer /> 
+    </Fragment>
+    :""
     }
-    </Main>
-    }
-    <Footer /> 
     </Fragment>
   )
 }

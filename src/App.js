@@ -40,7 +40,6 @@ function App() {
       <Route path='/:slug' element={<BlogDetail/>}/>
       <Route path='/blogs/:id/edit' element={<CreatePost/>}/>
       <Route path='/blogs/draft' element={<DraftPage/>}/>
-      <Route path='/blogs/public' element={<PublishedPage/>}/>
      </Routes> 
     </div>
   );

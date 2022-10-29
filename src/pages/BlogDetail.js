@@ -11,6 +11,7 @@ import { Timestamp } from 'firebase/firestore';
 import { Comment } from '../components/Comment';
 import { CommentForm } from '../components/CommentForm';
 import { RelatedBlog } from '../components/RelatedBlog';
+import { Footer } from '../components/Footer';
 
 
 
@@ -29,6 +30,7 @@ export const BlogDetail = () => {
    },[id,dispatch])
 
   return (
+    <Fragment>
     <Main>
       {blogSucess && 
       <Fragment >
@@ -91,10 +93,9 @@ export const BlogDetail = () => {
       </Section>
       </Fragment>
       }
-  
-
-     
     </Main>
+    <Footer /> 
+    </Fragment>
   )
 }
 

@@ -6,6 +6,7 @@ import { Section } from '../components/Section';
 import { TabSlide } from '../components/TabSlide';
 import { useSelector , useDispatch } from 'react-redux';
 import {getAllPosts, createNewPost,POST_CREATE_RESET } from '../store/posts/actions';
+import { auth } from '../firebaseConfig';
 
 
 
@@ -21,6 +22,9 @@ export const DraftPage = () => {
    console.log({allBlogs})
 
   useEffect(()=>{
+    if(!auth.currentUser){
+      navigate("/login")
+    }
     if(createSuccess){
            navigate(`/blogs/${createdBlog.id}/edit`)
      }
