@@ -11,12 +11,14 @@ export const MainNavbar = ({userInfo,dropRef,userDisplay,currentMode,setUserDisp
 
    const handleSubmit = (e)=>{
      e.preventDefault();
-     const name = value;
-     if(name){
-      setSearchParams({name})
-     }else{
-      setSearchParams({})
-     }
+      navigate(`/blogs?name=${value}`)
+     
+    //  const name = value;
+    //  if(name){
+    //   setSearchParams({name})
+    //  }else{
+    //   setSearchParams({})
+    //  }
     //  navigate("/blogs")
 
    }
