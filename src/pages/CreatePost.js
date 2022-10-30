@@ -114,6 +114,7 @@ export const CreatePost =()=>{
 
     }
     // console.log({value})
+
     const publishHandler = async(e)=>{
       e.preventDefault();
       await submit("publish",Timestamp)
