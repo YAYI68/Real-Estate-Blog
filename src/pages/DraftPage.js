@@ -7,12 +7,13 @@ import { TabSlide } from '../components/TabSlide';
 import { useSelector , useDispatch } from 'react-redux';
 import {getAllPosts, createNewPost,POST_CREATE_RESET } from '../store/posts/actions';
 import { auth } from '../firebaseConfig';
+import { useStateContext } from '../context/ContextProvider';
 
 
 
 
 export const DraftPage = () => {
-   const [ draft, setDraft] = useState(false);
+   const [currentState, setCurrentState] = useState("draft");
    const navigate = useNavigate()
    const dispatch = useDispatch()
    const postCreate = useSelector(state =>state.postCreate)
@@ -20,7 +21,7 @@ export const DraftPage = () => {
    const postList = useSelector(state => state.postList)
    const { loading:allPostsLoading, success:allPostsSuccess, error:allPostsError, blogs:allBlogs } = postList
 
-
+   
   useEffect(()=>{
     if(!auth.currentUser){
       navigate("/login")
@@ -29,9 +30,9 @@ export const DraftPage = () => {
            navigate(`/blogs/${createdBlog.id}/edit`)
      }
      dispatch({type:POST_CREATE_RESET})
-    dispatch(getAllPosts());
+    dispatch(getAllPosts(currentState));
        
-  },[createSuccess,navigate,createdBlog,dispatch]);
+  },[createSuccess,navigate,createdBlog,dispatch,currentState]);
   
   const writePost = ()=>{
      dispatch(createNewPost())
@@ -49,7 +50,7 @@ export const DraftPage = () => {
               </div>
             </div> 
             <div className='w-full  '>
-             <TabSlide current='draft' />
+             <TabSlide currentState={currentState} setCurrentState={setCurrentState} />
            </div>
            </div>    
            {allPostsSuccess && allBlogs.length >0 &&

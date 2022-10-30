@@ -52,10 +52,12 @@ export const  getAllPublishPosts =(num)=>async(dispatch)=>{
     
 }
 
-export const  getAllPosts =()=>async(dispatch)=>{      
+export const  getAllPosts =(state)=>async(dispatch)=>{      
     try{
        dispatch({type:POST_LIST_REQUEST})
-       const snapshots = await getDocs(collection(db,"posts"))
+       const postRef = collection(db, "posts");
+       const q = query(postRef, where("blogState", "==", `${state}`));
+       const snapshots = await getDocs(q)
        const posts = snapshots.docs.map(snapshot=>({id:snapshot.id,...snapshot.data()}))
        dispatch({
         type:POST_LIST_SUCCESS,
