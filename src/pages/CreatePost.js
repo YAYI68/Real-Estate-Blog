@@ -138,8 +138,8 @@ export const CreatePost =()=>{
       {detailSuccess &&    
       <Section className={`mt-[5rem]`}>
         <div className='w-screen text-[1.5rem] lg:px-2  flex flex-col items-center'>
-          <div className='bg-white dark:bg-slate-900 w-[70%] md:w-full lg:w-[90%] lg:p-[1rem] px-[2rem] py-[2rem] fixed z-10 h-[95vh]'>
-            <div className='w-full py-[2rem] '>
+          <div className='bg-white dark:bg-slate-900 w-[70%] md:w-full lg:w-[90%] lg:p-[1rem] px-[2rem] py-[2rem]'>
+            <div className='w-full py-[2rem] sticky top-[7rem] md:top-[6.3rem] left-0 z-10 bg-white dark:bg-slate-900'>
             <div className='flex justify-between items-center px-[1rem] '>
              <button onClick={submitHandler} className='text-white bg-[#ff8400] px-[1rem] py-2 rounded-[.5rem]  w-fit'>Saved to Draft</button> 
   {/* <div role="status">
@@ -151,7 +151,7 @@ export const CreatePost =()=>{
             <button onClick={publishHandler} className='text-white bg-[#8034eb] px-[1rem] py-2 rounded-[.5rem]'>publish</button>
             </div>
             </div>
-            <form className='overflow-y-scroll h-full'>
+            <form className='h-full'>
             <input  ref={titleRef} defaultValue={blog.title}  type="text" placeholder='Title' className='dark:bg-gray-600 dark:text-white text-[2rem] focus:border-2 focus:border-solid border-none w-full my-5 rounded p-2 focus:border-[#8034eb] outline-none'/>
           <div class="flex justify-center items-center w-full relative ">
           {preview && imgFile?

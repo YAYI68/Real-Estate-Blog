@@ -1,4 +1,4 @@
-import React,{ useEffect } from 'react'
+import React,{ useEffect, useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom';
 import { DraftBlog } from '../components/DraftBlog';
 import { Main } from '../components/Main'
@@ -12,6 +12,7 @@ import { auth } from '../firebaseConfig';
 
 
 export const DraftPage = () => {
+   const [ draft, setDraft] = useState(false);
    const navigate = useNavigate()
    const dispatch = useDispatch()
    const postCreate = useSelector(state =>state.postCreate)
@@ -32,8 +33,6 @@ export const DraftPage = () => {
        
   },[createSuccess,navigate,createdBlog,dispatch]);
   
-    console.log({allBlogs})
-
   const writePost = ()=>{
      dispatch(createNewPost())
   }
@@ -41,8 +40,8 @@ export const DraftPage = () => {
   return (
     <Main>
        <Section className={`flex flex-col dark:bg-black items-center mt-[5rem]`}>
-        <div className='flex flex-col w-[50%] lg:w-[80%] md:w-full fixed z-10 h-[90vh] '>
-           <div className='flex flex-col w-full pt-4 px-4  bg-white dark:bg-slate-900'>
+        <div className='flex flex-col w-[50%] lg:w-[80%] md:w-full z-10  '>
+           <div className='flex flex-col w-full pt-4 px-4  bg-white dark:bg-slate-900 sticky top-[7rem] md:top-[6.5rem] left-0 z-10'>
            <div className="flex mb-[2rem] md:mt-[1.5rem] items-center justify-between w-full">
               <h2 className='text-[4rem] md:text-[2.5rem] sm:text-[1.5rem] font-bold  dark:text-white'>Your Posts</h2>
               <div>
@@ -50,11 +49,11 @@ export const DraftPage = () => {
               </div>
             </div> 
             <div className='w-full  '>
-             <TabSlide current='draft'/>
+             <TabSlide current='draft' />
            </div>
            </div>    
            {allPostsSuccess && allBlogs.length >0 &&
-           <div className='w-full mb-[2rem] flex-grow h-full  flex flex-col gap-4 overflow-y-scroll'>
+           <div className='w-full mb-[2rem] flex-grow h-full  flex flex-col gap-4 '>
             {allBlogs.map((blog,index)=>(
              <DraftBlog key={blog.id} blog={blog} />
             ))}
