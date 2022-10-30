@@ -48,7 +48,6 @@ export const CreatePost =()=>{
     const [value, setValue] = useState("");
 
 
-    console.log({value})
   useEffect(()=>{
     if(!auth.currentUser){
       navigate("/login")
@@ -136,7 +135,7 @@ export const CreatePost =()=>{
       {detailSuccess &&    
       <Section className={`mt-[5rem]`}>
         <div className='w-screen text-[1.5rem] lg:px-2  flex flex-col items-center'>
-          <div className='bg-white dark:bg-slate-900 w-[50%] md:w-full lg:w-[90%] lg:p-[1rem] px-[2rem] py-[2rem] fixed z-10 h-[95vh]'>
+          <div className='bg-white dark:bg-slate-900 w-[70%] md:w-full lg:w-[90%] lg:p-[1rem] px-[2rem] py-[2rem] fixed z-10 h-[95vh]'>
             <div className='w-full py-[2rem] '>
             <div className='flex justify-between items-center px-[1rem] '>
              <button onClick={submitHandler} className='text-white bg-[#ff8400] px-[1rem] py-2 rounded-[.5rem]  w-fit'>Saved to Draft</button> 
@@ -175,9 +174,10 @@ export const CreatePost =()=>{
            {/* <textarea ref={contentRef} defaultValue={blog.content} cols="30" rows="10" placeholder='Write a story' className=' dark:bg-gray-600 dark:text-white w-full h-full  border-2 focus:border-solid border-none p-3 rounded focus:border-[#8034eb] outline-none '/>  */}
            <ReactQuill 
            className=' dark:bg-slate-900 dark:text-white w-full h-full  border-2 focus:border-solid border-none p-3 rounded focus:border-[#8034eb] outline-none '
-             modules={modules}
+           modules={modules}
            theme="snow" defaultValue={blog.content}
-            value={value} onChange={setValue}  />;
+            value={value} onChange={setValue} 
+             />;
          </div>     
         </form>
           </div>
