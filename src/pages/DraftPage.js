@@ -19,7 +19,7 @@ export const DraftPage = () => {
    const postCreate = useSelector(state =>state.postCreate)
    const {loading:createLoading,success:createSuccess,error:createError,blog:createdBlog } = postCreate
    const postList = useSelector(state => state.postList)
-   const { loading:allPostsLoading, success:allPostsSuccess, error:allPostsError, blogs:allBlogs } = postList
+   const { loading:allPostsLoading, success:allPostsSuccess, error:allPostsError, blogs:allBlogs, counts } = postList
 
    
   useEffect(()=>{
@@ -50,13 +50,13 @@ export const DraftPage = () => {
               </div>
             </div> 
             <div className='w-full  '>
-             <TabSlide currentState={currentState} setCurrentState={setCurrentState} />
+             <TabSlide currentState={currentState} setCurrentState={setCurrentState}  counts = {counts} />
            </div>
            </div>    
            {allPostsSuccess && allBlogs.length >0 &&
            <div className='w-full mb-[2rem] flex-grow h-full  flex flex-col gap-4 '>
             {allBlogs.map((blog,index)=>(
-             <DraftBlog key={blog.id} blog={blog} />
+             <DraftBlog key={blog.id} blog={blog}  />
             ))}
              {/* <DraftBlog/> */}
              {/* <div className='w-full mt-[2rem]'>

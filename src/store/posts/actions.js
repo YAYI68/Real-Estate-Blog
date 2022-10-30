@@ -1,5 +1,5 @@
 import { auth, db } from "../../firebaseConfig";
-import { collection,getDocs,getDoc, doc, addDoc, updateDoc, where, query, limit, Timestamp } from "firebase/firestore";
+import { collection,getDocs,getDoc, doc, addDoc, updateDoc, where, query, limit, Timestamp,getCountFromServer } from "firebase/firestore";
 
 
 
@@ -52,6 +52,7 @@ export const  getAllPublishPosts =(num)=>async(dispatch)=>{
     
 }
 
+
 export const  getAllPosts =(state)=>async(dispatch)=>{      
     try{
        dispatch({type:POST_LIST_REQUEST})
@@ -59,9 +60,13 @@ export const  getAllPosts =(state)=>async(dispatch)=>{
        const q = query(postRef, where("blogState", "==", `${state}`));
        const snapshots = await getDocs(q)
        const posts = snapshots.docs.map(snapshot=>({id:snapshot.id,...snapshot.data()}))
+       const counts = posts.length
        dispatch({
         type:POST_LIST_SUCCESS,
-        payload:posts
+        payload:{
+            posts,
+            counts,
+        }
        })
     }
     catch(error){

@@ -28,7 +28,7 @@ export const  allPostReducer = (state={ blogs:[]},action)=>{
         return{loading:true}
     }
     if(action.type === POST_LIST_SUCCESS ){
-        return{ loading:false, blogs:action.payload,success:true}
+        return{ loading:false, blogs:action.payload.posts, counts:action.payload.counts,success:true}
     }
     if(action.type === POST_LIST_FAIL){
         return {loading:false, error:action.payload, success:true}
