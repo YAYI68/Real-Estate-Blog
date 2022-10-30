@@ -74,7 +74,7 @@ export const CreatePost =()=>{
     const submit = async(state,date)=>{
       const title = titleRef.current.value;
       const content = value;
-      const file = imgFile
+      const file = imgFile;
       const slug = title.toLowerCase().replaceAll(" ","_")
       const excerpts = content.substr(0,100)
       const postRef = doc(db,"posts",`${postId}`) 

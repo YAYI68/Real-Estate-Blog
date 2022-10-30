@@ -19,7 +19,6 @@ export const DraftPage = () => {
    const postList = useSelector(state => state.postList)
    const { loading:allPostsLoading, success:allPostsSuccess, error:allPostsError, blogs:allBlogs } = postList
 
-   console.log({allBlogs})
 
   useEffect(()=>{
     if(!auth.currentUser){
