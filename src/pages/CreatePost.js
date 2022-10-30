@@ -130,6 +130,8 @@ export const CreatePost =()=>{
     const closePreview = ()=>{
       setPreview("")
     }
+
+    
   
   return (
     <Main>
@@ -176,8 +178,9 @@ export const CreatePost =()=>{
            <ReactQuill 
            className=' dark:bg-slate-900 dark:text-white w-full h-full  border-2 focus:border-solid border-none p-3 rounded focus:border-[#8034eb] outline-none '
            modules={modules}
-           theme="snow" defaultValue={blog.content}
-            value={value} onChange={setValue} 
+           theme="snow"
+           defaultValue={blog.content}
+           onChange={setValue} 
              />;
          </div>     
         </form>
