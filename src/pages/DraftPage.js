@@ -55,13 +55,17 @@ export const DraftPage = () => {
            </div>    
            {allPostsSuccess && allBlogs.length >0 &&
            <div className='w-full mb-[2rem] flex-grow h-full  flex flex-col gap-4 '>
-            {allBlogs.map((blog,index)=>(
+            {allBlogs.length > 0?
+             allBlogs.map((blog,index)=>(
              <DraftBlog key={blog.id} blog={blog}  />
-            ))}
-             {/* <DraftBlog/> */}
-             {/* <div className='w-full mt-[2rem]'>
-                <p className='text-center text-[2rem] '>You haven`t write any article yet.</p>
-             </div> */}
+            )):
+            <div className='w-full mt-[2rem]'>
+            <p className='text-center text-[2rem] '>You haven`t write any article yet.</p>
+          </div>
+          }
+              
+              
+
            </div>
          }
         </div>
