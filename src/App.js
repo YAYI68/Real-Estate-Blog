@@ -11,6 +11,7 @@ import { BlogPage } from './pages/BlogPage';
 import { useStateContext } from './context/ContextProvider';
 import { useEffect } from 'react';
 import { PrivateRoutes } from './utils/PrivateRoutes';
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 
 

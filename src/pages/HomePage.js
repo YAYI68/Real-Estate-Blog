@@ -23,7 +23,7 @@ export const HomePage = () => {
       {success && 
       <>
       <Carousel sliderBlogs = { blogs.slice(0,3)} />  
-      <Blog blogs={blogs} />
+      <Blog blogs={blogs} title="" />
       </>     
       }
     </Main>

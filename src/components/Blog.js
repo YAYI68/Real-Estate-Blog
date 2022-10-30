@@ -25,7 +25,7 @@ export const Blog = ({blogs,title}) => {
             <div className='m-[.7rem] flex flex-col h-[15rem] md:h-[18rem] lg:h-[20rem]'>
              <div className="flex flex-col h-[70%] w-full gap-5">
              <Link to={`/${blog.slug}`} state={{id:blog.id}} className='text-[2.2rem] text-[#ff8400] font-bold mb-2'>{blog.title}</Link>
-             <p className='text-[1.5rem] mb-2'>{blog.excerpts}</p>    
+             <div  dangerouslySetInnerHTML={{__html:blog.excerpts}} className='text-[1.5rem] mb-2' />   
              </div>     
             <div className='flex justify-between items-center w-full mt-[1rem] h-[30%]'>
                <Link to={`/${blog.slug}`} state={{id:blog.id}} className='px-[2rem] py-[1rem]  text-[1.2rem] bg-[#8034eb] w-fit text-center text-white  rounded'>Read More</Link>

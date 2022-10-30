@@ -24,7 +24,7 @@ export const DraftBlog = ({blog}) => {
         </div>
         <div className='basis-[70%] h-full flex flex-col px-[1rem] gap-4 md:gap-2 '>
             <h3 className='text-[2.2rem] md:text-[2rem] sm:text-[1.7rem] font-bold text-[#ff8400]'>{blog.title}</h3>
-            <p className='text-[1.5rem] font-semibold md:text-[1.4rem] sm:text-[1.1rem] text-gray-800 dark:text-white'>{blog.excerpts}</p>
+            <div  dangerouslySetInnerHTML={{__html: blog.excerpts}}  className='text-[1.5rem] font-semibold md:text-[1.4rem] sm:text-[1.1rem] text-gray-800 dark:text-white' />
             <div className='mt-2 flex justify-between items-center text-[1.4rem] sm:text-[.8rem] text-[#585858]'>
                 <p className='dark:text-gray-200 text-gray-500 text-[1.1rem]'>{ convertTimeToDate(blog.createdAt)}</p>
                 <div className='flex justify-between '>

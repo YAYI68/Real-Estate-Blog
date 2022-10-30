@@ -12,6 +12,8 @@ import { Comment } from '../components/Comment';
 import { CommentForm } from '../components/CommentForm';
 import { RelatedBlog } from '../components/RelatedBlog';
 import { Footer } from '../components/Footer';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.bubble.css';
 
 
 
@@ -63,9 +65,12 @@ export const BlogDetail = () => {
              <img src={blog.imageURL} alt="" className='w-full h-full' />
           </div>
           <div id="blogContent" className='w-full mt-[2rem] '>
-            <p className='text-[1.8rem] lg:text-[1.5rem] leading-[4rem] text-gray-700 dark:text-gray-200 whitespace-pre-line .text-margin-start .text-margin-end .text-inline-start .text-inline-end '>
-            {blog.content}
-            </p>
+            <ReactQuill value={blog.content} readOnly={true}
+              theme={"bubble"}
+              
+              /> 
+           
+            {/* <div dangerouslySetInnerHTML={{__html:blog.content}} className='text-[1.8rem] lg:text-[1.5rem] leading-[4rem] text-gray-700 dark:text-gray-200 whitespace-pre-line .text-margin-start .text-margin-end .text-inline-start .text-inline-end ' /> */}
           </div>
           <div className=' w-full flex justify-end p-2'>
           <button className='h-[3rem] w-[3rem] '><FaComment className='w-[80%] h-[80%] flex items-center ' /></button>

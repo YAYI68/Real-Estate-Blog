@@ -9,8 +9,29 @@ import { ref, uploadBytesResumable,getDownloadURL,uploadBytes  } from "firebase/
 import { useParams,useNavigate} from "react-router-dom"
 import { getPost, updateNewPost } from '../store/posts/actions';
 import { doc, Timestamp, updateDoc } from 'firebase/firestore';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { EditorState, convertToRaw } from 'draft-js';
 
 
+
+
+const  modules  = {
+  toolbar: [
+      [{ font: [] }],
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ color: [] }, { background: [] }],
+      [{ script:  "sub" }, { script:  "super" }],
+      ["blockquote", "code-block"],
+      [{ list:  "ordered" }, { list:  "bullet" }],
+      [{ indent:  "-1" }, { indent:  "+1" }, { align: [] }],
+      ["link", "image", "video"],
+      ["clean"],
+  ],
+}
 
 
 export const CreatePost =()=>{
@@ -22,12 +43,12 @@ export const CreatePost =()=>{
     const params = useParams()
     const postId = params.id
     const [preview,setPreview] = useState("")
+    const postDetail = useSelector(state => state.postDetail)
+    const { loading:detailLoading,success:detailSuccess,error:detailError,blog } = postDetail
+    const [value, setValue] = useState("");
 
-    
-    
-  const postDetail = useSelector(state => state.postDetail)
-  const { loading:detailLoading,success:detailSuccess,error:detailError,blog } = postDetail
 
+    console.log({value})
   useEffect(()=>{
     if(!auth.currentUser){
       navigate("/login")
@@ -51,18 +72,13 @@ export const CreatePost =()=>{
     const getFile = (e)=>{
       setImgFile(e.target.files[0])
     }
-     
     const submit = async(state,date)=>{
       const title = titleRef.current.value;
-      const content = contentRef.current.value;
+      const content = value;
       const file = imgFile
       const slug = title.toLowerCase().replaceAll(" ","_")
       const excerpts = content.substr(0,100)
       const postRef = doc(db,"posts",`${postId}`) 
-      
-     
-      
-
       const data = {
         title,
         excerpts,
@@ -98,7 +114,7 @@ export const CreatePost =()=>{
       }
 
     }
-
+    // console.log({value})
     const publishHandler = async(e)=>{
       e.preventDefault();
       await submit("publish",Timestamp)
@@ -114,8 +130,7 @@ export const CreatePost =()=>{
     const closePreview = ()=>{
       setPreview("")
     }
-
-
+  
   return (
     <Main>
       {detailSuccess &&    
@@ -156,9 +171,14 @@ export const CreatePost =()=>{
            <input   id="dropzone-file" type="file" onChange={getFile} className="hidden" />
           </label>
          </div>
-         <div className='w-full  my-[1rem]'>
-           <textarea ref={contentRef} defaultValue={blog.content} cols="30" rows="10" placeholder='Write a story' className=' dark:bg-gray-600 dark:text-white w-full h-full  border-2 focus:border-solid border-none p-3 rounded focus:border-[#8034eb] outline-none '/> 
-         </div>
+         <div className='w-full my-[1rem]'>
+           {/* <textarea ref={contentRef} defaultValue={blog.content} cols="30" rows="10" placeholder='Write a story' className=' dark:bg-gray-600 dark:text-white w-full h-full  border-2 focus:border-solid border-none p-3 rounded focus:border-[#8034eb] outline-none '/>  */}
+           <ReactQuill 
+           className=' dark:bg-slate-900 dark:text-white w-full h-full  border-2 focus:border-solid border-none p-3 rounded focus:border-[#8034eb] outline-none '
+             modules={modules}
+           theme="snow" defaultValue={blog.content}
+            value={value} onChange={setValue}  />;
+         </div>     
         </form>
           </div>
         </div>

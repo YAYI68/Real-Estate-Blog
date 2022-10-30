@@ -17,7 +17,7 @@ export const Profile = ({setEditProfile, user}) => {
             </div>
             <div className='text-[1.6rem] my-[1rem]'>
             <p className='text-center text-[#8034eb] lg:font-semibold sm'>{user.displayName}</p>
-            <p className='text-gray-100'>{user.headLine}</p>
+            <p className='dark:text-gray-100'>{user.headLine}</p>
             </div>
             <div className='w-[50%] sm:w-[50%] lg:w-[30%] mx-auto flex items-center justify-between my-[1rem] '>
                 <button onClick={()=>window.open(user.facebook,'_blank')} className=" h-full"><FaFacebookF  className='h-full text-[1.8rem] fill-[#8034eb]'/></button>
