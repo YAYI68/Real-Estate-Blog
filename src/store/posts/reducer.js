@@ -20,6 +20,10 @@ import {
      POST_UPDATE_SUCCESS,
      POST_UPDATE_FAIL,
 
+    POST_DELETE_REQUEST,
+    POST_DELETE_SUCCESS,
+    POST_DELETE_FAIL 
+
 
     } from "./actions";
 
@@ -94,4 +98,16 @@ export const postUpdateReducer = (state={ blog:{}},action)=>{
         return {loading:false,success:false, error:action.payload}
     }
     return state
+}
+
+export const deleteBlogReducer = (state={message:""},action) =>{
+    if(action.type === POST_DELETE_REQUEST){
+        return { loading:true}
+    }
+    if(action.type === POST_DELETE_SUCCESS){
+        return { loading:false, success:true, message:action.payload}
+    }
+    if(action.type === POST_DELETE_FAIL){
+        return {loading:false, success:false, error:action.payload}
+    }
 }
