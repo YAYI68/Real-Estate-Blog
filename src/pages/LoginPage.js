@@ -29,6 +29,7 @@ export const LoginPage = () => {
     const submitHandler = async(e) => {
       e.preventDefault();
       const {user} = await signInWithEmailAndPassword(auth,email,password) 
+       localStorage.setItem("userInfo", JSON.stringify(user))
         setEmail("")
         setPassword("")
     }

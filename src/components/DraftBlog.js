@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { FaTrashAlt,FaPen } from 'react-icons/fa'
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom'
-import { deleteBlog } from '../store/posts/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom'
 import { convertTimeToDate } from '../utils/blog_util';
 import { DeleteModal } from './DeleteModal';
 
@@ -10,10 +9,10 @@ import { DeleteModal } from './DeleteModal';
 
 export const DraftBlog = ({blog}) => {
   const [ modal, setModal ] = useState(false);
-  useEffect(() => {
-    setModal(false)
-  },[])
-
+  const userLogin =  useSelector((state)=>state.userLogin)
+  const { userInfo } = userLogin
+  
+  console.log({userInfo})
   return (
     <Fragment>
     <div className='w-full border-b-[2px] py-[1rem] bg-white dark:bg-slate-900 text-white'>

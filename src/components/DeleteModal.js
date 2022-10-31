@@ -22,7 +22,6 @@ export const DeleteModal = ({setModal,blog}) => {
 
 const removeBlog = (id)=>{
   dispatch(deleteBlog(id))
-  setModal(false)
 }
   return (
     <Section>

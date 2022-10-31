@@ -126,10 +126,14 @@ export const getPost = (id)=>async (dispatch)=>{
 
 }
 
-export const createNewPost = ()=>async(dispatch)=>{
+export const createNewPost = ()=>async(dispatch,getState)=>{
      try{
         dispatch({type:POST_CREATE_REQUEST})
-          const userRef =  doc(db,'users',`${auth.currentUser.uid}`)
+         
+          const 
+          {userLogin:{userInfo}
+            }=getState()
+          const userRef =  doc(db,'users',`${userInfo.uid}`)
           const snapshot = await getDoc(userRef)
           const author = {id:snapshot.id,...snapshot.data()}
           const newPost = {
