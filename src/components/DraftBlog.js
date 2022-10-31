@@ -1,22 +1,18 @@
-import React from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { FaTrashAlt,FaPen } from 'react-icons/fa'
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
+import { deleteBlog } from '../store/posts/actions';
 import { convertTimeToDate } from '../utils/blog_util';
+import { DeleteModal } from './DeleteModal';
 
 
 
-
-export const DraftBlog = ({blog,setModal}) => {
-      const navigate = useNavigate();
-
-      // console.log({blog})
-   
-  const deleteBlog = ()=>{
-
-  }
-
+export const DraftBlog = ({blog}) => {
+  const [ modal, setModal ] = useState(true);
 
   return (
+    <Fragment>
     <div className='w-full border-b-[2px] py-[1rem] bg-white dark:bg-slate-900 text-white'>
       <div className='flex w-[90%] md:w-full h-[15rem] lg:h-[13rem] md:h-[13rem] items-center'> 
         <div className='basis-[30%] mx-[1rem] h-full'>
@@ -35,5 +31,9 @@ export const DraftBlog = ({blog,setModal}) => {
         </div>
       </div>
     </div>
+    { modal &&    
+       <DeleteModal setModal={setModal} blog={blog}/>
+       }
+    </Fragment>
   )
 }

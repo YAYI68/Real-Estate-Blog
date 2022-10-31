@@ -5,6 +5,7 @@ import { createCommentsReducer } from './comments/reducer';
 import {
    allPostReducer, 
    allPublishPostReducer, 
+   deleteBlogReducer, 
    postCreateReducer, 
    postDetailReducer,
    postUpdateReducer, 
@@ -26,6 +27,7 @@ import {
        },
    }
    
+      
 const reducer = {
      userLogin:userLoginReducer,
      userRegister:userRegisterReducer,
@@ -36,7 +38,8 @@ const reducer = {
      updatedProfile:updateProfileReducer,
      postDetail:postDetailReducer,
      postCreate:postCreateReducer,
-     postUpdate:postUpdateReducer,       
+     postUpdate:postUpdateReducer,
+     postDelete:deleteBlogReducer,       
 }
 
 

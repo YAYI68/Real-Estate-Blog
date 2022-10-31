@@ -14,7 +14,7 @@ import { DeleteModal } from '../components/DeleteModal';
 
 
 export const DraftPage = () => {
-  const [ modal, setModal ] = useState(true);
+
    const [currentState, setCurrentState] = useState("draft");
    const navigate = useNavigate()
    const dispatch = useDispatch()
@@ -58,24 +58,20 @@ export const DraftPage = () => {
            {allPostsSuccess && allBlogs.length >0 &&
            <div className='w-full mb-[2rem] flex-grow h-full  flex flex-col gap-4 '>
             {allBlogs.length > 0?
-             allBlogs.map((blog,index)=>(
+             allBlogs.map((blog)=>(
              <DraftBlog key={blog.id} blog={blog} setModal={setModal}  />
             )):
             <div className='w-full mt-[2rem]'>
             <p className='text-center text-[2rem] '>You haven`t write any article yet.</p>
           </div>
           }
-              
-              
-
            </div>
          }
         </div>
        </Section>
-       { modal &&    
-       <DeleteModal setModal={setModal}/>
-       }
+       <Section>
       
+       </Section>  
     </Main>
   )
 }

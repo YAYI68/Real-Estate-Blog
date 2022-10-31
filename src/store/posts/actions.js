@@ -199,7 +199,7 @@ export const updateNewPost = (id,data)=>async(dispatch)=>{
 }
 
 
-const deleteBlog = (id)=>async(dispatch)=>{
+export  const deleteBlog = (id)=>async(dispatch)=>{
     try{
         dispatch({type:POST_DELETE_REQUEST})
         const postRef = doc(db, "posts", `${id}`)

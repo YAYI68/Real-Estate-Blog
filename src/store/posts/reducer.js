@@ -110,4 +110,5 @@ export const deleteBlogReducer = (state={message:""},action) =>{
     if(action.type === POST_DELETE_FAIL){
         return {loading:false, success:false, error:action.payload}
     }
+    return state;
 }
