@@ -10,6 +10,9 @@ import { DeleteModal } from './DeleteModal';
 
 export const DraftBlog = ({blog}) => {
   const [ modal, setModal ] = useState(false);
+  useEffect(() => {
+    setModal(false)
+  },[])
 
   return (
     <Fragment>

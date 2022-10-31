@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { deleteBlog } from '../store/posts/actions';
+import { useStateContext } from '../context/ContextProvider';
+import { deleteBlog, getAllPosts } from '../store/posts/actions';
 import { Section } from './Section'
 
 export const DeleteModal = ({setModal,blog}) => {
+  const {setAlertMessage,currentState} =   useStateContext()
   const dispatch =  useDispatch()
   const navigate = useNavigate();
   const postDelete = useSelector((state)=>state.postDelete)
   const { success, error, message } = postDelete
 
   useEffect(()=>{
-    navigate("/blogs/draft")
-  },[navigate])
+    if(success){
+      navigate("/blogs/draft")
+    }
+  },[navigate,success,message,setAlertMessage])
 
   // console.log({blog})
 

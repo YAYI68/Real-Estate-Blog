@@ -1,5 +1,5 @@
 import { auth, db } from "../../firebaseConfig";
-import { collection,getDocs,getDoc, doc, addDoc, updateDoc, where, query, limit, Timestamp,getCountFromServer, deleteDoc } from "firebase/firestore";
+import { collection,getDocs,getDoc, doc, addDoc, updateDoc, where, query, limit, Timestamp, deleteDoc } from "firebase/firestore";
 
 
 
@@ -129,14 +129,10 @@ export const getPost = (id)=>async (dispatch)=>{
 export const createNewPost = ()=>async(dispatch)=>{
      try{
         dispatch({type:POST_CREATE_REQUEST})
-
-        // const {
-        //     userLogin:{ userInfo },
-        // } = getState()
           const userRef =  doc(db,'users',`${auth.currentUser.uid}`)
           const snapshot = await getDoc(userRef)
           const author = {id:snapshot.id,...snapshot.data()}
-        const newPost = {
+          const newPost = {
             title:"Write your blog title",
             excerpts:"",
             content:" Write a Story",

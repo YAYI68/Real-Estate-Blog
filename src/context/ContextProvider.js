@@ -9,6 +9,8 @@ const stateContext = createContext();
 
 
 export const ContextProvider = ({children}) => {
+  const [currentState, setCurrentState] = useState("draft");
+  const { alertMessage, setAlertMessage } = useState("")
   const [authorId, setAuthorId] = useState("")
     const [userInfo, setUserInfo ] = useState();
     const themeMode = localStorage.getItem('theme')?localStorage.getItem("theme"):"Light";
@@ -41,7 +43,9 @@ useEffect(() => {
       currentMode,
       setMode,
       authorId,
-      setAuthorId
+      setAuthorId,
+      alertMessage, setAlertMessage,
+      setCurrentState,currentState,
     }}>
        { children }
     </stateContext.Provider>

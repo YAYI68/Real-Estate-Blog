@@ -14,17 +14,20 @@ import { DeleteModal } from '../components/DeleteModal';
 
 
 export const DraftPage = () => {
-
-   const [currentState, setCurrentState] = useState("draft");
+    const {alertMessage,setCurrentState,currentState} =   useStateContext()
+   
    const navigate = useNavigate()
    const dispatch = useDispatch()
    const postCreate = useSelector(state =>state.postCreate)
    const {loading:createLoading,success:createSuccess,error:createError,blog:createdBlog } = postCreate
    const postList = useSelector(state => state.postList)
    const { loading:allPostsLoading, success:allPostsSuccess, error:allPostsError, blogs:allBlogs, counts } = postList
+   const postDelete = useSelector((state)=>state.postDelete)
+ 
 
    
   useEffect(()=>{
+    
     if(!auth.currentUser){
       navigate("/login")
     }
