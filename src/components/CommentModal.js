@@ -1,30 +1,10 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { useStateContext } from '../context/ContextProvider';
-import { deleteBlog, getAllPosts } from '../store/posts/actions';
+import React from 'react'
 import { Section } from './Section'
 
-export const DeleteModal = ({setModal,blog}) => {
-  const {setAlertMessage,currentState} =   useStateContext()
-  const dispatch =  useDispatch()
-  const navigate = useNavigate();
-  const postDelete = useSelector((state)=>state.postDelete)
-  const { success, message } = postDelete
-
-  useEffect(()=>{
-    if(success){
-      navigate("/blogs/draft")
-      window.location.reload()
-    }
-  },[navigate,success,message,setAlertMessage])
-
-const removeBlog = (id)=>{
-  dispatch(deleteBlog(id))
-}
+export const CommentModal = ({setModal,comment}) => {
   return (
     <Section>
-    <div  onClick={()=>setModal(false)} className='fixed z-[20]  w-[100vw]  h-[100vh] bg-[rgb(0,0,0,0.69)]  left-0 top-0  flex items-center justify-center'></div>
+    <div  className='fixed z-[20]  w-[100vw]  h-[100vh] bg-[rgb(0,0,0,0.69)]  left-0 top-0  flex items-center justify-center'></div>
         <div className='w-[35%]  lg:w-[50%] left-1/2 -translate-x-1/2 rounded-md  top-[20%] bg-white fixed z-[25] md:w-[80%] '>
            <div className='w-full h-full bg-white rounded-md dark:bg-slate-900 flex gap-5 flex-col p-4 justify-between'>
             <h3 className='dark:text-white text-[3rem]  md:text-[2rem] font-semibold lg:text-[2.8rem]'>Are you sure, you want to delete this?</h3>
