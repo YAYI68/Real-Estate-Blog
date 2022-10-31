@@ -60,7 +60,7 @@ export const postDetailReducer = (state={blog:{}},action)=>{
      return {loading:true}
     }
     if( action.type === POST_DETAIL_SUCCESS){
-      return {loading:false,success:true, blog:action.payload.post, comments:action.payload.comments}
+      return {loading:false,success:true, blog:action.payload}
     }
 
     if(action.type === POST_DETAIL_FAIL){

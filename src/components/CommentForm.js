@@ -14,9 +14,9 @@ export const CommentForm = ({blogId}) => {
     const createComment = useSelector((state)=>state.createComment)
     const {success} = createComment
     useEffect(()=>{
-        if(success){
-          window.location.reload()
-        }
+        // if(success){
+        //   window.location.reload()
+        // }
     },[success])
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -29,7 +29,8 @@ export const CommentForm = ({blogId}) => {
          commentDate:Timestamp.fromDate(new Date()),
         }
         dispatch(createBlogComment(data))
- 
+        commentNameRef.current.value="";
+        commentContentRef.current.value="";
       }
   return (
     <form className='flex flex-col mx-auto' onSubmit={handleSubmit}>

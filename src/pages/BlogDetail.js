@@ -7,21 +7,23 @@ import { getPost } from '../store/posts/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { BLOG_COMMENT_CREATE_RESET, createBlogComment } from '../store/comments/actions';
 import { convertTimeToDate} from '../utils/blog_util';
-import { Timestamp } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot, orderBy, query, Timestamp, where } from 'firebase/firestore';
 import { Comment } from '../components/Comment';
 import { CommentForm } from '../components/CommentForm';
 import { RelatedBlog } from '../components/RelatedBlog';
 import { Footer } from '../components/Footer';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
+import { db } from '../firebaseConfig';
+import { Loader } from '../components/Loader';
 
 
 
 export const BlogDetail = () => {
-
+  const [ comments, setComments] = useState()
   const dispatch = useDispatch();
   const postDetail =  useSelector((state)=>state.postDetail);
-  const { success:blogSucess, error , blog, loading,comments } = postDetail;
+  const { success:blogSucess, error , blog, loading, } = postDetail;
   const createComment = useSelector((state)=>state.createComment)
   const {loading:commentLoading,success:commentSuccess, error:commentError  } = createComment;
   const location = useLocation();
@@ -31,6 +33,23 @@ export const BlogDetail = () => {
      dispatch(getPost(id))
      dispatch({type:BLOG_COMMENT_CREATE_RESET})
    },[id,dispatch])
+
+   useEffect(()=>{
+            const commentsRef = collection(db,'comments')
+            const q = query(commentsRef,where("blogId", "==", id))
+            const unsub =  onSnapshot(q,(docs)=>{
+              const allComments = []
+              docs.forEach(doc=>{
+                allComments.push({id:doc.id,...doc.data(),})
+              })
+              setComments(allComments)
+            })
+            return ()=>{
+              unsub();
+            }
+   },[id])
+
+   console.log({comments})
 
   return (
     <Fragment>
@@ -69,8 +88,6 @@ export const BlogDetail = () => {
             <ReactQuill value={blog.content} readOnly={true}
               theme={"bubble"}   
               /> 
-           
-            {/* <div dangerouslySetInnerHTML={{__html:blog.content}} className='text-[1.8rem] lg:text-[1.5rem] leading-[4rem] text-gray-700 dark:text-gray-200 whitespace-pre-line .text-margin-start .text-margin-end .text-inline-start .text-inline-end ' /> */}
           </div>
           <div className=' w-full flex justify-end p-2'>
           <button className='h-[3rem] w-[3rem] '><FaComment className='w-[80%] h-[80%] flex items-center ' /></button>
@@ -79,7 +96,7 @@ export const BlogDetail = () => {
           </p>
           </div>
           </div>
-          <div className=' w-full mt-[2rem]'>
+          {/* <div className=' w-full mt-[2rem]'>
             {comments? 
             comments.map((comment,index)=>(
             <Comment key={index} comment={comment} />
@@ -89,11 +106,10 @@ export const BlogDetail = () => {
            <div className=' w-full mt-[2rem]'>
              <CommentForm blogId={id} />
             </div>
-        </div>
-
+        </div> */}
         </article>
         <aside className='w-[25%] mt-[5rem] relative lg:hidden px-2'>
-         {/* <RelatedBlog /> */}
+       
         </aside>  
       </Section>
       </Fragment>
