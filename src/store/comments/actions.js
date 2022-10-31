@@ -1,4 +1,5 @@
-import { addDoc, collection} from "firebase/firestore"
+import { async } from "@firebase/util"
+import { addDoc, collection, deleteDoc, doc} from "firebase/firestore"
 import { db } from "../../firebaseConfig"
 
 export const BLOG_COMMENT_LIST_REQUEST = "BLOG_COMMENT_LIST_REQUEST"
@@ -35,5 +36,22 @@ export const createBlogComment = (data)=>async(dispatch)=>{
        })
     }
 
+}
+export const deleteComment = (id)=>async(dispatch)=>{
+    try{
+        dispatch({type:BLOG_COMMENT_DELETE_REQUEST})
+        const postRef = doc(db, "comments", `${id}`)
+        await deleteDoc(postRef)
+        dispatch({
+            type:BLOG_COMMENT_DELETE_SUCCESS,
+            payload:"Comment sucessfully deleted",
+        })
+    }
+    catch(error){
+      dispatch({
+        type: BLOG_COMMENT_DELETE_FAIL,
+        payload:error
+      })
+    }
 }
 
