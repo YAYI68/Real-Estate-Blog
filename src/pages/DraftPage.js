@@ -29,7 +29,6 @@ export const DraftPage = () => {
    
    
   useEffect(()=>{
-
     // if(!userInfo){
     //   navigate("/login")
     // }
