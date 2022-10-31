@@ -1,5 +1,5 @@
 import { auth, db } from "../../firebaseConfig";
-import { collection,getDocs,getDoc, doc, addDoc, updateDoc, where, query, limit, Timestamp,getCountFromServer } from "firebase/firestore";
+import { collection,getDocs,getDoc, doc, addDoc, updateDoc, where, query, limit, Timestamp,getCountFromServer, deleteDoc } from "firebase/firestore";
 
 
 
@@ -27,6 +27,10 @@ export const POST_CREATE_RESET = "POST_CREATE_RESET"
 export const POST_UPDATE_REQUEST = "POST_UPDATE_REQUEST";
 export const POST_UPDATE_SUCCESS = "POST_UPDATE_SUCCESS";
 export const POST_UPDATE_FAIL = "POST_UPDATE_FAIL"
+
+export const POST_DELETE_REQUEST = "POST_DELETE_REQUEST";
+export const POST_DELETE_SUCCESS = "POST_DELETE_SUCCESS";
+export const POST_DELETE_FAIL = "POST_DELETE_FAIL"
 
 
 
@@ -192,4 +196,24 @@ export const updateNewPost = (id,data)=>async(dispatch)=>{
        })
     }
 
+}
+
+
+const deleteBlog = (id)=>async(dispatch)=>{
+    try{
+        dispatch({type:POST_DELETE_REQUEST})
+        const postRef = doc(db, "posts", `${id}`)
+        await deleteDoc(postRef)
+
+        dispatch({
+            type:POST_DELETE_SUCCESS,
+            payload:"Blog sucessfully deleted",
+        })
+    }
+    catch(error){
+      dispatch({
+        type: POST_DELETE_FAIL,
+        payload:error
+      })
+    }
 }
