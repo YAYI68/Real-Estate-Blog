@@ -7,6 +7,8 @@ import { CommentModal } from './CommentModal';
 export const Comment = ({comment}) => {
   const { userInfo } =  useStateContext();
   const [ modal, setModal ] = useState(false);
+
+  
   return (
     <Fragment>
     <div className='mx-auto my-[2rem] dark:bg-slate-800 bg-white p-5 flex flex-col'>

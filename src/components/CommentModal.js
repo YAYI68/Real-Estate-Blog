@@ -1,16 +1,19 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteComment } from '../store/comments/actions'
 import { Section } from './Section'
 
 export const CommentModal = ({setModal,comment}) => {
     const dispatch =  useDispatch()
 
+
     const removeComment = (id)=>{
-        dispatch(deleteBlog(id))
+        dispatch(deleteComment(id))
+        setModal(false)
     }
   return (
     <Section>
-      <div  className='fixed z-[20]  w-[100vw]  h-[100vh] bg-[rgb(0,0,0,0.4)]  left-0 top-0  flex items-center justify-center'></div>
+      <div onClick={()=>setModal(false)} className='fixed z-[20]  w-[100vw]  h-[100vh] bg-[rgb(0,0,0,0.4)]  left-0 top-0  flex items-center justify-center'></div>
         <div className='w-[35%]  lg:w-[50%] left-1/2 -translate-x-1/2 rounded-md  top-[20%] bg-white fixed z-[25] md:w-[80%] '>
            <div className='w-full h-full bg-white rounded-md dark:bg-slate-900 flex gap-5 flex-col p-4 justify-between'>
             <h3 className='dark:text-white text-[3rem]  md:text-[2rem] font-semibold lg:text-[2.8rem]'>Are you sure, you want to delete this?</h3>
