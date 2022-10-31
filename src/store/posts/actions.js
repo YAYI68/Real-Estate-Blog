@@ -128,8 +128,7 @@ export const getPost = (id)=>async (dispatch)=>{
 
 export const createNewPost = ()=>async(dispatch,getState)=>{
      try{
-        dispatch({type:POST_CREATE_REQUEST})
-         
+        dispatch({type:POST_CREATE_REQUEST})        
           const 
           {userLogin:{userInfo}
             }=getState()

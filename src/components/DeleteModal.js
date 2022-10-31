@@ -18,8 +18,6 @@ export const DeleteModal = ({setModal,blog}) => {
     }
   },[navigate,success,message,setAlertMessage])
 
-  // console.log({blog})
-
 const removeBlog = (id)=>{
   dispatch(deleteBlog(id))
 }

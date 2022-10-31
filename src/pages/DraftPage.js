@@ -23,14 +23,16 @@ export const DraftPage = () => {
    const postList = useSelector(state => state.postList)
    const { loading:allPostsLoading, success:allPostsSuccess, error:allPostsError, blogs:allBlogs, counts } = postList
    const postDelete = useSelector((state)=>state.postDelete)
+   const userLogin =  useSelector((state)=>state.userLogin)
+   const { userInfo } = userLogin
  
-
+   
    
   useEffect(()=>{
-    
-    if(!auth.currentUser){
-      navigate("/login")
-    }
+
+    // if(!userInfo){
+    //   navigate("/login")
+    // }
     if(createSuccess){
            navigate(`/blogs/${createdBlog.id}/edit`)
      }

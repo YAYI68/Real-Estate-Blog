@@ -9,10 +9,7 @@ import { DeleteModal } from './DeleteModal';
 
 export const DraftBlog = ({blog}) => {
   const [ modal, setModal ] = useState(false);
-  const userLogin =  useSelector((state)=>state.userLogin)
-  const { userInfo } = userLogin
-  
-  console.log({userInfo})
+
   return (
     <Fragment>
     <div className='w-full border-b-[2px] py-[1rem] bg-white dark:bg-slate-900 text-white'>
