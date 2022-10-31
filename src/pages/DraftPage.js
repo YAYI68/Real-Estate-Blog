@@ -59,7 +59,7 @@ export const DraftPage = () => {
            <div className='w-full mb-[2rem] flex-grow h-full  flex flex-col gap-4 '>
             {allBlogs.length > 0?
              allBlogs.map((blog)=>(
-             <DraftBlog key={blog.id} blog={blog} setModal={setModal}  />
+             <DraftBlog key={blog.id} blog={blog}  />
             )):
             <div className='w-full mt-[2rem]'>
             <p className='text-center text-[2rem] '>You haven`t write any article yet.</p>
@@ -69,9 +69,9 @@ export const DraftPage = () => {
          }
         </div>
        </Section>
-       <Section>
+       {/* <Section>
       
-       </Section>  
+       </Section>   */}
     </Main>
   )
 }
