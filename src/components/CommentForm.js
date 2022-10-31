@@ -7,17 +7,13 @@ import { useNavigate } from 'react-router-dom';
 
 
 
+
 export const CommentForm = ({blogId}) => {
     const commentNameRef =   useRef(null)
     const commentContentRef = useRef(null)
     const dispatch = useDispatch();
-    const createComment = useSelector((state)=>state.createComment)
-    const {success} = createComment
-    useEffect(()=>{
-        // if(success){
-        //   window.location.reload()
-        // }
-    },[success])
+
+
     const handleSubmit = (e)=>{
         e.preventDefault();
         const  commentName = commentNameRef.current.value;
@@ -32,6 +28,8 @@ export const CommentForm = ({blogId}) => {
         commentNameRef.current.value="";
         commentContentRef.current.value="";
       }
+
+      
   return (
     <form className='flex flex-col mx-auto' onSubmit={handleSubmit}>
     <input  ref={commentNameRef} type="text"  className='dark:bg-slate-800 dark:text-gray-200 w-full text-[1.5rem] h-[3rem] rounded outline-none focus:border-2 p-2 focus:border-[#8034eb]' placeholder='Name' />

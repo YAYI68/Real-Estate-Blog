@@ -49,7 +49,7 @@ export const BlogDetail = () => {
             }
    },[id])
 
-   console.log({comments})
+  //  console.log({comments})
 
   return (
     <Fragment>
@@ -91,12 +91,15 @@ export const BlogDetail = () => {
           </div>
           <div className=' w-full flex justify-end p-2'>
           <button className='h-[3rem] w-[3rem] '><FaComment className='w-[80%] h-[80%] flex items-center ' /></button>
+          { comments ?  
           <p className='text-[1.8rem]  font-medium text-[#8034eb]'>
            {comments.length}
           </p>
+          :""
+            }
           </div>
           </div>
-          {/* <div className=' w-full mt-[2rem]'>
+          <div className=' w-full mt-[2rem]'>
             {comments? 
             comments.map((comment,index)=>(
             <Comment key={index} comment={comment} />
@@ -106,7 +109,7 @@ export const BlogDetail = () => {
            <div className=' w-full mt-[2rem]'>
              <CommentForm blogId={id} />
             </div>
-        </div> */}
+        </div>
         </article>
         <aside className='w-[25%] mt-[5rem] relative lg:hidden px-2'>
        
