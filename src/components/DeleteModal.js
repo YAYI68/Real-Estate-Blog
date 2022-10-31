@@ -15,6 +15,7 @@ export const DeleteModal = ({setModal,blog}) => {
   useEffect(()=>{
     if(success){
       navigate("/blogs/draft")
+      window.location.reload()
     }
   },[navigate,success,message,setAlertMessage])
 
