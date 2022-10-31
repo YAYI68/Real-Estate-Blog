@@ -1,8 +1,9 @@
 
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Timestamp } from 'firebase/firestore'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createBlogComment } from '../store/comments/actions';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -10,8 +11,13 @@ export const CommentForm = ({blogId}) => {
     const commentNameRef =   useRef(null)
     const commentContentRef = useRef(null)
     const dispatch = useDispatch();
-
-
+    const createComment = useSelector((state)=>state.createComment)
+    const {success} = createComment
+    useEffect(()=>{
+        if(success){
+          window.location.reload()
+        }
+    },[success])
     const handleSubmit = (e)=>{
         e.preventDefault();
         const  commentName = commentNameRef.current.value;
@@ -23,6 +29,7 @@ export const CommentForm = ({blogId}) => {
          commentDate:Timestamp.fromDate(new Date()),
         }
         dispatch(createBlogComment(data))
+ 
       }
   return (
     <form className='flex flex-col mx-auto' onSubmit={handleSubmit}>

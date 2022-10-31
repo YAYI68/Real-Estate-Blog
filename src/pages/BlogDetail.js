@@ -5,7 +5,7 @@ import { FaFacebookF,FaTwitter,FaInstagram,FaLinkedinIn, FaComment} from 'react-
 import { Link,useLocation,useParams } from "react-router-dom";
 import { getPost } from '../store/posts/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { createBlogComment } from '../store/comments/actions';
+import { BLOG_COMMENT_CREATE_RESET, createBlogComment } from '../store/comments/actions';
 import { convertTimeToDate} from '../utils/blog_util';
 import { Timestamp } from 'firebase/firestore';
 import { Comment } from '../components/Comment';
@@ -29,6 +29,7 @@ export const BlogDetail = () => {
    
    useEffect(()=>{
      dispatch(getPost(id))
+     dispatch({type:BLOG_COMMENT_CREATE_RESET})
    },[id,dispatch])
 
   return (
@@ -66,8 +67,7 @@ export const BlogDetail = () => {
           </div>
           <div id="blogContent" className='w-full mt-[2rem] '>
             <ReactQuill value={blog.content} readOnly={true}
-              theme={"bubble"}
-              
+              theme={"bubble"}   
               /> 
            
             {/* <div dangerouslySetInnerHTML={{__html:blog.content}} className='text-[1.8rem] lg:text-[1.5rem] leading-[4rem] text-gray-700 dark:text-gray-200 whitespace-pre-line .text-margin-start .text-margin-end .text-inline-start .text-inline-end ' /> */}
@@ -81,8 +81,8 @@ export const BlogDetail = () => {
           </div>
           <div className=' w-full mt-[2rem]'>
             {comments? 
-            comments.map((comment)=>(
-            <Comment comment={comment} />
+            comments.map((comment,index)=>(
+            <Comment key={index} comment={comment} />
             )):
             <p>No Comment yet</p>
           }

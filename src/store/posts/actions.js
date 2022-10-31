@@ -1,5 +1,5 @@
 import { auth, db } from "../../firebaseConfig";
-import { collection,getDocs,getDoc, doc, addDoc, updateDoc, where, query, limit, Timestamp, deleteDoc } from "firebase/firestore";
+import { collection,getDocs,getDoc, doc, addDoc, updateDoc, where, query, limit, Timestamp, deleteDoc, orderBy } from "firebase/firestore";
 
 
 
@@ -99,7 +99,7 @@ export const getPost = (id)=>async (dispatch)=>{
 
         const getComments = async()=>{
             const commentsRef = collection(db,'comments')
-            const q = query(commentsRef,where("blogId", "==", id))
+            const q = query(commentsRef,where("blogId", "==", id,orderBy("blogId"),orderBy("commentDate","desc")))
             const commentShots = await getDocs(q)
             const comments = commentShots.docs.map((doc)=>({commentId:doc.id,...doc.data()}))
             return comments      
