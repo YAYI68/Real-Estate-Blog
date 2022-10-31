@@ -6,7 +6,7 @@ import { convertTimeToDate } from '../utils/blog_util';
 
 
 
-export const DraftBlog = ({blog}) => {
+export const DraftBlog = ({blog,setModal}) => {
       const navigate = useNavigate();
 
       // console.log({blog})
@@ -28,7 +28,7 @@ export const DraftBlog = ({blog}) => {
             <div className='mt-2 flex justify-between items-center text-[1.4rem] sm:text-[.8rem] text-[#585858]'>
                 <p className='dark:text-gray-200 text-gray-500 text-[1.1rem]'>{ convertTimeToDate(blog.createdAt)}</p>
                 <div className='flex justify-between '>
-                   <button className="h-14 w-14 flex items-center justify-center rounded-full hover:bg-slate-200 cursor-pointer "><FaTrashAlt className='fill-[red] md:h-5 md:w-5'/></button>
+                   <button onClick={()=>setModal(true)}  className="h-14 w-14 flex items-center justify-center rounded-full hover:bg-slate-200 cursor-pointer "><FaTrashAlt className='fill-[red] md:h-5 md:w-5'/></button>
                    <Link to={`/blogs/${blog.id}/edit`}  className="h-14 w-14 flex items-center justify-center rounded-full hover:bg-slate-200 cursor-pointer " ><FaPen className='fill-[green] md:h-5 md:w-5'/></Link>
                 </div>
             </div>
