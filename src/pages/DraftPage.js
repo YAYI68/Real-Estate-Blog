@@ -66,7 +66,7 @@ export const DraftPage = () => {
              <DraftBlog key={blog.id} blog={blog}  />
             )):
             <div className='w-full mt-[2rem]'>
-            <p className='text-center text-[2rem] '>You haven`t write any article yet.</p>
+            <p className='text-center text-[2rem]  dark:text-white'>You haven`t write any article yet.</p>
           </div>
           }
            </div>

@@ -37,6 +37,12 @@ useEffect(() => {
  }
   }, [])
 
+  useEffect(() => {
+    const user= localStorage.getItem('userInfo')
+    setUserInfo(user)
+  }, [])
+   
+
   return (
     <stateContext.Provider   value={{
       userInfo,

@@ -14,7 +14,6 @@ export const BlogPage = () => {
   const location = useLocation();
   const searchName = location.search?location.search.split('=')[1] : ""
   const title = searchName.toLowerCase()
-  console.log({searchName})
 
   const { loading, error,success, blogs} = postPublish;
    
