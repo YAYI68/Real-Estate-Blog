@@ -1,7 +1,7 @@
 
 
 import { configureStore } from '@reduxjs/toolkit';
-import { createCommentsReducer } from './comments/reducer';
+import { createCommentsReducer, deleteCommentReducer } from './comments/reducer';
 import {
    allPostReducer, 
    allPublishPostReducer, 
@@ -39,7 +39,8 @@ const reducer = {
      postDetail:postDetailReducer,
      postCreate:postCreateReducer,
      postUpdate:postUpdateReducer,
-     postDelete:deleteBlogReducer,       
+     postDelete:deleteBlogReducer, 
+     commentDelete:deleteCommentReducer      
 }
 
 
